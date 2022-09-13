@@ -5,6 +5,6 @@
 |Jeremy La |lajeremy |1007191995 |jeremy.la@mail.utoronto.ca |Discord/Email |birb#7874 |
 |Ricky Su |sushenri |1007284163 |ricky.su.shen@mail.utoronto.ca |Discord/Email |elnagne13#9992 |
 |Mohamad El Kadri |elkadrim |1001598844 |mohamad.elkadri@mail.utoronto.ca |Discord/Email |melkadri#6011 |
-|Nevin Wong |wongnevi |1005391434 |nevin.wong@mail.utoronto.ca |Discord.Email |Nev#5710 |
+|Nevin Wong |wongnevi |1005391434 |nevin.wong@mail.utoronto.ca |Discord/Email |Nev#5710 |
 ---
-**Discord Chat/Server Invite :** https://discord.gg/PBg7EQTU
+**Discord Chat/Server Invite:** https://discord.gg/PBg7EQTU

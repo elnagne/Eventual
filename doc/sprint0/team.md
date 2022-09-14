@@ -6,5 +6,6 @@
 |Ricky Su |sushenri |1007284163 |ricky.su.shen@mail.utoronto.ca |Discord/Email |elnagne13#9992 |
 |Mohamad El Kadri |elkadrim |1001598844 |mohamad.elkadri@mail.utoronto.ca |Discord/Email |melkadri#6011 |
 |Nevin Wong |wongnevi |1005391434 |nevin.wong@mail.utoronto.ca |Discord/Email |Nev#5710 |
+|Ivy Wills |willsivy |1004800940 |ivy.wills@mail.utoronto.ca |Discord/Email |PoisonIvy#7782 |
 ---
 **Discord Chat/Server Invite:** https://discord.gg/PBg7EQTU

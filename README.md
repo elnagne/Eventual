@@ -16,7 +16,7 @@ We will be using Swift and Mongodb
 
 This project uses git flow to organize project contribution.
 
-We will name of branches feature- followed by the title of the feature. For example: feature-signup
+We will name branches feature- followed by the title of the feature. For example: feature-signup
 
 We will be using Jira to track team tickets and issues.
 

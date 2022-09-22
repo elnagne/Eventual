@@ -10,7 +10,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper {
+.homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper, .dbWriteWrapper {
     display: flex;
 }
 

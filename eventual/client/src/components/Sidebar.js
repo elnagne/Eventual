@@ -9,6 +9,7 @@ const Sidebar = () => {
         <Link to="/liked" className="navbarItem">Liked</Link>
         <Link to="/history" className="navbarItem">History</Link>
         <Link to="/settings" className="navbarItem">Settings</Link>
+        <Link to="/dbwritetemp" className="navbarItem">DB Write</Link>
     </div>
   )
 }

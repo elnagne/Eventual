@@ -10,7 +10,7 @@ This app will also allow the hosts of free events to post their events online in
 
 ## Installation
 
-We are using MERN to create our event schdeuling website.
+We are using MERN to create our event scheduling website.
 
 To get set up:
 

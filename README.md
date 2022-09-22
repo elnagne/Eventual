@@ -18,6 +18,8 @@ Clone our git repository to your local machine
 
 Navigate to the file eventual
 
+Navigate to the file client
+
 Run npm install
 
 Run npm start

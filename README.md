@@ -10,7 +10,17 @@ This app will also allow the hosts of free events to post their events online in
 
 ## Installation
 
-We will be using Swift and Mongodb
+We are using MERN to create our event schdeuling website.
+
+To get set up:
+
+Clone our git repository to your local machine
+
+Navigate to the file eventual
+
+Run npm install
+
+Run npm start
 
 ## Contribution
 

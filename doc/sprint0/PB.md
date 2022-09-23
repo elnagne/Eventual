@@ -1,24 +1,24 @@
-As a user, I would like to have a history of my attended events
+As a user, I would like to have a history of my attended events so I can remember which events I attended to.
 
 CoS:
 1. User can see past events that he attended to
 2. User can remove events from his history
  
-As a community user, I would like to have a like button to show support for an event without having to participate in it
+As a community user, I would like to have a like button so I can show support for an event without having to participate in it
 
 CoS:
 1. Users can press a like button that does not commit them into attending an event
 2. Once liked an event, users can remove it at any time
 3. Total number of likes of an event will be publicly available
 
-As a community user, I would like to be able to leave a review once an event have finished
+As a community user, I would like to be able to leave a review once an event have finished so the event organizer can read my constructive criticism.
 
 CoS:
 1. Users can leave a review once an event has ended
 2. Users are able to erase this review
 3. The reviews will be accessed alongside the archived past event
 
-As an investor I would like to easily get the contact information of the event organizer
+As an investor I would like to easily get the contact information of the event organizer so I can easily contact him to directly support the event.
 
 CoS:
 1. From the event scroll view, users can access the public profile of the event organizer of each event

@@ -1,28 +1,42 @@
-# Event Planner :tada:
+# Eventual :tada:
 
 ## Motivation
 
-This project is an Event Planning mobile app created to help users find free events in their area. Users can scroll through free events or post their own free events.
+Eventual is an Event Planning web app created to help users find free events in their area. Users can scroll through free events or post their own free events.
 
 We created this project to help users who are bored and looking for something in their area to do. The app will allow them to find an event they are interested in that they can attend.
 
-This app will also allow the hosts of free events to post their events online in order to attract people to attend.
+Eventual will also allow the hosts of free events to post their events online in order to attract people to attend.
 
 ## Installation
 
-We are using MERN to create our event scheduling website.
+1. Install Node.js from [Download | Node.js](https://nodejs.org/en/download/). You can verify if Node is installed by opening any terminal and running the following:
+   ```
+   node -v
+   ```
 
-To get set up:
+2. Install dependencies
+   ```
+   cd <path-to-repo>\eventual\client
+   npm install
+   
+   cd <path-to-repo>\eventual\server
+   npm install
+   ```
+   
+3. Start the backend (default port 5000)
+   ```
+   cd <path-to-repo>\eventual\server
+   node server.js
+   ```
+   
+4. In a separate terminal, start the frontend (default port 3000)
+   ```
+   cd <path-to-repo>\eventual\client
+   npm start
+   ```
 
-Clone our git repository to your local machine
-
-Navigate to the file eventual
-
-Navigate to the file client
-
-Run npm install
-
-Run npm start
+**NOTE**: if the backend crashes shortly after starting, you may need to whitelist your IP address on MongoDB Cloud.
 
 ## Contribution
 

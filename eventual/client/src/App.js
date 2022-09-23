@@ -6,6 +6,7 @@ import Events from './components/Events';
 import Liked from './components/Liked';
 import History from './components/History';
 import Settings from './components/Settings';
+import DbWriteTemp from "./components/DbWriteTemp";
 
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/liked" element={<Liked/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/settings" element={<Settings/>}/>
+        <Route path="/dbwritetemp" element={<DbWriteTemp/>}/>
       </Routes>
    </Router>
  );

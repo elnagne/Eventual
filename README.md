@@ -23,14 +23,19 @@ Eventual will also allow the hosts of free events to post their events online in
    cd <path-to-repo>\eventual\server
    npm install
    ```
-   
-3. Start the backend (default port 5000)
+ 
+3. Navigate to `\eventual\server` and create a file named `config.env` with the following content (Credentials can be found in the Discord server linked in `team.md` or by contacting one of the team members):
+   ```
+   ATLAS_URI=
+   ```
+ 
+4. Start the backend (default port 5000)
    ```
    cd <path-to-repo>\eventual\server
    node server.js
    ```
    
-4. In a separate terminal, start the frontend (default port 3000)
+5. In a separate terminal, start the frontend (default port 3000)
    ```
    cd <path-to-repo>\eventual\client
    npm start

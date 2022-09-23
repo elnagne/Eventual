@@ -36,8 +36,6 @@ Eventual will also allow the hosts of free events to post their events online in
    npm start
    ```
 
-**NOTE**: if the backend crashes shortly after starting, you may need to whitelist your IP address on MongoDB Cloud.
-
 ## Contribution
 
 This project uses git flow to organize project contribution.

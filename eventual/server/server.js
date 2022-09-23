@@ -5,11 +5,14 @@ require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
-// TODO change require to one we use
+
+// different routes - for now we just have accounts (accounts.js), when adding more accounts add it here
 app.use(require("./routes/accounts"));
+
 // get driver connection
 const dbo = require("./db/conn");
 
+// app.listen starts a server using the express app created on line 2 (see express docs for more info)
 app.listen(port, () => {
   // perform a database connection when server starts
   dbo.connectToServer(function (err) {

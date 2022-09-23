@@ -24,4 +24,5 @@ accountsRoutes.route("/accounts/add").post((req, response) => {
     });
 });
 
+// Export accountsRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)
 module.exports = accountsRoutes;

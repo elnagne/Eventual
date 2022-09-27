@@ -6,8 +6,8 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// different routes - for now we just have accounts (accounts.js), when adding more accounts add it here
-app.use(require("./routes/accounts"));
+// different routes - for now we just have users (users.js), when adding more users add it here
+app.use(require("./routes/users"));
 
 // get driver connection
 const dbo = require("./db/conn");

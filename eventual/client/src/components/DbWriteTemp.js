@@ -24,7 +24,7 @@ const DbWriteTemp = () => {
             name: {first: firstName, last: lastName}
         }
 
-        await fetch("http://localhost:5000/accounts/add", {
+        await fetch("http://localhost:5000/users/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

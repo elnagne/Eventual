@@ -13,11 +13,10 @@ const ObjectId = require("mongodb").ObjectId;
 
 // Registering a new user
 usersRoutes.route("/users/register").post(async (req, response) => {
-    const user = req.body;
-    
     const dbConnect = dbo.getDb();
     const usersCollection = dbConnect.collection("mockUsers");
 
+    const user = req.body;
     const takenUsername = await usersCollection.findOne({username: user.username});
     const takenEmail = await usersCollection.findOne({email: user.email});
 
@@ -29,16 +28,67 @@ usersRoutes.route("/users/register").post(async (req, response) => {
         user.password = await bcrypt.hash(req.body.password, 10);
         usersCollection.insertOne(user, (err, res) => {
             if (err) throw err;
-            // Re-use MongoDB's response
-            res.message = "Registered new user";
+            res.message = "Successfully registered new user";
             response.json(res);
         });
     }
 });
 
+// User login
 usersRoutes.route("/users/login").post((req, response) => {
     // TODO: Annabelle
 });
 
-// Export usersRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)
+// Update user
+usersRoutes.route("/users/update/:id").post((req, response) => {
+    const dbConnect = dbo.getDb();
+    const usersCollection = dbConnect.collection("mockUsers");
+
+    const updatedUser = { $set: req.body };
+    const query = { _id: ObjectId(req.params.id) };
+
+    // Do not allow updating passwords here
+    if(req.body.hasOwnProperty('password')) {
+        // Status 400 indicates a bad request
+        response.status(400).json({ message: "Cannot update password using this route. Use /users/updatePassword/:id instead."  });
+    } else {
+        usersCollection.updateOne(query, updatedUser, (err, res) => {
+            if (err) throw err;
+            res.message = "Successfully updated user";
+            response.json(res);
+        })
+    }
+});
+
+// Update user password
+usersRoutes.route("/users/updatePassword/:id").post(async (req, response) => {
+    const dbConnect = dbo.getDb();
+    const usersCollection = dbConnect.collection("mockUsers");
+
+    const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);
+    const updatedUser = { $set: { password: updatedHashedPassword } };
+    const query = { _id: ObjectId(req.params.id) };
+
+    usersCollection.updateOne(query, updatedUser, (err, res) => {
+        if (err) throw err;
+        res.message = "Successfully updated password";
+        response.json(res);
+    })
+});
+
+// Delete user
+usersRoutes.route("/users/delete/:id").delete((req, response) => {
+    const dbConnect = dbo.getDb();
+    const usersCollection = dbConnect.collection("mockUsers");
+
+    const query = { _id: ObjectId(req.params.id) };
+
+    usersCollection.deleteOne(query, (err, res) => {
+        if (err) throw err;
+        res.message = "Successfully deleted user";
+        response.json(res);
+    })
+});
+
+// Export usersRoutes so we can use we different CRUD operations established here in server.js
 module.exports = usersRoutes;

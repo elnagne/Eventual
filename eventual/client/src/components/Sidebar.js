@@ -10,6 +10,7 @@ const Sidebar = () => {
         <Link to="/history" className="navbarItem">History</Link>
         <Link to="/settings" className="navbarItem">Settings</Link>
         <Link to="/dbwritetemp" className="navbarItem">DB Write</Link>
+        <Link to="/register" className="navbarItem">Register</Link>
     </div>
   )
 }

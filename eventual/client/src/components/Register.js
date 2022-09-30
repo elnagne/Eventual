@@ -29,7 +29,7 @@ const Register = (props) => {
             name: {first: firstName, last: lastName}
         }
 
-        await fetch("http://localhost:5000/accounts/add", {
+        const response = await fetch("http://localhost:5000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,6 +40,7 @@ const Register = (props) => {
             return;
         })
 
+        document.getElementById("response").value = response;
         setUsername('');
         setPassword('');
         setEmail('');
@@ -51,8 +52,8 @@ const Register = (props) => {
         <section id="registerPopup" className="h-100 h-custom">
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
-                    <div className="col-lg-8 col-xl-6" ref={ref}>
-                        <div className="card rounded-3">
+                    <div className="col-lg-8 col-xl-6">
+                        <div className="card rounded-3" ref={ref}>
                             <div className="card-body p-4 p-md-5">                    
                                 <Col>
                                     <Row className="mb-3">
@@ -80,9 +81,12 @@ const Register = (props) => {
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                                     </Form.Group>
-                                    <Button variant="primary" type="submit" onClick={submit}>
-                                        Register
-                                    </Button>
+                                    <div class="col-sm-8">
+                                        <Button variant="primary" type="submit" onClick={submit}>
+                                            Register
+                                        </Button>
+                                        <h5 class="d-inline-block p-3" id="response">{""}</h5>
+                                    </div>
                                 </Col>
                             </div>
                         </div>

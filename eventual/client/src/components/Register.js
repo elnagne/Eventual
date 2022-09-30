@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useState } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { RegisterContext } from './RegisterContext';
 
 const Register = (props) => {
     const [firstName, setFirstName] = useState('');
@@ -12,6 +13,11 @@ const Register = (props) => {
     const [email, setEmail] = useState('');
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
+
+    const ref = useRef();
+    // Call hook passing in the ref and a function to call on outside click
+    const {isModalOpen, setModalOpen} = useContext(RegisterContext);
+    useOnClickOutside(ref, () => setModalOpen(false));
 
     const submit = async (e) => {
         e.preventDefault();
@@ -41,13 +47,13 @@ const Register = (props) => {
         setLastName('');
     }
 
-    return (props.trigger) ? (
-        <section id="registerPopup" class="h-100 h-custom">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-lg-8 col-xl-6">
-                        <div class="card rounded-3">
-                            <div class="card-body p-4 p-md-5">                    
+    return props.trigger ? (
+        <section id="registerPopup" className="h-100 h-custom">
+            <div className="container py-5 h-100">
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                    <div className="col-lg-8 col-xl-6" ref={ref}>
+                        <div className="card rounded-3">
+                            <div className="card-body p-4 p-md-5">                    
                                 <Col>
                                     <Row className="mb-3">
                                         <Form.Group as={Col} controlId="firstName">
@@ -74,11 +80,9 @@ const Register = (props) => {
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                                     </Form.Group>
-                                    <Row>
-                                        <Button variant="primary" type="submit" onClick={submit}>
-                                            Register
-                                        </Button>
-                                    </Row>
+                                    <Button variant="primary" type="submit" onClick={submit}>
+                                        Register
+                                    </Button>
                                 </Col>
                             </div>
                         </div>
@@ -87,6 +91,28 @@ const Register = (props) => {
             </div>
         </section>
     ) : "";
+  }
+
+  function useOnClickOutside(ref, handler) {
+    useEffect(
+      () => {
+        const listener = (event) => {
+          // Do nothing if clicking ref's element or descendent elements
+          if (!ref.current || ref.current.contains(event.target)) {
+            return;
+          }
+          handler(event);
+        };
+        document.addEventListener("mousedown", listener);
+        document.addEventListener("touchstart", listener);
+        return () => {
+          document.removeEventListener("mousedown", listener);
+          document.removeEventListener("touchstart", listener);
+        };
+      },
+      // Add ref and handler to effect dependencies
+      [ref, handler]
+    );
   }
   
   export default Register

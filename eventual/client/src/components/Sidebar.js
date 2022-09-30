@@ -1,10 +1,11 @@
 import React from 'react'
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { useState } from 'react'
 import Register from './Register';
+import { RegisterContext } from './RegisterContext';
 
 const Sidebar = () => {
-  const [registerPopup, setRegisterPopup] = useState(false);
+  const {isModalOpen, setModalOpen} = useContext(RegisterContext);
 
   return (
     <div>
@@ -15,11 +16,9 @@ const Sidebar = () => {
         <Link to="/history" className="navbarItem">History</Link>
         <Link to="/settings" className="navbarItem">Settings</Link>
         <Link to="/dbwritetemp" className="navbarItem">DB Write</Link>
-        <button onClick={() => setRegisterPopup(true)}>Register</button>
+        <button onClick={() => setModalOpen(true)}>Register</button>
     </div>
-      <div>
-        <Register trigger={registerPopup} setTrigger={setRegisterPopup}/>
-      </div>
+        <Register trigger={isModalOpen} setTrigger={setModalOpen}/>
     </div>
   )
 }

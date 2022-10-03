@@ -14,15 +14,25 @@ const ObjectId = require("mongodb").ObjectId;
  
 // This section will help you get a list of all the records.
 likedRoutes.route("/liked").get(function (req, res) {
- let db_connect = dbo.getDb();
+ let db_connect = dbo.getDb("eventual");
  db_connect
-   .collection("accounts")
+   .collection("testEvents") 
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
      res.json(result);
    });
- res.json(db_connect);
 });
- 
+
+// This section will help you get a single record by id
+likedRoutes.route("/liked/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect
+    .collection("testEvents")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
 module.exports = likedRoutes;

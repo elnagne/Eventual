@@ -29,7 +29,7 @@ const Register = (props) => {
             name: {first: firstName, last: lastName}
         }
 
-        const response = await fetch("http://localhost:5000/register", {
+        const response = await fetch("http://localhost:5000/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,12 +40,13 @@ const Register = (props) => {
             return;
         })
 
-        document.getElementById("response").value = response;
         setUsername('');
         setPassword('');
         setEmail('');
         setFirstName('');
         setLastName('');
+
+        return response;
     }
 
     return props.trigger ? (

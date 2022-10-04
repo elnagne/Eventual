@@ -10,6 +10,64 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.eventsWrapper {
+    background-color: #ffe599;
+}
+
+.eventContent {
+    width: 85%;
+}
+
+.eventCard {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.eventCard:hover {
+    background-color: #ECECEC;
+}
+
+.eventCard img {
+    filter: drop-shadow(3px 3px 4px);
+    object-fit: cover;
+    margin-right: 17.5px;
+    width: 135px;
+    height: 135px;
+    float: left;
+}
+
+.eventCard .title {
+    color: #20124d;
+    font-weight: 700;
+    font-size: 36px;
+    margin-right: 0.7rem;
+}
+
+.eventCard .desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eventCard .date {
+    font-weight: 700;
+    font-size: 22.5px;
+}
+
+.eventCard .infoStrip {
+    font-size: 18px;
+}
+
+.eventCard .infoStrip .property {
+    font-weight: 700;
+}
+
+.eventCard .likes {
+    color: #7f6000;
+    font-weight: 700;
+    font-size: 21px;
+}
+
 .homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper, .dbWriteWrapper {
     display: flex;
 }

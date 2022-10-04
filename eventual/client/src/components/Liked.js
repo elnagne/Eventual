@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 import Sidebar from './Sidebar'
 const Events = (props) => (
  <tr>
-   <td>{props.testEvents._id}</td>
    <td>{props.testEvents.event_name}</td>
    <td>{props.testEvents.description}</td>
+   <td>{props.testEvents.num_likes}</td>
    <td>
-   <Link className="btn btn-link" to={`/edit/${props.testEvents._id}`}>Edit</Link> |
-     <button className="btn btn-link">
-       Delete
-     </button>
+   <Button variant="outline-primary"
+        onClick={() => {
+          props.likeEvent(props.testEvents._id)
+        }}
+      > Like 
+    </Button>{'  '}
+   <Button variant="outline-danger"
+        onClick={() => {
+          props.dislikeEvent(props.testEvents._id)
+        }}
+      > Dislike 
+    </Button>
    </td>
  </tr>
 );
@@ -37,14 +45,21 @@ export default function EventList() {
  
    return;
  }, [events.length]);
- // This method will delete a record
- async function deleteEvent(id) {
-  await fetch(`http://localhost:5000/${id}`, {
-    method: "DELETE"
-  });
 
-  const newRecords = events.filter((el) => el._id !== id);
-  setEvents(newRecords);
+ // This method increase the number of likes by 1
+ async function likeEvent(id) {
+  await fetch(`http://localhost:5000/liked/add_like/${id}`, {
+      method: "POST"
+    });
+  window.location.reload(false);
+}
+
+// This method decrease the number of likes by 1
+async function dislikeEvent(id) {
+  await fetch(`http://localhost:5000/liked/add_dislike/${id}`, {
+      method: "POST"
+    });
+  window.location.reload(false);
 }
   
  // This method will map out the records on the table
@@ -53,6 +68,8 @@ export default function EventList() {
      return (
        <Events
        testEvents={testEvents}
+       likeEvent={() => likeEvent(testEvents._id)}
+       dislikeEvent={() => dislikeEvent(testEvents._id)}
        key={testEvents._id}
        />
      );
@@ -69,9 +86,9 @@ export default function EventList() {
           <table className="table table-striped" style={{ marginTop: 20 }}>
             <thead>
               <tr>
-                <th>_id</th>
-                <th>author</th>
-                <th>description</th>
+                <th>Event Name</th>
+                <th>Description</th>
+                <th>Number of Likes</th>
                 <th>Action</th>
               </tr>
             </thead>

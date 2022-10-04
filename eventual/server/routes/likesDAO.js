@@ -24,15 +24,49 @@ likedRoutes.route("/liked").get(function (req, res) {
    });
 });
 
-// This section will help you get a single record by id
-likedRoutes.route("/liked/:id").get(function (req, res) {
+likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
+  let myquery = { _id: ObjectId( req.params.id )};
+  let newvalues = {
+    $inc: {
+      num_likes:1
+    },
+  };
   db_connect
     .collection("testEvents")
-    .findOne(myquery, function (err, result) {
+    .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      res.json(result);
+      console.log("1 document liked");
+      response.json(res);
     });
- });
+});
+
+likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.params.id )};
+  let newvalues = {
+    $inc: {
+      num_likes: -1
+    }
+  };
+
+  db_connect
+    .collection("testEvents")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document disliked");
+      response.json(res);
+    });
+});
+
+likedRoutes.route("/liked/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.params.id )};
+  db_connect
+      .collection("testEvents")
+      .findOne(myquery, function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
+});
 module.exports = likedRoutes;

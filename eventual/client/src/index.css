@@ -31,4 +31,31 @@ body {
     color: white;
     text-decoration: none;
     margin-bottom: 15px;
-  }
+}
+
+.AddEvent {
+    width: 2000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.AddEventElement {
+    margin-bottom: 15px;
+}
+.AddEventForm {
+    width: 600px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.EventTitle {
+    display:flex;
+    color: rgb(118, 16, 212);
+    justify-content: center;
+    align-items: center;
+}
+
+.AddEventSubmit {
+    margin-top: 10px;
+}

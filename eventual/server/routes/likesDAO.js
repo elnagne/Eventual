@@ -32,6 +32,16 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
       num_likes:1
     },
   };
+  let likevalues = {
+    event_id:ObjectId( req.params.id),
+    account_id:ObjectId("632c889ad56e85f52f50ac78")
+  };
+  db_connect 
+  .collection("testLikes")
+  .insertOne(likevalues, function (err, res) {
+    if (err) throw err;
+  });
+
   db_connect
     .collection("testEvents")
     .updateOne(myquery, newvalues, function (err, res) {
@@ -39,9 +49,11 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
       console.log("1 document liked");
       response.json(res);
     });
+  
 });
 
 likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
+
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
@@ -49,6 +61,17 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
       num_likes: -1
     }
   };
+
+  let likevalues = {
+    event_id:ObjectId( req.params.id),
+    account_id:ObjectId("632c889ad56e85f52f50ac78")
+  };
+
+  db_connect
+    .collection("testLikes")
+    .removeOne(likevalues, function (err, res) {
+      if (err) throw err;
+    });
 
   db_connect
     .collection("testEvents")

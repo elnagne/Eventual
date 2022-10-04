@@ -26,7 +26,6 @@ const Events = (props) => (
 export default function EventList() {
  const [events, setEvents] = useState([]);
  
- // This method fetches the records from the database.
  useEffect(() => {
    async function getEvents() {
      const response = await fetch(`http://localhost:5000/liked/`);
@@ -48,6 +47,7 @@ export default function EventList() {
 
  // This method increase the number of likes by 1
  async function likeEvent(id) {
+  // passes the id of the event
   await fetch(`http://localhost:5000/liked/add_like/${id}`, {
       method: "POST"
     });
@@ -56,6 +56,7 @@ export default function EventList() {
 
 // This method decrease the number of likes by 1
 async function dislikeEvent(id) {
+  // passes the id of the event
   await fetch(`http://localhost:5000/liked/add_dislike/${id}`, {
       method: "POST"
     });

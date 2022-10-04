@@ -38,16 +38,17 @@ const Register = (props) => {
         }).catch(error => {
             window.alert(error);
             return;
-        })
+        });
+
+        let message = await response.json();
+        document.getElementById("response").innerHTML = message.message;
 
         setUsername('');
         setPassword('');
         setEmail('');
         setFirstName('');
         setLastName('');
-
-        return response;
-    }
+    };
 
     return props.trigger ? (
         <section id="registerPopup" className="h-100 h-custom">
@@ -82,12 +83,12 @@ const Register = (props) => {
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                                     </Form.Group>
-                                    <div class="col-sm-8">
+                                    <p>
                                         <Button variant="primary" type="submit" onClick={submit}>
                                             Register
                                         </Button>
-                                        <h5 class="d-inline-block p-3" id="response">{""}</h5>
-                                    </div>
+                                        <span className="p-3" id="response">{""}</span>
+                                    </p>
                                 </Col>
                             </div>
                         </div>

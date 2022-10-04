@@ -48,7 +48,7 @@ const EventCard = (props) => {
         <div className="infoStrip">
           {startTimeStr && endTimeStr && (
             <span>
-              <span className="property">TIME: </span>
+              <span className="property">Time: </span>
               {startTimeStr} - {endTimeStr}
             </span>
           )}
@@ -56,7 +56,7 @@ const EventCard = (props) => {
             <span>
               {" "}
               <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
-              <span className="property">CITY: </span>
+              <span className="property">City: </span>
               {city}
             </span>
           )}
@@ -64,7 +64,7 @@ const EventCard = (props) => {
             <span>
               {" "}
               <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
-              <span className="property">HOSTED BY: </span>
+              <span className="property">Hosted By: </span>
               {author}
             </span>
           )}
@@ -72,7 +72,7 @@ const EventCard = (props) => {
             <span>
               {" "}
               <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
-              <span className="property">ADDRESS: </span>
+              <span className="property">Address: </span>
               {address}
             </span>
           )}
@@ -81,8 +81,7 @@ const EventCard = (props) => {
         {likes && (
           <div className="likes">
             <FontAwesomeIcon icon={faHeart} /> {likes}{" "}
-            {likes === 1 ? "person has" : "people have"} are interested in this
-            event
+            {likes === 1 ? "person is" : "people are"} interested in this event
           </div>
         )}
       </Card.Body>

@@ -62,10 +62,14 @@ body {
     font-weight: 700;
 }
 
+.eventCard .likeCount {
+    font-weight: 1000;
+}
+
 .eventCard .likes {
-    color: #7f6000;
-    font-weight: 700;
+    color: #E510A3;
     font-size: 21px;
+    font-weight: 700;
 }
 
 .homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper, .dbWriteWrapper {

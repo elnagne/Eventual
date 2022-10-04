@@ -1,5 +1,8 @@
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 const LogIn = () => {
+  let navigate = useNavigate();
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -22,16 +25,8 @@ const LogIn = () => {
         return;
       });
 
-    // await User.login(email, pw).then(
-    // (id) => {
-    //     // move to the profile page if successful
-    //     navigate(/profile/${id});
-    // },
-    // (err) => {
-    //     setAlert(err.message);
-    //     setsnackbarOpen(true);
-    // }
-    // );
+    // move to the home page if successful
+    // navigate("/");
   };
 
   return (

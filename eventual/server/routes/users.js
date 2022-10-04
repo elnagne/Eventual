@@ -39,9 +39,29 @@ usersRoutes.route("/users/register").post(async (req, response) => {
 });
 
 // User login
-usersRoutes.route("/users/login").post((req, res) => {
+usersRoutes.route("/users/login").post(async (req, res) => {
+  if (!("email" in req.body)) return res.status(400).json("email is missing");
+  if (!("pw" in req.body)) return res.status(400).json("password is missing");
+
   const dbConnect = dbo.getDb();
-  console.log(req.body);
+
+  let pw = req.body.pw;
+  let email = req.body.email;
+
+  dbConnect
+    .collection("mockUsers")
+    .findOne({ email: email }, function (err, user) {
+      if (err) return res.status(500).json(err);
+      if (!user) return res.status(401).json("access denied");
+    //   console.log(user);
+      bcrypt.compare(pw, user.password, function (err, valid) {
+        if (err) return res.status(500).json(err);
+        if (!valid)
+          return res.status(401).json("Incorrect email or Password");
+        return res.json(user.username); 
+      });
+    });
+ 
 });
 
 // Update user
@@ -55,12 +75,10 @@ usersRoutes.route("/users/update/:id").post((req, response) => {
   // Do not allow updating passwords here
   if (req.body.hasOwnProperty("password")) {
     // Status 400 indicates a bad request
-    response
-      .status(400)
-      .json({
-        message:
-          "Cannot update password using this route. Use /users/updatePassword/:id instead.",
-      });
+    response.status(400).json({
+      message:
+        "Cannot update password using this route. Use /users/updatePassword/:id instead.",
+    });
   } else {
     usersCollection.updateOne(query, updatedUser, (err, res) => {
       if (err) throw err;

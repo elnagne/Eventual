@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 // different routes - for now we just have accounts (accounts.js), when adding more accounts add it here
-app.use(require('./routes/accounts'));
+app.use(require('./routes/users'));
 app.use(require('./routes/events'));
 
 // get driver connection

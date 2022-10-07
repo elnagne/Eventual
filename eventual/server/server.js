@@ -9,6 +9,7 @@ app.use(express.json());
 // different routes - for now we just have accounts (accounts.js), when adding more accounts add it here
 app.use(require('./routes/users'));
 app.use(require('./routes/events'));
+app.use(require('./routes/search'));
 app.use(require("./routes/likesDAO"));
 // get driver connection
 const dbo = require('./db/conn');

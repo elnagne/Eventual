@@ -10,6 +10,68 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.eventsWrapper {
+    background-color: #ffe599;
+}
+
+.eventContent {
+    width: 85%;
+}
+
+.eventCard {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.eventCard:hover {
+    background-color: #ECECEC;
+}
+
+.eventCard img {
+    filter: drop-shadow(3px 3px 4px);
+    object-fit: cover;
+    margin-right: 17.5px;
+    width: 135px;
+    height: 135px;
+    float: left;
+}
+
+.eventCard .title {
+    color: #20124d;
+    font-weight: 700;
+    font-size: 36px;
+    margin-right: 0.7rem;
+}
+
+.eventCard .desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eventCard .date {
+    font-weight: 700;
+    font-size: 22.5px;
+}
+
+.eventCard .infoStrip {
+    font-size: 18px;
+}
+
+.eventCard .infoStrip .property {
+    font-weight: 700;
+}
+
+.eventCard .likeCount {
+    font-weight: 1000;
+}
+
+.eventCard .likes {
+    color: #E510A3;
+    font-size: 21px;
+    font-weight: 700;
+}
+
 .homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper, .dbWriteWrapper {
     display: flex;
 }
@@ -31,4 +93,56 @@ body {
     color: white;
     text-decoration: none;
     margin-bottom: 15px;
-  }
+}
+
+  .bottom-right{
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}
+.img {
+    display: block;
+    margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+    width:80%;
+    height: 80%;
+}
+div.c {
+  font-size: 200%;
+}
+button.size
+{
+  font-size: 80%;
+}
+h1.size
+{
+  font-size: 200%;
+}
+
+.AddEvent {
+    width: 2000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.AddEventElement {
+    margin-bottom: 15px;
+}
+.AddEventForm {
+    width: 600px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.EventTitle {
+    display:flex;
+    color: rgb(118, 16, 212);
+    justify-content: center;
+    align-items: center;
+}
+
+.AddEventSubmit {
+    margin-top: 10px;
+}

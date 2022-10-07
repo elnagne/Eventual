@@ -1,0 +1,3152 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:x="urn:schemas-microsoft-com:office:excel"
+      xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+        <title>Math &amp; Computational Scienes - Jira</title>
+        <style type="text/css">
+         table {
+             mso-displayed-decimal-separator:"\.";
+             mso-displayed-thousand-separator:"\,";
+         }
+         body
+         {
+             margin: 0px;
+             font-size: 12px;
+             font-family: Arial, sans-serif;
+             color:black;
+         }
+
+        </style>
+        <META HTTP-EQUIV="Content-Type" Content="application/vnd.ms-excel; charset=UTF-8">
+        <!-- JRA-7598 - ensure fields (e.g. description) occupy only one cell - even fields containing newlines. -->
+        <!--
+             Vertical align all cells to the top, in order to align all issue rows of issuetable to the top,
+             since Excel does not use or save the css files it is hardcoded here.
+           -->
+        <style>
+         @page
+         {
+             mso-page-orientation:landscape;
+             margin:.25in .25in .5in .25in;
+             mso-header-margin:.5in;
+             mso-footer-margin:.25in;
+             mso-footer-data:"&R&P of &N";
+             mso-horizontal-page-align:center;
+             mso-vertical-page-align:center;
+         }
+
+         td.issuekey,
+         td.issuetype,
+         td.status {
+             mso-style-parent: "";
+             mso-number-format: \@;
+             text-align: left;
+         }
+         br
+         {
+             mso-data-placement:same-cell;
+         }
+
+         td
+         {
+             vertical-align: top;
+         }
+        </style>
+
+        <!--[if gte mso 9]><xml>
+            <x:ExcelWorkbook>
+            <x:ExcelWorksheets>
+            <x:ExcelWorksheet>
+            <x:Name>general_report</x:Name>
+            <x:WorksheetOptions>
+            <x:Print>
+            <x:ValidPrinterInfo/>
+            </x:Print>
+            </x:WorksheetOptions>
+            </x:ExcelWorksheet>
+            </x:ExcelWorksheets>
+            </x:ExcelWorkbook>
+            </xml><![endif]-->
+    </head>
+    <body>
+
+        <table border="1">
+            <tr bgcolor="#0747a6" height="30">
+                <td colspan="48">
+                    <img src="https://mcsapps.utm.utoronto.ca/jira/images/jira-core.png" width="57" height="30" border="0" alt="Math &amp; Computational Scienes - Jira">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="48">
+                    <a href="https://mcsapps.utm.utoronto.ca/jira/issues/?jql=project+%3D+RUN+ORDER+BY+created+DESC" data-testid="filterNameHref">Math &amp; Computational Scienes - Jira</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="48">
+                    Displaying <strong>35</strong> issues at <strong>07/Oct/22 3:39 PM</strong>.
+                </td>
+            </tr>
+        </table>
+
+        
+
+
+                            <issuetable-web-component data-content="issues">
+                <table id="issuetable"  border="1" cellpadding="3" cellspacing="1" width="100%">
+                        <thead>
+        <tr class="rowHeader">
+            
+                                                            <th class="colHeaderLink headerrow-project" data-id="project">
+                            Project
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuekey" data-id="issuekey">
+                            Key
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-summary" data-id="summary">
+                            Summary
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuetype" data-id="issuetype">
+                            Issue Type
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-status" data-id="status">
+                            Status
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-priority" data-id="priority">
+                            Priority
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-resolution" data-id="resolution">
+                            Resolution
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-assignee" data-id="assignee">
+                            Assignee
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-reporter" data-id="reporter">
+                            Reporter
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-creator" data-id="creator">
+                            Creator
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-created" data-id="created">
+                            Created
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-lastViewed" data-id="lastViewed">
+                            Last Viewed
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-updated" data-id="updated">
+                            Updated
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-resolutiondate" data-id="resolutiondate">
+                            Resolved
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-versions" data-id="versions">
+                            Affects Version/s
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-fixVersions" data-id="fixVersions">
+                            Fix Version/s
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-components" data-id="components">
+                            Component/s
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-duedate" data-id="duedate">
+                            Due Date
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-votes" data-id="votes">
+                            Votes
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-watches" data-id="watches">
+                            Watchers
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-thumbnail" data-id="thumbnail">
+                            Images
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timeoriginalestimate" data-id="timeoriginalestimate">
+                            Original Estimate
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timeestimate" data-id="timeestimate">
+                            Remaining Estimate
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timespent" data-id="timespent">
+                            Time Spent
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-workratio" data-id="workratio">
+                            Work Ratio
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-subtasks" data-id="subtasks">
+                            Sub-Tasks
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuelinks" data-id="issuelinks">
+                            Linked Issues
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-environment" data-id="environment">
+                            Environment
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-description" data-id="description">
+                            Description
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-security" data-id="security">
+                            Security Level
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-progress" data-id="progress">
+                            Progress
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregateprogress" data-id="aggregateprogress">
+                            Σ Progress
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimespent" data-id="aggregatetimespent">
+                            Σ Time Spent
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimeestimate" data-id="aggregatetimeestimate">
+                            Σ Remaining Estimate
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimeoriginalestimate" data-id="aggregatetimeoriginalestimate">
+                            Σ Original Estimate
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-labels" data-id="labels">
+                            Labels
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10104" data-id="customfield_10104">
+                            Epic Name
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10105" data-id="customfield_10105">
+                            Epic Status
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10106" data-id="customfield_10106">
+                            Epic Colour
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10107" data-id="customfield_10107">
+                            Rank
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10108" data-id="customfield_10108">
+                            Epic Link
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10109" data-id="customfield_10109">
+                            Sprint
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10000" data-id="customfield_10000">
+                            Development
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10110" data-id="customfield_10110">
+                            Team
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10100" data-id="customfield_10100">
+                            Parent Link
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10101" data-id="customfield_10101">
+                            Target start
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10102" data-id="customfield_10102">
+                            Target end
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10103" data-id="customfield_10103">
+                            Original story points
+                                                    </th>
+                                                                    </tr>
+    </thead>
+    <tbody>
+                    
+
+                <tr id="issuerow10213" rel="10213" data-issuekey="RUN-37" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-37" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-37">RUN-37</a>
+</td>
+                                            <td class="summary"><p>
+                Store liked
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Ricky Su Shen
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:39 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 07/Oct/22 3:24 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 3:24 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # Store how many likes an event has.<br/>
+ # Store which events a user has liked.<br/>
+<br/>
+Pokers Points: 5
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i001b3:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10211" rel="10211" data-issuekey="RUN-36" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-36" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-36">RUN-36</a>
+</td>
+                                            <td class="summary"><p>
+                Search by popularity
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:35 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:35 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # Using all the events search the events by the user.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i001an:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10210" rel="10210" data-issuekey="RUN-35" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-35" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-35">RUN-35</a>
+</td>
+                                            <td class="summary"><p>
+                Backend: Get all events for feed
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:31 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 07/Oct/22 3:05 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 3:05 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # Get all events for the feed so that the person using the feed has all the information organized for when they create the recycle view.<br/>
+<br/>
+ <br/>
+<br/>
+Poker Points: 7
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i001af:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10209" rel="10209" data-issuekey="RUN-34" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-34" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-34">RUN-34</a>
+</td>
+                                            <td class="summary"><p>
+                Frontend: Create a feed that collects all posted events in a recycler view
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:23 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 07/Oct/22 3:05 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 3:05 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # Display the events in a recycler view.<br/>
+<br/>
+ <br/>
+<br/>
+Poker Points: 5.5
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i001a7:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10184" rel="10184" data-issuekey="RUN-33" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-33" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-33">RUN-33</a>
+</td>
+                                            <td class="summary"><p>
+                Add picture to events on event creation
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:16 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:16 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # Add a picture to the event.<br/>
+<br/>
+ 
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0014n:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10182" rel="10182" data-issuekey="RUN-32" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-32" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-32">RUN-32</a>
+</td>
+                                            <td class="summary"><p>
+                Backend: Login
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;In Progress&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;This issue is being actively worked on at the moment by the assignee.&lt;/span&gt;">In Progress</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">            Anabelle Hsiao
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:07 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:46 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # Users can login with their email/username and password.<br/>
+<br/>
+Poker points: 6
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i00147:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10181" rel="10181" data-issuekey="RUN-31" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-31" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-31">RUN-31</a>
+</td>
+                                            <td class="summary"><p>
+                Frontend: Login
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;In Progress&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;This issue is being actively worked on at the moment by the assignee.&lt;/span&gt;">In Progress</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">            Anabelle Hsiao
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:06 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:46 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # Users can login with email/username and password<br/>
+<br/>
+Poker points: 6
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0013z:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10180" rel="10180" data-issuekey="RUN-30" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-30" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-30">RUN-30</a>
+</td>
+                                            <td class="summary"><p>
+                Backend: Register
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Jeremy La
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:05 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 07/Oct/22 3:38 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 3:38 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      1. User wants to register with an email, username, and password.<br/>
+<br/>
+Poker Points: 6
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0013r:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10179" rel="10179" data-issuekey="RUN-29" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-29" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-29">RUN-29</a>
+</td>
+                                            <td class="summary"><p>
+                Password reset
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 7:02 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:32 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:02 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # Button to let user reset their password.<br/>
+ # Email user with password reset.<br/>
+ # Send the user to a separate page to reset the password. <br/>
+<br/>
+Poker Points: 7
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0013j:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10176" rel="10176" data-issuekey="RUN-28" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-28" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-28">RUN-28</a>
+</td>
+                                            <td class="summary"><p>
+                Learn MERN stack
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;In Progress&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;This issue is being actively worked on at the moment by the assignee.&lt;/span&gt;">In Progress</span>    </td>
+                                            <td class="priority">           High
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 6:31 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 2:56 PM </td>
+                                            <td class="updated"> 26/Sep/22 7:49 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate">288000</td>
+                                            <td class="timeestimate">288000</td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">            0%
+    </td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      Teammates need to spend time learning this skill
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     0%
+</td>
+                                            <td class="aggregateprogress">     0%
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate">288000</td>
+                                            <td class="aggregatetimeoriginalestimate">288000</td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0012v:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10175" rel="10175" data-issuekey="RUN-27" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-27" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-27">RUN-27</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I am search by city (distance) so I can go to events nearby my house
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:28 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:33 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:28 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # A spinner/ search box to find the city and filter the options to show up on upcoming events<br/>
+ # The events are sorted by popularity
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0012n:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10174" rel="10174" data-issuekey="RUN-26" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-26" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-26">RUN-26</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, i want to be updated if an event is changed/cancelled so i don’t look awkward showing up to an empty event.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:28 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:33 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:28 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # The user gets the notification through email if they are subscribed <br/>
+ # The canceled/changed event would pop up when the user login<br/>
+ # Once canceled the event would be removed from upcoming, liked events
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0012f:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10173" rel="10173" data-issuekey="RUN-25" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-25" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-25">RUN-25</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, i want to be notified when an event is coming up so that i don’t forget about it
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:27 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:33 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:27 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      # An option button in the settings page for users to choose to get notified<br/>
+ # Users would be notified by the email they have given<br/>
+ # The email is filled up on register page<br/>
+ # The email can be changed later on on Settings 
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i00127:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10172" rel="10172" data-issuekey="RUN-24" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-24" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-24">RUN-24</a>
+</td>
+                                            <td class="summary"><p>
+                As a user I am able to choose my own preference based on categories when I create my account so the initial feed that I get would match my own predilection.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Jeremy La
+    </td>
+                                            <td class="creator">            Jeremy La
+    </td>
+                                            <td class="created"> 26/Sep/22 6:26 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:34 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:26 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      * When registering an account, the user can select one or more categories for their preferences<br/>
+ * When on the settings page, there is an option to update preferred categories
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0011z:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10171" rel="10171" data-issuekey="RUN-23" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-23" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-23">RUN-23</a>
+</td>
+                                            <td class="summary"><p>
+                As an event organizer, I want to be able to limit attendance to my event to women only because it makes the event safer.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Jeremy La
+    </td>
+                                            <td class="creator">            Jeremy La
+    </td>
+                                            <td class="created"> 26/Sep/22 6:26 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:34 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:26 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      * A “women-only” option is available when creating an event<br/>
+ * User can specify their gender as female in their profile settings<br/>
+ * When viewing a women-only event, user can only register if they have specified their gender as female
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0011r:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10170" rel="10170" data-issuekey="RUN-22" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-22" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-22">RUN-22</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I am able to update certain information in the settings so I can update my events’ address.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="creator">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="created"> 26/Sep/22 6:25 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:34 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:25 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # users are able to edit the address of events that they host
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0011j:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10169" rel="10169" data-issuekey="RUN-21" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-21" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-21">RUN-21</a>
+</td>
+                                            <td class="summary"><p>
+                As a user I want to be able to press a button on the event page to open the location on my maps app so I can easily find directions.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Jeremy La
+    </td>
+                                            <td class="creator">            Jeremy La
+    </td>
+                                            <td class="created"> 26/Sep/22 6:25 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:34 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:25 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      * User can specify a location/address when creating an event<br/>
+ * When viewing an event page, there is a “view location on maps” button<br/>
+ * When clicking the button, should open the location in google maps in a new tab
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0011b:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10168" rel="10168" data-issuekey="RUN-20" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-20" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-20">RUN-20</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I am able to go to settings to see my own information
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="creator">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="created"> 26/Sep/22 6:25 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:35 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:25 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # users all have their own information (name, username, profile picture, if they are a woman) which they can access and change
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i00113:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10167" rel="10167" data-issuekey="RUN-19" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-19" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-19">RUN-19</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I am able to find events by certain category so I can find my favourite boardgames related events easier
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="creator">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="created"> 26/Sep/22 6:25 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:39 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:25 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # events have a ‘category’ property which it can be sorted with
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0010v:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10166" rel="10166" data-issuekey="RUN-18" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-18" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-18">RUN-18</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I want to be able to share the event on other social media sites with a button so that I can convince others without the app to come join me.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:25 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:36 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:25 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      #  user can press share button to have share interface popup<br/>
+ #  share interface allows sharing an automatically generated blurb about the event on the given social media site<br/>
+ #  automatically generated blurb contains event name, location and date.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i0010n:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10164" rel="10164" data-issuekey="RUN-16" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-16" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-16">RUN-16</a>
+</td>
+                                            <td class="summary"><p>
+                As a user/student, I am able search by date so I wouldn’t have time conflicts with my classes.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="creator">            Nevin Ho Ching Wong
+    </td>
+                                            <td class="created"> 26/Sep/22 6:24 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:36 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:24 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # users are able to filter their search of events by date and time
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i00107:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10163" rel="10163" data-issuekey="RUN-15" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-15" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-15">RUN-15</a>
+</td>
+                                            <td class="summary"><p>
+                Frontend: Register
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Mohamad El Kadri
+    </td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:24 PM </td>
+                                            <td class="lastViewed"> 07/Oct/22 3:38 PM </td>
+                                            <td class="updated"> 07/Oct/22 2:57 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 2:57 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # Users can register with a username, password and email.<br/>
+<br/>
+Poker points: 6
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000zz:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10162" rel="10162" data-issuekey="RUN-14" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-14" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-14">RUN-14</a>
+</td>
+                                            <td class="summary"><p>
+                As an playwright, I want to be able to place a limit on the number of users who can join my event because I have a limited number of seats in the auditorium.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Mohamad El Kadri
+    </td>
+                                            <td class="creator">            Mohamad El Kadri
+    </td>
+                                            <td class="created"> 26/Sep/22 6:24 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:36 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:24 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # organizer can set limit when creating or editing the event.<br/>
+ # user cannot join and join button will be unusable while the limit is reached.<br/>
+ # number of slots left is displayed on the event page
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000zr:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10161" rel="10161" data-issuekey="RUN-13" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-13" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-13">RUN-13</a>
+</td>
+                                            <td class="summary"><p>
+                As a non-converted user, I want to be able to browse events without having an account so that I can decide whether the app is worth registering for.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Mohamad El Kadri
+    </td>
+                                            <td class="creator">            Mohamad El Kadri
+    </td>
+                                            <td class="created"> 26/Sep/22 6:24 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:36 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:24 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # user can browse events by swapping homepage and going to searchpage.<br/>
+ # user will have non-functional join and favourite buttons.<br/>
+ # user can register by going back to homepage.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000zj:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10160" rel="10160" data-issuekey="RUN-12" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-12" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-12">RUN-12</a>
+</td>
+                                            <td class="summary"><p>
+                As a busy businessman I would like to see what other users comments are on an upcoming event
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Anabelle Hsiao
+    </td>
+                                            <td class="creator">            Anabelle Hsiao
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:37 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # users are able to comment on all events<br/>
+ # users are able to delete their event as wanted<br/>
+ # After the time passed, the event would be deleted on the upcoming page<br/>
+ # Upcoming event have a scroll view for the users to view the events
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000zb:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10159" rel="10159" data-issuekey="RUN-11" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-11" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-11">RUN-11</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I want to be able to report events so that admins can review them because it helps remove spam from the events page.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:37 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # A button will be available on an event that allows the user to report an event as span.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000z3:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10158" rel="10158" data-issuekey="RUN-10" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-10" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-10">RUN-10</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I want to be able to join an event ahead of time so that I can get guaranteed access without worrying about not being able to get in.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Mohamad El Kadri
+    </td>
+                                            <td class="creator">            Mohamad El Kadri
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:37 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # user can press join button if event has space available to be added to event, and join button becomes leave button.<br/>
+ # user can press cancel button to leave event.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000yv:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10157" rel="10157" data-issuekey="RUN-9" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-9" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-9">RUN-9</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I want to be able to share the event on other social media sites with a button so that I can convince others without the app to come join me.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Mohamad El Kadri
+    </td>
+                                            <td class="creator">            Mohamad El Kadri
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:41 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # user can press share button to have share interface popup<br/>
+ # share interface allows sharing an automatically generated blurb about the event on the given social media site<br/>
+ # automatically generated blurb contains event name, location and date.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000yn:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10156" rel="10156" data-issuekey="RUN-8" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-8" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-8">RUN-8</a>
+</td>
+                                            <td class="summary"><p>
+                As an event organizer, I want to be able to ban a user from joining because it prevents us from having them disrupt our event.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:41 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # Event organizers will be given a button that allows them to search for a user they would like to ban.<br/>
+ # When they find the user they would like to ban they can click on that user to ban them.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000yf:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10155" rel="10155" data-issuekey="RUN-7" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-7" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-7">RUN-7</a>
+</td>
+                                            <td class="summary"><p>
+                As an investor I would like to easily get the contact information of the event organizer so I can easily contact him to directly support the event.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ricky Su Shen
+    </td>
+                                            <td class="creator">            Ricky Su Shen
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:40 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # From the event scroll view, users can access the public profile of the event organizer of each event<br/>
+ # Users may select what information they want to show in their public profile
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000y7:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10154" rel="10154" data-issuekey="RUN-6" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-6" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-6">RUN-6</a>
+</td>
+                                            <td class="summary"><p>
+                Enter event to post on the app page.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Done&lt;/span&gt;">Done</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    Done
+</td>
+                                            <td class="assignee">            Ivy Miranda Wills
+    </td>
+                                            <td class="reporter">            Mohamad El Kadri
+    </td>
+                                            <td class="creator">            Mohamad El Kadri
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:32 PM </td>
+                                            <td class="updated"> 07/Oct/22 3:06 PM </td>
+                                            <td class="resolutiondate"> 07/Oct/22 3:06 PM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">       <br/>
+ # The organizer can post event with location, date, attendee limit, and description<br/>
+<br/>
+ <br/>
+<br/>
+Poker points: 6
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000xz:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10153" rel="10153" data-issuekey="RUN-5" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-5" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-5">RUN-5</a>
+</td>
+                                            <td class="summary"><p>
+                As a community user, I would like to be able to leave a review once an event have finished so the event organizer can read my constructive criticism.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ricky Su Shen
+    </td>
+                                            <td class="creator">            Ricky Su Shen
+    </td>
+                                            <td class="created"> 26/Sep/22 6:23 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:40 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:23 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # Users can leave a review once an event has ended<br/>
+ # Users are able to erase this review<br/>
+ # The reviews will be accessed alongside the archived past event
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000xr:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10152" rel="10152" data-issuekey="RUN-4" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-4" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-4">RUN-4</a>
+</td>
+                                            <td class="summary"><p>
+                As a community user, I would like to have a like button so I can show support for an event without having to participate in it
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ricky Su Shen
+    </td>
+                                            <td class="creator">            Ricky Su Shen
+    </td>
+                                            <td class="created"> 26/Sep/22 6:22 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:39 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:22 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # Users can press a like button that does not commit them into attending an event<br/>
+ # Once liked an event, users can remove it at any time<br/>
+ # Total number of likes of an event will be publicly available
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000xj:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10150" rel="10150" data-issuekey="RUN-2" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-2" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-2">RUN-2</a>
+</td>
+                                            <td class="summary"><p>
+                As a user, I would like to have a history of my attended events so I can remember which events I attended to.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">    <em>Unassigned</em>
+</td>
+                                            <td class="reporter">            Ricky Su Shen
+    </td>
+                                            <td class="creator">            Ricky Su Shen
+    </td>
+                                            <td class="created"> 26/Sep/22 6:22 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:39 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:22 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # User can see past events that he attended to<br/>
+ # User can remove events from his history
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000x3:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+
+
+                <tr id="issuerow10149" rel="10149" data-issuekey="RUN-1" class="issuerow">
+                                            <td class="project">    RuntimeWarriors
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="RUN-1" href="https://mcsapps.utm.utoronto.ca/jira/browse/RUN-1">RUN-1</a>
+</td>
+                                            <td class="summary"><p>
+                As an event organizer, I want to be able to post updates that users will get as notifications so that they can know about unexpected changes.
+    </p>
+</td>
+                                            <td class="issuetype">    Task
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-blue-gray jira-issue-status-lozenge-new aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;To Do&lt;/span&gt;">To Do</span>    </td>
+                                            <td class="priority">           Medium
+    </td>
+                                            <td class="resolution">    <em>Unresolved</em>
+</td>
+                                            <td class="assignee">            Anabelle Hsiao
+    </td>
+                                            <td class="reporter">            Ivy Miranda Wills
+    </td>
+                                            <td class="creator">            Ivy Miranda Wills
+    </td>
+                                            <td class="created"> 26/Sep/22 6:22 PM </td>
+                                            <td class="lastViewed"> 06/Oct/22 12:33 PM </td>
+                                            <td class="updated"> 26/Sep/22 6:32 PM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks">                </td>
+                                            <td class="issuelinks">                </td>
+                                            <td class="environment"></td>
+                                            <td class="description">      CoS:<br/>
+ # Event organizers will have the option to update events they have already created using an update button. This will make the event editable.<br/>
+ # Users signed up for an event will get a notification in the form of email and app notifications to ensure that last-minute details are known.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress">     
+</td>
+                                            <td class="aggregateprogress">     
+</td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    </td>
+                                            <td class="customfield_10104"></td>
+                                            <td class="customfield_10105"></td>
+                                            <td class="customfield_10106"></td>
+                                            <td class="customfield_10107">      0|i000wv:
+  </td>
+                                            <td class="customfield_10108"></td>
+                                            <td class="customfield_10109"></td>
+                                            <td class="customfield_10000">    <div class='dev-status-column-view-wrapper'></div>
+</td>
+                                            <td class="customfield_10110"></td>
+                                            <td class="customfield_10100">
+</td>
+                                            <td class="customfield_10101">
+</td>
+                                            <td class="customfield_10102">
+</td>
+                                            <td class="customfield_10103"></td>
+                    </tr>
+                </tbody>
+    </table>
+    </issuetable-web-component>
+    <div class="end-of-stable-message"></div>
+            <table border="1" >
+<tr>
+    <td bgcolor="#f5f5f5" colspan="48"><font size="1">
+        Generated at Fri Oct 07 15:39:03 EDT 2022 by Mohamad El Kadri using Jira 8.20.12#820012-sha1:714e321bb65f6e9cd84e7b7ef8795e4146ab9c7a.
+    </font></td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -8,10 +8,9 @@ import History from "./components/History";
 import Settings from "./components/Settings";
 import DbWriteTemp from "./components/DbWriteTemp";
 import Register from "./components/Register";
-
+import LogIn from "./components/LogIn";
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LogIn from "./components/LogIn";
 
 const App = () => {
   return (

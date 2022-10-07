@@ -37,11 +37,16 @@ usersRoutes.route("/users/register").post(async (req, response) => {
     });
   }
 });
-
 // User login
 usersRoutes.route("/users/login").post(async (req, res) => {
-  if (!("email" in req.body)) return res.status(400).json("email is missing");
-  if (!("pw" in req.body)) return res.status(400).json("password is missing");
+  if (!("email" in req.body))
+    return res
+      .status(400)
+      .json({ content: "email is missing", isValid: false });
+  if (!("pw" in req.body))
+    return res
+      .status(400)
+      .json({ content: "password is missing", isvalid: false });
 
   const dbConnect = dbo.getDb();
 
@@ -52,16 +57,20 @@ usersRoutes.route("/users/login").post(async (req, res) => {
     .collection("mockUsers")
     .findOne({ email: email }, function (err, user) {
       if (err) return res.status(500).json(err);
-      if (!user) return res.status(401).json("access denied");
-    //   console.log(user);
+      if (!user)
+        return res
+          .status(401)
+          .json({ content: "access denied", isValid: false });
+        
       bcrypt.compare(pw, user.password, function (err, valid) {
         if (err) return res.status(500).json(err);
         if (!valid)
-          return res.status(401).json("Incorrect email or Password");
-        return res.json(user.username); 
+          return res
+            .status(401)
+            .json({ content: "Incorrect email or Password", isValid: false });
+        return res.json({ content: user.username, isValid: true });
       });
     });
- 
 });
 
 // Update user

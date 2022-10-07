@@ -69,7 +69,7 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
 
   db_connect
     .collection("testLikes")
-    .removeOne(likevalues, function (err, res) {
+    .remove(likevalues, function (err, res) {
       if (err) throw err;
     });
 

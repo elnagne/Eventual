@@ -8,6 +8,7 @@ app.use(express.json());
 
 // different routes - for now we just have users (users.js), when adding more users add it here
 app.use(require("./routes/users"));
+app.use(require("./routes/search"));
 
 // get driver connection
 const dbo = require("./db/conn");

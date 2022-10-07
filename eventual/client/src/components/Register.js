@@ -1,11 +1,15 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React from 'react'
+import Sidebar from './Sidebar'
 
-const Register = () => {
-    return (
-        1
-    );
-  }
-  
-  export default Register
+const Settings = () => {
+  return (
+    <div className="settingsWrapper">
+        <Sidebar/>
+        <div className="settingsContent">
+            <h1>Register</h1>
+        </div>
+    </div>
+  )
+}
+
+export default Settings

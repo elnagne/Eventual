@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // Components
 import Home from './components/Home';
@@ -11,11 +11,11 @@ import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import LogIn from './components/LogIn';
 // We use Route in order to define the different routes of our application
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 const App = () => {
-  return (
-    <Router>
+ return (
+   <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
@@ -27,8 +27,8 @@ const App = () => {
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-    </Router>
-  );
+   </Router>
+ );
 };
 
 export default App;

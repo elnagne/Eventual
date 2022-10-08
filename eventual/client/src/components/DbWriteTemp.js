@@ -24,16 +24,13 @@ const DbWriteTemp = () => {
             name: {first: firstName, last: lastName}
         }
 
-        await fetch("http://localhost:5000/users/register", {
+        await fetch("http://localhost:5000/accounts/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(newAccount),
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => {
+        }).catch(error => {
             window.alert(error);
             return;
         })

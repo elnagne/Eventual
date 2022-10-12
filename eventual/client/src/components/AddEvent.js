@@ -11,6 +11,7 @@ const today = new Date();
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
   const [date_of_event, setDate_of_event] = useState('');
   const [time_of_event, setTime_of_event] = useState('');
   const [num_slots, setNum_slots] = useState(0);
@@ -28,6 +29,7 @@ const AddEvent = () => {
     const newEvent = {
       event_name: event_name,
       description: description,
+      image: image,
       date_of_event: date_of_event,
       time_of_event: time_of_event,
       num_slots: num_slots,
@@ -76,6 +78,18 @@ const AddEvent = () => {
             />
           </div>
           <div class="form-group" className="AddEventElement">
+            <label class="form-label" for="customFile">
+              Upload Image
+            </label>
+            <input
+              type="file"
+              class="form-control"
+              id="customFile"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+          </div>
+          <div class="form-group" className="AddEventElement">
             <label>Date</label>
             <input
               class="form-control"
@@ -114,7 +128,7 @@ const AddEvent = () => {
           >
             <option>Sport</option>
             <option>Entertainment</option>
-            <option>Indoor Game</option>
+            <option>Board Game</option>
             <option>Concert</option>
             <option>Charity</option>
           </select>

@@ -10,6 +10,7 @@ import DbWriteTemp from './components/DbWriteTemp';
 import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import LogIn from './components/LogIn';
+import Profile from './components/Profile';
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/add-events" element={<AddEvents />} />
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

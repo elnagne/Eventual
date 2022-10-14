@@ -21,6 +21,16 @@ searchRoutes.route("/search").get((req, res) => {
     });
 });
 
+// Find a singular event given their id
+searchRoutes.route("/search/events/:id").get((req, res) => {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection("testEvents").findOne(myquery, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
 // Find the name of a user given their id
 searchRoutes.route("/search/name/:id").get((req, res) => {
   let db_connect = dbo.getDb();

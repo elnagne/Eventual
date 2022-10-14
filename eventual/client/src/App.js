@@ -3,6 +3,7 @@ import React from 'react';
 // Components
 import Home from './components/Home';
 import Events from './components/Events';
+import Event from './components/Event';
 import Liked from './components/Liked';
 import History from './components/History';
 import Settings from './components/Settings';
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<Event />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />

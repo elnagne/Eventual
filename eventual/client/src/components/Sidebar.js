@@ -12,6 +12,7 @@ const Sidebar = () => {
       <div className="sidebarWrapper">
           <Link to="/" className="navbarItem">Home</Link>
           <Link to="/events" className="navbarItem">Events</Link>
+          <Link to="/add-events" className="navbarItem">Add Event</Link>
           <Link to="/liked" className="navbarItem">Liked</Link>
           <Link to="/history" className="navbarItem">History</Link>
           <Link to="/settings" className="navbarItem">Settings</Link>

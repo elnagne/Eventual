@@ -11,7 +11,8 @@ const Profile = () => {
     const [lastName, setLastName] = useState('Test');
     const [email, setEmail] = useState('Test');
     const [username,setUsername] = useState('Test');
-    const [password,setPassword] = useState('Test');
+    const [oldPassword,setOldPassword] = useState('');
+    const [newPassword,setNewPassword] = useState('');
 
     // get current user information and populate forms
     const getUser = async (e) => {
@@ -19,7 +20,7 @@ const Profile = () => {
 
         const currUser = {
             username: username,
-            password: password,
+            password: oldPassword,
             email: email,
             name: {first: firstName, last: lastName}
         }
@@ -40,13 +41,15 @@ const Profile = () => {
 
     // update user information on submit click
 
+    // if password is equal to the users password, change password
+
     return (
         <div className="d-flex">
             <div className="d-flex">
                 <Sidebar />
             </div>
-            <Col className="flex-fill">
-                <div className="mx-auto p-5">
+            <div class="row">
+                <Col className="col-xs-12 col-sm-12 col-md-6 justify-content-start p-5">
                     <h3>Change Profile Information</h3>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="firstName">
@@ -66,10 +69,6 @@ const Profile = () => {
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} disabled/>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} disabled/>
-                    </Form.Group>
                     <div class='col-xs-3'>
                         <Button variant="primary" className="me-1" type="Edit" onClick={toggleForms}>
                             Edit
@@ -79,20 +78,48 @@ const Profile = () => {
                         </Button>
                         <span className="m-3" id="response">{""}</span>
                     </div>
-                </div>
-            </Col>
+                </Col>
+                <Col className="col-xs-12 col-sm-12 col-md-6 justify-content-start p-5">
+                    <h3>Change Password</h3>
+                    <Row className="mb-3">
+                        <Form.Group className="mb-3" controlId="formOldPassword">
+                            <Form.Label>Enter Current Password</Form.Label>
+                            <Form.Control type="password" placeholder="Old Password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} disabled/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formNewPassword">
+                            <Form.Label>Enter Current Password</Form.Label>
+                            <Form.Control type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} disabled/>
+                        </Form.Group>
+                        <div class='col-xs-3'>
+                            <Button variant="primary" className="me-1" type="Edit" onClick={togglePassword}>
+                                Edit
+                            </Button>
+                            <Button variant="primary" className="me-1" type="Submit" id="submitPassword" onClick={getUser} disabled>
+                                Submit
+                            </Button>
+                            <span className="m-3" id="response">{""}</span>
+                        </div>
+                    </Row>
+                </Col>
+            </div>
         </div>
     );
 }
 
-// toggles enabled and disabled for forms
+// toggles enabled and disabled for profile forms
 function toggleForms() {
     document.getElementById("firstName").disabled = !document.getElementById("firstName").disabled;
     document.getElementById("lastName").disabled = !document.getElementById("lastName").disabled;
     document.getElementById("formBasicEmail").disabled = !document.getElementById("formBasicEmail").disabled;
     document.getElementById("formBasicUsername").disabled = !document.getElementById("formBasicUsername").disabled;
-    document.getElementById("formBasicPassword").disabled = !document.getElementById("formBasicPassword").disabled;
     document.getElementById("submit").disabled = !document.getElementById("submit").disabled;
+}
+
+// toggles enabled and disabled for password forms
+function togglePassword() {
+    document.getElementById("formOldPassword").disabled = !document.getElementById("formOldPassword").disabled;
+    document.getElementById("formNewPassword").disabled = !document.getElementById("formNewPassword").disabled;
+    document.getElementById("submitPassword").disabled = !document.getElementById("submitPassword").disabled;
 }
 
 export default Profile

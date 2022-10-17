@@ -44,6 +44,11 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
 
   db_connect
     .collection("testEvents")
+    .update({ _id: ObjectId( req.params.id )},
+    {$push:{"liked_by":{account_id:ObjectId("632c889ad56e85f52f50ac78")}}});
+
+  db_connect
+    .collection("testEvents")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
       console.log("1 document liked");
@@ -72,6 +77,11 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
     .remove(likevalues, function (err, res) {
       if (err) throw err;
     });
+
+  db_connect
+    .collection("testEvents")
+    .update({ _id: ObjectId( req.params.id )},
+    {$pull:{"liked_by":{account_id:ObjectId("632c889ad56e85f52f50ac78")}}});
 
   db_connect
     .collection("testEvents")

@@ -1,6 +1,7 @@
 import * as Utils from './Utils.js';
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
+import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -38,6 +39,23 @@ const EventCard = (props) => {
     }
   }, [props.event.author]);
 
+  async function likeEvent(id) {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/liked/add_like/${id}`, {
+        method: "POST"
+      });
+    window.location.reload(false);
+  }
+  
+  // This method decrease the number of likes by 1
+  async function dislikeEvent(id) {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/liked/add_dislike/${id}`, {
+        method: "POST"
+      });
+    window.location.reload(false);
+  }
+
   const event = props.event;
   const id = event._id;
   const name = event.event_name;
@@ -46,6 +64,9 @@ const EventCard = (props) => {
   const likes = event.num_likes;
   const city = event.city;
   const address = event.location;
+  const eventID = event._id;
+  const likedby= event.liked_by;
+  const account_id = "632c889ad56e85f52f50ac78";
 
   const startTimeObj = event.startTime;
   const startTime = new Date(startTimeObj);
@@ -118,6 +139,7 @@ const EventCard = (props) => {
             </span>
           )}
         </div>
+        
         {desc && <div className="desc">{desc}</div>}
         {likes !== undefined && (
           <div className="likes">
@@ -125,6 +147,22 @@ const EventCard = (props) => {
             {likes === 1 ? "person is" : "people are"} interested in this event
           </div>
         )}
+        {likedby.find((likeObjects)=>likeObjects.account_id==account_id) !== undefined 
+        ?
+        <div><Button variant="outline-danger"
+        onClick={() => {
+          dislikeEvent(eventID)
+        }}
+      > Dislike 
+      </Button></div>
+        :
+        <div><Button variant="outline-primary"
+        onClick={() => {
+          likeEvent(eventID)
+        }}
+      > Like 
+      </Button></div>
+        }
       </Card.Body>
     </Card>
   );

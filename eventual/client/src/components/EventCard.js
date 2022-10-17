@@ -2,6 +2,9 @@ import * as Utils from './Utils.js';
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import './Likebtn.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -143,26 +146,38 @@ const EventCard = (props) => {
         {desc && <div className="desc">{desc}</div>}
         {likes !== undefined && (
           <div className="likes">
-            <FontAwesomeIcon icon={faHeart} /> {likes}{" "}
+            {likedby.find((likeObjects)=>likeObjects.account_id===account_id) !== undefined 
+            ?
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Remove Like</Tooltip>}
+              >
+              <Button variant="liked" 
+              onClick={() => {
+                dislikeEvent(eventID)
+              }}
+              > <FontAwesomeIcon icon={faHeart} />
+              </Button>
+              </OverlayTrigger>
+              :
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
+              >
+              <Button variant="like" 
+              onClick={() => {
+                likeEvent(eventID)
+              }}
+              > <FontAwesomeIcon icon={faHeart} />
+              </Button>
+              </OverlayTrigger>
+            }
+            {likes}{" "}
             {likes === 1 ? "person is" : "people are"} interested in this event
           </div>
         )}
-        {likedby.find((likeObjects)=>likeObjects.account_id===account_id) !== undefined 
-        ?
-        <div><Button className="circle" variant="danger"
-        onClick={() => {
-          dislikeEvent(eventID)
-        }}
-      > {likes} <FontAwesomeIcon icon={faHeart} /> Liked
-      </Button></div>
-        :
-        <div><Button className="circle" variant="outline-danger"
-        onClick={() => {
-          likeEvent(eventID)
-        }}
-      > {likes} <FontAwesomeIcon icon={faHeart} /> Like
-      </Button></div>
-        }
       </Card.Body>
     </Card>
   );

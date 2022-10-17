@@ -40,8 +40,68 @@ const Profile = () => {
     };
 
     // update user information on submit click
+    const updateProfile = async (e) => {
+        e.preventDefault();
 
-    // if password is equal to the users password, change password
+        const newProfile = {
+            username: username,
+            email: email,
+            name: {first: firstName, last: lastName}
+        }
+
+        const response = await fetch("http://localhost:5000/users/update/:id", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newProfile),
+        }).catch(error => {
+            window.alert(error);
+            return;
+        });
+
+        let message = await response.json();
+        document.getElementById("profileResponse").innerHTML = message.message;
+
+        setUsername('');
+        setEmail('');
+        setFirstName('');
+        setLastName('');
+    };
+
+    // update password
+    const updatePassword = async (e) => {
+        e.preventDefault();
+
+        // if old password is not correct don't update TODO 
+        /*
+        if () {
+
+            return;
+        }
+        */
+
+        const newProfile = {
+            password: newPassword
+        }
+
+        const response = await fetch("http://localhost:5000/users/updatePassword/:id", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newProfile),
+        }).catch(error => {
+            window.alert(error);
+            return;
+        });
+
+        let message = await response.json();
+        document.getElementById("passwordResponse").innerHTML = message.message;
+
+        setOldPassword('');
+        setNewPassword('');
+    };
 
     return (
         <div className="d-flex">
@@ -73,10 +133,10 @@ const Profile = () => {
                         <Button variant="primary" className="me-1" type="Edit" onClick={toggleForms}>
                             Edit
                         </Button>
-                        <Button variant="primary" className="me-1" type="Submit" id="submit" onClick={getUser} disabled>
+                        <Button variant="primary" className="me-1" type="Submit" id="submit" onClick={updateProfile} disabled>
                             Submit
                         </Button>
-                        <span className="m-3" id="response">{""}</span>
+                        <span className="m-3" id="profileResponse">{""}</span>
                     </div>
                 </Col>
                 <Col className="col-xs-12 col-sm-12 col-md-6 justify-content-start p-5">
@@ -94,10 +154,10 @@ const Profile = () => {
                             <Button variant="primary" className="me-1" type="Edit" onClick={togglePassword}>
                                 Edit
                             </Button>
-                            <Button variant="primary" className="me-1" type="Submit" id="submitPassword" onClick={getUser} disabled>
+                            <Button variant="primary" className="me-1" type="Submit" id="submitPassword" onClick={updatePassword} disabled>
                                 Submit
                             </Button>
-                            <span className="m-3" id="response">{""}</span>
+                            <span className="m-3" id="passwordResponse">{""}</span>
                         </div>
                     </Row>
                 </Col>

@@ -147,20 +147,20 @@ const EventCard = (props) => {
             {likes === 1 ? "person is" : "people are"} interested in this event
           </div>
         )}
-        {likedby.find((likeObjects)=>likeObjects.account_id==account_id) !== undefined 
+        {likedby.find((likeObjects)=>likeObjects.account_id===account_id) !== undefined 
         ?
-        <div><Button variant="outline-danger"
+        <div><Button className="circle" variant="danger"
         onClick={() => {
           dislikeEvent(eventID)
         }}
-      > Dislike 
+      > {likes} <FontAwesomeIcon icon={faHeart} /> Liked
       </Button></div>
         :
-        <div><Button variant="outline-primary"
+        <div><Button className="circle" variant="outline-danger"
         onClick={() => {
           likeEvent(eventID)
         }}
-      > Like 
+      > {likes} <FontAwesomeIcon icon={faHeart} /> Like
       </Button></div>
         }
       </Card.Body>

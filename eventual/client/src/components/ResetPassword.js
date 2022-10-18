@@ -26,7 +26,7 @@ const ResetPassword = () => {
                             <h3>Reset Password</h3>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>New Password</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" value={password} onChange={(e) => setPassword(e.target.value)} disabled/>
+                                <Form.Control type="email" placeholder="Enter email" value={password} onChange={(e) => setPassword(e.target.value)}/>
                             </Form.Group>
                             <Button variant="primary" className="me-1" type="Submit" id="reset" onClick={resetPassword}>
                                 Reset

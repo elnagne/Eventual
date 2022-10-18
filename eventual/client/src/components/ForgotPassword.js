@@ -1,21 +1,33 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Sidebar from './Sidebar'
+import axios from 'axios';
 import { useState, useEffect } from 'react';
+
+const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
 
+
     const sendResetPassword = e => {
         e.preventDefault();
+    /* TODO email is considered NULL even if not null
+        if (!emailRegex.test(email)) {
+            document.getElementById("response").innerHTML = "Please enter a valid email address.";
+        } else {
+            axios.post('http://localhost:3000/forgot-password', {
+                email: this.state.email,
+            }).then(response => {
+                // don't state if email is of registered account for privacy
+                document.getElementById("response").innerHTML = response.data;         
+            }).catch(error => {
+                console.log(error.data);
+            });
+        }
+        */
+    };
 
-        const data = {
-            email: this.email
-        };
-    }
 
     return (
         <div className="vh-100 d-flex justify-content-center align-items-center">
@@ -26,7 +38,7 @@ const ForgotPassword = () => {
                             <h3>Reset Password</h3>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} disabled/>
+                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                             </Form.Group>
                             <Button variant="primary" className="me-1" type="Submit" id="reset" onClick={sendResetPassword}>
                                 Reset

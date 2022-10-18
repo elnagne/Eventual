@@ -1,33 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Sidebar from "./Sidebar";
 import EventsDisplay from "./EventsDisplay";
+import EventsSearch from "./EventsSearch";
+import { SearchContext } from './SearchContext';
 
 const Events = () => {
+  const {
+    activeFilters, setActiveFilters,
+    womanOnly, setWomanOnly,
+    startDate, setStartDate,
+    endDate, setEndDate,
+  } = useContext(SearchContext);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    async function getEvents() {
-      const response = await fetch(`http://localhost:5000/search/`);
+    getEvents();
+    return;
+  }, []);
 
-      if (!response.ok) {
-        const message = `${response.statusText}`;
-        window.alert(message);
-        return;
-      }
+  async function getEvents() {
+    setEvents([]);
 
-      const events = await response.json();
-      setEvents(events);
+    const response = await fetch(`http://localhost:5000/search/`);
+
+    if (!response.ok) {
+      const message = `${response.statusText}`;
+      window.alert(message);
+      return;
     }
 
-    getEvents();
+    const events = await response.json();
+    setEvents(events);
+  }
 
-    return;
-  }, [events.length]);
+  async function getFilteredEvents() {
+    setEvents([]);
+    let filtersArray = Object.keys(activeFilters).filter(k => activeFilters[k] == true);
+
+    const response = await fetch(`http://localhost:5000/search/filteredSearch`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filters: filtersArray, womanOnly: womanOnly, startDate: startDate, endDate: endDate }),
+    });
+
+    if (!response.ok) {
+      const message = `${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const events = await response.json();
+    setEvents(events);
+  }
 
   return (
     <div className="eventsWrapper">
       <Sidebar />
       <div className="eventContent">
+        <EventsSearch search={getFilteredEvents} />
         <EventsDisplay events={events} />
       </div>
     </div>

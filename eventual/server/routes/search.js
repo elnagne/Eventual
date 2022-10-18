@@ -21,6 +21,26 @@ searchRoutes.route("/search").get((req, res) => {
     });
 });
 
+// Search for events based on filters
+searchRoutes.route("/search/filteredSearch").post((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+
+  let activeFilters = req.body.filters;
+  let startDate = req.body.startDate.length != 0 ? req.body.startDate : "0000-00-00"
+  let endDate = req.body.endDate.length != 0 ? req.body.endDate : "9999-99-99";
+
+  let query = req.body.womanOnly ? { category: { $in: activeFilters }, woman_only: true, date_of_event: { $gte: startDate, $lte: endDate } }
+                                 : { category: { $in: activeFilters }, date_of_event: { $gte: startDate, $lte: endDate } }
+
+  db_connect
+    .collection("testEvents")
+    .find(query)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
 // Find the name of a user given their id
 searchRoutes.route("/search/name/:id").get((req, res) => {
   let db_connect = dbo.getDb();
@@ -31,5 +51,4 @@ searchRoutes.route("/search/name/:id").get((req, res) => {
   });
 });
 
-// Export searchRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)
 module.exports = searchRoutes;

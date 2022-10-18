@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import EventsDisplay from "./EventsDisplay";
 import EventsSearch from "./EventsSearch";
 import { SearchContext } from './SearchContext';
+import Alert from 'react-bootstrap/Alert';
 
 const Events = () => {
   const {
@@ -19,8 +20,6 @@ const Events = () => {
   }, []);
 
   async function getEvents() {
-    setEvents([]);
-
     const response = await fetch(`http://localhost:5000/search/`);
 
     if (!response.ok) {
@@ -34,7 +33,6 @@ const Events = () => {
   }
 
   async function getFilteredEvents() {
-    setEvents([]);
     let filtersArray = Object.keys(activeFilters).filter(k => activeFilters[k] == true);
 
     const response = await fetch(`http://localhost:5000/search/filteredSearch`, {
@@ -60,7 +58,7 @@ const Events = () => {
       <Sidebar />
       <div className="eventContent">
         <EventsSearch search={getFilteredEvents} />
-        <EventsDisplay events={events} />
+        {events.length > 0 ? <EventsDisplay events={events} /> : <Alert variant='primary' className="mx-4 my-4">No events found.</Alert>}
       </div>
     </div>
   );

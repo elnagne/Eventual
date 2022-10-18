@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
 const today = new Date();
 
 const AddEvent = () => {

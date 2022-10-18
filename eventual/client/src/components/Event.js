@@ -30,7 +30,6 @@ const Event = () => {
     <div className="eventsWrapper">
       <Sidebar />
       <div className="eventContent">
-        {/* <h1>{id}</h1> */}
         <div>
           <EventCardSingular event={event} />
         </div>

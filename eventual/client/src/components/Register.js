@@ -90,7 +90,7 @@ const Register = (props) => {
                                         </Button>
                                         <span className="p-3" id="response">{""}</span>
                                     </p>
-                                    <p><Link to={'/password-reset'}>Forgot Password?</Link></p>
+                                    <p><Link to={'/forgot-password'}>Forgot Password?</Link></p>
                                 </Col>
                             </div>
                         </div>

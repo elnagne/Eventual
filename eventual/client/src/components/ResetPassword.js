@@ -6,11 +6,15 @@ import Row from 'react-bootstrap/Row';
 import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react';
 
-const PasswordReset = () => {
-    const [email, setEmail] = useState('');
+const ResetPassword = () => {
+    const [password, setPassword] = useState('');
 
     const resetPassword = e => {
         e.preventDefault();
+
+        const data = {
+            email: this.email
+        };
     }
 
     return (
@@ -20,9 +24,9 @@ const PasswordReset = () => {
                     <div className="d-flex">
                         <div className="mx-auto p-5">
                             <h3>Reset Password</h3>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} disabled/>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>New Password</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email" value={password} onChange={(e) => setPassword(e.target.value)} disabled/>
                             </Form.Group>
                             <Button variant="primary" className="me-1" type="Submit" id="reset" onClick={resetPassword}>
                                 Reset
@@ -36,4 +40,4 @@ const PasswordReset = () => {
     );
 }
 
-export default PasswordReset
+export default ResetPassword

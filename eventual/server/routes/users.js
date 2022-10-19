@@ -1,12 +1,14 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 // This router will act as a controller for users
 const usersRoutes = express.Router();
 
 // Used for connecting to the database
 const dbo = require("../db/conn");
+const { json } = require("express");
 
 // Used for converting id from string to ObjectId for the _id attribute
 const ObjectId = require("mongodb").ObjectId;
@@ -61,14 +63,37 @@ usersRoutes.route("/users/login").post(async (req, res) => {
         return res
           .status(401)
           .json({ content: "access denied", isValid: false });
-        
+
       bcrypt.compare(pw, user.password, function (err, valid) {
-        if (err) return res.status(500).json(err);
-        if (!valid)
+        if (valid) {
+          const payload = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+          };
+          //create a token to send to the front end
+          jwt.sign(
+            payload,
+            process.env.JWT_SECRET || "",
+            { expiresIn: 3600 },
+            (err, token) => {
+              if (err) return res.json({ message: err });
+              return res.json({
+                context: "Successful",
+                token: "Bearer " + token,
+                isValid: true,
+                payload: payload,
+              });
+            }
+          );
+          // return res.json({ content: user.username, isValid: true });
+        } else {
+          if (err) return res.status(500).json(err);
+          console.log("error error");
           return res
             .status(401)
             .json({ content: "Incorrect email or Password", isValid: false });
-        return res.json({ content: user.username, isValid: true });
+        }
       });
     });
 });

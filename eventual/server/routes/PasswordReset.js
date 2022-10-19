@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const users = require('./users');
 
-// Registering a new user
+// sets user to have a token and sends email
 passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
     // TODO switch to non-mock users for release
@@ -63,6 +63,7 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
     })
 });
 
+// returns user if password reset token is valid
 passwordResetRoutes.route('/reset').get(async (req, response) => {
     const dbConnect = dbo.getDb();
     dbConnect.collection("mockUsers").findOne({
@@ -78,6 +79,7 @@ passwordResetRoutes.route('/reset').get(async (req, response) => {
     })
 });
 
+// updats password
 passwordResetRoutes.route('/update-forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
     const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);

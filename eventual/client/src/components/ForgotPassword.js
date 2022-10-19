@@ -1,23 +1,25 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { json } from 'react-router-dom';
 
 const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
 
-
     const sendResetPassword = e => {
         e.preventDefault();
-    /* TODO email is considered NULL even if not null
         if (!emailRegex.test(email)) {
             document.getElementById("response").innerHTML = "Please enter a valid email address.";
         } else {
-            axios.post('http://localhost:3000/forgot-password', {
-                email: this.state.email,
+            fetch("http://localhost:5000/forgot-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({email: email})
             }).then(response => {
                 // don't state if email is of registered account for privacy
                 document.getElementById("response").innerHTML = response.data;         
@@ -25,9 +27,7 @@ const ForgotPassword = () => {
                 console.log(error.data);
             });
         }
-        */
     };
-
 
     return (
         <div className="vh-100 d-flex justify-content-center align-items-center">

@@ -1,37 +1,42 @@
 const express = require("express");
 
 // This router will act as a controller for users
-const routes = express.Router();
+const passwordResetRoutes = express.Router();
 
 // Used for connecting to the database
 const dbo = require("../db/conn");
-
-// Used for converting id from string to ObjectId for the _id attribute
-const ObjectId = require("mongodb").ObjectId;
-
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 // Registering a new user
-PasswordReset.route('/forgot-password').post(async (req, response) => {
+passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
     // TODO switch to non-mock users for release
-    dbConnect.collection('mockUsers').findOne({
-        where: {
+    console.log('Attempting to send email to ', req.body.email);
+
+    dbConnect.collection("mockUsers").findOne({
             email: req.body.email
-        }
     }).then((user) => {
+        console.log(user);
         if (user == null) {
             response.status(403).send('Email not found');
         } else {
             const token = crypto.randomBytes(20).toString('hex');
             // TODO check if update adds fields
-            user.update({
-                PasswordResetToken: token,
-                PasswordResetExpires: Date.now() + 1800000 // 30 minutes
-            });
+
+            dbConnect.collection("mockUsers").updateOne(
+                { email: req.body.email },
+                { $set:
+                   {
+                    PasswordResetToken: token,
+                    PasswordResetExpires: Date.now() + 1800000 // 30 minutes
+                   }
+                }
+            );
 
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
+                secure: 'true',
                 auth: {
                     user: `${process.env.EMAIL}`,
                     pass: `${process.env.PASSWORD}`
@@ -48,7 +53,7 @@ PasswordReset.route('/forgot-password').post(async (req, response) => {
 
             transporter.sendMail(mailOptions, (err, response) => {
                 if (err) {
-                    console.error(err);
+                    console.error("Could not send:", err);
                 } else {
                     response.status(200).json('email sent');
                 }
@@ -56,3 +61,5 @@ PasswordReset.route('/forgot-password').post(async (req, response) => {
         }
     })
 });
+
+module.exports = passwordResetRoutes;

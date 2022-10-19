@@ -224,6 +224,6 @@ System Design Total Mark: 10 / 10
 
 ## Total Mark
 
-71 / 89
+85 / 89
 
  « Note: This mark will be updated after the demo is presented »

@@ -217,7 +217,7 @@ System Design Total Mark: 10 / 10
   - 1 mark = documentation has been created for frontend and backend systems with some errors
   - 0 marks = documentation has not been created
 
-  Your Mark: __ / 14
+  Your Mark: 14 / 14
 
 ---
 

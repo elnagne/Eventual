@@ -22,7 +22,7 @@ const ForgotPassword = () => {
                 body: JSON.stringify({email: email})
             }).then(response => {
                 // don't state if email is of registered account for privacy
-                document.getElementById("response").innerHTML = response.data;         
+                document.getElementById("response").innerHTML = "If email is correct, then the reset link has been sent.";        
             }).catch(error => {
                 console.log(error.data);
             });

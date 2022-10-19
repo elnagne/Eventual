@@ -7,6 +7,7 @@ const passwordResetRoutes = express.Router();
 const dbo = require("../db/conn");
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const users = require('./users');
 
 // Registering a new user
 passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
@@ -58,6 +59,46 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
                     response.status(200).json('email sent');
                 }
             });
+        }
+    })
+});
+
+passwordResetRoutes.route('/reset').post(async (req, response) => {
+    const dbConnect = dbo.getDb();
+    dbConnect.collection("mockUsers").findOne({
+        PasswordResetToken: req.query.PasswordResetToken,
+    }).then(user => {
+        if (user == null || user.PasswordResetExpires > Date.now()) {
+            response.json('Password reset has either expired or is not valid.')
+        } else {
+            response.status(200).send({
+                username: user.username
+            })
+        }
+    })
+});
+
+passwordResetRoutes.route('/update-forgot-password').post(async (req, response) => {
+    const dbConnect = dbo.getDb();
+    const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);
+    dbConnect.collection("mockUsers").findOne({
+        username: req.body.username
+    }).then(user => {
+        // TODO create a function that both users password update and this can use
+        if (user != null) {
+            const updatedUser = { $set: {
+                password: updatedHashedPassword,
+                PasswordResetExpires: null,
+                PasswordResetToken: null
+            }};
+          
+            usersCollection.updateOne(user, updatedUser, (err, res) => {
+              if (err) throw err;
+              res.message = "Successfully updated password.";
+              response.json(res);
+            });
+        } else {
+            response.status(404).json("Error: User not found.");
         }
     })
 });

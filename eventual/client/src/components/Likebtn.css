@@ -10,7 +10,7 @@
     padding-left:0%;
     padding-right:0.2%;
 }
-.btn-like:hover,.btn-like:active,.btn-like:focus{
+.btn-like:hover{
     background-image:none;
     background-color: transparent;
     border-color:transparent !important;
@@ -32,7 +32,7 @@
     padding-right:0.2%;
 }
 
-.btn-liked:hover,.btn-liked:active,.btn-liked:focus{
+.btn-liked:hover{
     background-image:none;
     background-color: transparent;
     border-color:transparent !important;

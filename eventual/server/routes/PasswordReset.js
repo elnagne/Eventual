@@ -63,7 +63,7 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
     })
 });
 
-passwordResetRoutes.route('/reset').post(async (req, response) => {
+passwordResetRoutes.route('/reset').get(async (req, response) => {
     const dbConnect = dbo.getDb();
     dbConnect.collection("mockUsers").findOne({
         PasswordResetToken: req.query.PasswordResetToken,

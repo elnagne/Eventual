@@ -47,7 +47,11 @@ const EventCard = (props) => {
     await fetch(`http://localhost:5000/liked/add_like/${id}`, {
         method: "POST"
       });
-    window.location.reload(false);
+      let newlikedBy =[...likedby, account_id];
+      setLikedby((newlikedBy));
+      console.log(likedby.toString());
+      console.log(newlikedBy.toString());
+      setLikes(likes+1);
   }
   
   // This method decrease the number of likes by 1
@@ -56,7 +60,12 @@ const EventCard = (props) => {
     await fetch(`http://localhost:5000/liked/add_dislike/${id}`, {
         method: "POST"
       });
-    window.location.reload(false);
+      let newlikedBy =likedby;
+      newlikedBy.pop(account_id);
+      setLikedby(newlikedBy);
+      console.log(likedby.toString());
+      console.log(newlikedBy.toString());
+    setLikes(likes-1)
   }
 
   const event = props.event;
@@ -64,11 +73,11 @@ const EventCard = (props) => {
   const name = event.event_name;
   const imgUrl = event.image_url;
   const desc = event.description;
-  const likes = event.num_likes;
+  const [likes, setLikes] = useState(event.num_likes);
   const city = event.city;
   const address = event.location;
   const eventID = event._id;
-  const likedby= event.liked_by;
+  const [likedby, setLikedby]= useState(event.liked_by.map((user)=>user.account_id));
   const account_id = "632c889ad56e85f52f50ac78";
 
   const startTimeObj = event.startTime;
@@ -146,14 +155,14 @@ const EventCard = (props) => {
         {desc && <div className="desc">{desc}</div>}
         {likes !== undefined && (
           <div className="likes">
-            {likedby.find((likeObjects)=>likeObjects.account_id===account_id) !== undefined 
+            {likedby.includes(account_id)
             ?
                 <OverlayTrigger
                 placement="top"
                 delay={{ show: 200, hide: 180}}
                 overlay={<Tooltip id="button-tooltip-2">Remove Like</Tooltip>}
               >
-              <Button variant="liked" 
+              <Button id = "a" variant="liked" 
               onClick={() => {
                 dislikeEvent(eventID)
               }}
@@ -166,7 +175,7 @@ const EventCard = (props) => {
                 delay={{ show: 200, hide: 180}}
                 overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
               >
-              <Button variant="like" 
+              <Button id = "a" variant="like" 
               onClick={() => {
                 likeEvent(eventID)
               }}

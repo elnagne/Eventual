@@ -10,6 +10,7 @@ import {
   faHeart,
   faCircleDot,
   faAngleRight,
+  faCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -115,7 +116,6 @@ const EventCard = (props) => {
   return (
     <Card
       className="eventCard clickable card-title shadow"
-      onClick={redirectToEvent}
     >
       <Card.Body>
         {imgUrl && (
@@ -123,9 +123,15 @@ const EventCard = (props) => {
             <img src={imgUrl} alt={name} />
           </div>
         )}
-        <div style={arrowDivStyle}>
-          <FontAwesomeIcon icon={faAngleRight} style={arrowStyle} />
-        </div>
+        <Button
+            variant="dark"
+            size="sm"
+            className="back-btn"
+            onClick={redirectToEvent}
+          >
+             More Info <FontAwesomeIcon icon={faCaretRight} />
+          </Button>
+      
         <div>
           {name && <span className="title">{name}</span>}
           {startTimeObj && <span className="date">{date}</span>}
@@ -175,7 +181,8 @@ const EventCard = (props) => {
               >
               <Button id = "a" variant="liked" 
               onClick={() => {
-                dislikeEvent(eventID)
+                dislikeEvent(eventID);
+                return true
               }}
               > <FontAwesomeIcon icon={faHeart} />
               </Button>
@@ -188,7 +195,8 @@ const EventCard = (props) => {
               >
               <Button id = "a" variant="like" 
               onClick={() => {
-                likeEvent(eventID)
+                likeEvent(eventID);
+                return true
               }}
               > <FontAwesomeIcon icon={faHeart} />
               </Button>

@@ -39,6 +39,7 @@ searchRoutes.route("/search/filteredSearch").post((req, res) => {
       if (err) throw err;
       res.json(result);
     });
+});
 
 // Find a singular event given their id
 searchRoutes.route("/search/events/:id").get((req, res) => {

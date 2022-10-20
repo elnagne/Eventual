@@ -11,6 +11,7 @@ import DbWriteTemp from './components/DbWriteTemp';
 import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import LogIn from './components/LogIn';
+import { SearchContextProvider } from './components/SearchContext';
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/events" element={<SearchContextProvider><Events /></SearchContextProvider>} />
         <Route path="/events/:id" element={<Event />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />

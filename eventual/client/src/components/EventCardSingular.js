@@ -1,5 +1,5 @@
 import * as Utils from "./Utils.js";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Button, Container, Row, Col,OverlayTrigger,Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -35,9 +35,42 @@ const EventCardSingular = (props) => {
     let path = "/events";
     navigate(path);
   }
-
+  async function likeEvent(id) {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/liked/add_like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent)
+      });
+      let newlikedBy =[...likedby, account_id];
+      setLikedby((newlikedBy));
+      console.log(likedby.toString());
+      console.log(newlikedBy.toString());
+      setLikes(likes+1);
+  }
+  
+  // This method decrease the number of likes by 1
+  async function dislikeEvent(id) {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/liked/add_dislike`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent),
+      });
+      let newlikedBy =likedby;
+      newlikedBy.pop(account_id);
+      setLikedby(newlikedBy);
+      console.log(likedby.toString());
+      console.log(newlikedBy.toString());
+    setLikes(likes-1)
+  }
   const event = props.event;
-
+  const [likes, setLikes] = useState(0);
+  const [likedby, setLikedby]= useState([]);
   if (!event) {
     return (
       <Card className="eventCard singular card-title shadow" border="dark">
@@ -54,8 +87,7 @@ const EventCardSingular = (props) => {
         </Card.Body>
       </Card>
     );
-  }
-
+    }
   const name = event.event_name;
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
@@ -76,11 +108,17 @@ const EventCardSingular = (props) => {
     hour: "2-digit",
     minute: "2-digit",
   });
-  const likes = event.num_likes;
   const city = event.city;
   const category = event.category;
   const address = event.location;
   const desc = event.description;
+
+  const account_id = "632c889ad56e85f52f50ac78";
+  const eventID = event._id;
+  const accountEvent = {
+    account_id: account_id,
+    event_id: eventID
+  }
 
   const authorName = author ? Utils.getUsersNameAsString(author) : null;
 
@@ -105,10 +143,39 @@ const EventCardSingular = (props) => {
           {startTimeObj && <div className="date">{date}</div>}
           {likes !== undefined && (
             <div className="likes">
-              <FontAwesomeIcon icon={faHeart} /> {likes}{" "}
-              {likes === 1 ? "PERSON is" : "PEOPLE are"} interested in this
-              event
-            </div>
+            {likedby.includes(account_id)
+            ?
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Remove Like</Tooltip>}
+              >
+              <Button id = "a" variant="liked" 
+              onClick={() => {
+                dislikeEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHeart} />
+              </Button>
+              </OverlayTrigger>
+              :
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
+              >
+              <Button id = "a" variant="like" 
+              onClick={() => {
+                likeEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHeart} />
+              </Button>
+              </OverlayTrigger>
+            }
+            {likes}{" "}
+            {likes === 1 ? "person is" : "people are"} interested in this event
+          </div>
           )}
           <div className="main-btns">
             <Button variant="danger" size="lg" className="main-btn like-btn">

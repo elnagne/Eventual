@@ -24,7 +24,7 @@ export function getLocationInfoAsString(address_data) {
     locationStr = locationStr + address_data.country;
   }
   if (locationStr.endsWith(", ")) {
-    locationStr = locationStr.slice(0, -1);
+    locationStr = locationStr.slice(0, -2);
   }
   return locationStr;
 }

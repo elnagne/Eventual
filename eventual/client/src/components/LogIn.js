@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
-import { useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLayoutEffect, useEffect, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import Register from "./Register";
 import { RegisterContext } from "./RegisterContext";
@@ -11,17 +11,6 @@ const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   let navigate = useNavigate();
   const { isModalOpen, setModalOpen } = useContext(RegisterContext);
-
-  useLayoutEffect(() => {
-    fetch("/isUserAuth", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => (data.isLooggedIn ? navigate.push("/") : null))
-      .catch((err) => setErrorMessage(err));
-  }, [navigate]);
 
   // move to the home page if successful
 
@@ -39,32 +28,35 @@ const LogIn = () => {
       },
       body: JSON.stringify({ pw: pw, email: email }),
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
-        if (data.content === "") {
-          alert("Please fill out the form");
-          data.isValid = false;
-        } else if (!data.isValid) {
-          // not valid case
+        localStorage.setItem("token", data.token);
 
-          alert(data.content);
-          data.isValid = false;
-        } else {
-          // valid case
+        //navigate("/login")
+        console.log(localStorage.getItem("token"));
+      })
+      .catch((error) => {
+        setErrorMessage(error);
+      });
+  };
+  useEffect(() => {
+    console.log("California");
 
-          localStorage.setItem("token", data.token);
-          // console.log(data.payload);
-
-          //create a pop up to welcome the user then navigate to home page
+    fetch("/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isLoggedIn) {
           navigate("/");
         }
       })
       .catch((error) => {
-        window.alert(error);
-        return;
+        setErrorMessage(error);
       });
-  };
+  }, []);
 
   return (
     <>
@@ -105,7 +97,6 @@ const LogIn = () => {
           </button>
         </div>
       </div>
-
       <div className="embed-responsive embed-responsive-4by3">
         <img
           className="img"

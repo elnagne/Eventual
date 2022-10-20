@@ -39,16 +39,12 @@ usersRoutes.route("/users/register").post(async (req, response) => {
     });
   }
 });
-// User login
+//login
 usersRoutes.route("/users/login").post(async (req, res) => {
   if (!("email" in req.body))
-    return res
-      .status(400)
-      .json({ content: "email is missing", isValid: false });
+    return res.status(400).json({ message: "email is missing" });
   if (!("pw" in req.body))
-    return res
-      .status(400)
-      .json({ content: "password is missing", isvalid: false });
+    return res.status(400).json({ message: "password is missing" });
 
   const dbConnect = dbo.getDb();
 
@@ -59,40 +55,40 @@ usersRoutes.route("/users/login").post(async (req, res) => {
     .collection("mockUsers")
     .findOne({ email: email }, function (err, user) {
       if (err) return res.status(500).json(err);
-      if (!user)
-        return res
-          .status(401)
-          .json({ content: "access denied", isValid: false });
+      if (!user) return res.status(401).json({ message: "access denied" });
 
-      bcrypt.compare(pw, user.password, function (err, valid) {
+      bcrypt.compare(pw, user.password).then((valid) => {
+       //console.log(valid);
         if (valid) {
           const payload = {
             id: user._id,
             username: user.username,
             email: user.email,
           };
+          //console.log("hello");
           //create a token to send to the front end
           jwt.sign(
             payload,
-            process.env.JWT_SECRET || "",
+            process.env.JWT_SECRET,
             { expiresIn: 3600 },
             (err, token) => {
+              // bearer = t.split(" ")[0];
+              // to = t.split(" ")[1];
+              // console.log("token:"+to);
+              // console.log("BEARER:"+bearer );
               if (err) return res.json({ message: err });
               return res.json({
-                context: "Successful",
+                message: "Success",
                 token: "Bearer " + token,
-                isValid: true,
-                payload: payload,
               });
             }
           );
+
           // return res.json({ content: user.username, isValid: true });
         } else {
-          if (err) return res.status(500).json(err);
-          console.log("error error");
           return res
             .status(401)
-            .json({ content: "Incorrect email or Password", isValid: false });
+            .json({ message: "Incorrect email or Password" });
         }
       });
     });

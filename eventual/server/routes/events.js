@@ -22,6 +22,8 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     location: req.body.location,
     category: req.body.category,
     num_likes: 0,
+    liked_by:[],
+    attending_users:[],
   };
   dbConnect.collection('testEvents').insertOne(event, (err, res) => {
     if (err) throw err;

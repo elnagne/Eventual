@@ -2,16 +2,20 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 
+import { Buffer } from 'buffer';
+
 import Button from 'react-bootstrap/Button';
 
 import 'react-datepicker/dist/react-datepicker.css';
+global.Buffer = Buffer;
 
-const today = new Date();
+// @ts-ignore
+window.Buffer = Buffer;
 
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState();
   const [date_of_event, setDate_of_event] = useState('');
   const [time_of_event, setTime_of_event] = useState('');
   const [num_slots, setNum_slots] = useState(0);
@@ -21,6 +25,37 @@ const AddEvent = () => {
 
   const handleCheck = () => {
     setWoman_only(true);
+  };
+
+  const onFileChange = (event) => {
+    // Updating the state
+    setImage({ file: event.target.files[0] });
+  };
+
+  const onFileUpload = async () => {
+    // Client ID
+    const clientId = 'fd2e1e3d3d12ce1',
+      auth = 'Client-ID ' + clientId;
+
+    // Creating an object of formData
+    const formData = new FormData();
+
+    // Adding our image to formData
+    formData.append('file', image);
+
+    // Making the post request
+    await fetch('https://api.imgur.com/3/image/', {
+      // API Endpoint
+      method: 'POST', // HTTP Method
+      body: formData, // Data to be sent
+      headers: {
+        // Setting header
+        Authorization: auth,
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => alert('image uploaded') && console.log(res)) // Handling success
+      .catch((err) => alert('Failed') && console.log(err)); // Handling error
   };
 
   const onSubmit = async (e) => {
@@ -54,7 +89,14 @@ const AddEvent = () => {
     <div className="dbWriteWrapper">
       <Sidebar />
       <div className="AddEvent">
-        <form className="AddEventForm" onSubmit={onSubmit}>
+        <input type="file" onChange={onFileChange} />
+        <button onClick={onFileUpload}>Upload</button>
+        <form
+          name="image"
+          className="AddEventForm"
+          encType="multipart/form-data"
+          onSubmit={onSubmit}
+        >
           <h2 className="EventTitle">Add Event</h2>
           <div class="form-group" className="AddEventElement">
             <label>Event Name</label>
@@ -71,22 +113,10 @@ const AddEvent = () => {
             <textarea
               type="text"
               rows="6"
-              class="form-control input-lg"
+              className="form-control input-lg"
               placeholder="Enter Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div class="form-group" className="AddEventElement">
-            <label class="form-label" for="customFile">
-              Upload Image
-            </label>
-            <input
-              type="file"
-              class="form-control"
-              id="customFile"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
             />
           </div>
           <div class="form-group" className="AddEventElement">

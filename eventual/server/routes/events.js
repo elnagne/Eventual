@@ -1,16 +1,39 @@
-const express = require('express');
+const express = require("express");
 
 // This router will act as a controller for accounts
 const eventsRoutes = express.Router();
 
 // Used for connecting to the database
-const dbo = require('../db/conn');
+const dbo = require("../db/conn");
 
 // Used for converting id from string to ObjectId for the _id attribute
-const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require("mongodb").ObjectId;
+
+const got = require("got");
+const psApiKey = process.env.POSITIONSTACK_API_KEY;
+
+// Uses the positionstack API to get address data (longitude, latitude, city, country)
+async function getAddressData(address) {
+  var addressData = null;
+  const url =
+    "http://api.positionstack.com/v1/forward?access_key=" +
+    encodeURIComponent(psApiKey) +
+    "&query=" +
+    encodeURIComponent(address) +
+    "&limit=1"; // Limit the number of results to 1 (for now)
+  await got
+    .get(url)
+    .then((res) => {
+      addressData = JSON.parse(res.body);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  return addressData;
+}
 
 // Creating a new account
-eventsRoutes.route('/testEvents/add').post((req, response) => {
+eventsRoutes.route("/testEvents/add").post((req, response) => {
   let dbConnect = dbo.getDb();
   let event = {
     event_name: req.body.event_name,
@@ -23,9 +46,16 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     category: req.body.category,
     num_likes: 0,
   };
-  dbConnect.collection('testEvents').insertOne(event, (err, res) => {
-    if (err) throw err;
-    response.json(res);
+
+  getAddressData(req.body.location).then((address_data) => {
+    if (address_data.data && address_data.data.length) {
+      event.address_data = address_data.data[0];
+    }
+
+    dbConnect.collection("testEvents").insertOne(event, (err, res) => {
+      if (err) throw err;
+      response.json(res);
+    });
   });
 });
 

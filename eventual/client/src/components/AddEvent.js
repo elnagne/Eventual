@@ -96,7 +96,7 @@ const AddEvent = () => {
             />
           </div>
           <div class="form-group" className="AddEventElement">
-            <label>Location</label>
+            <label>Address</label>
             <input
               class="form-control"
               type="location"

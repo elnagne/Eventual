@@ -40,7 +40,7 @@ const EventCardSingular = (props) => {
 
   if (!event) {
     return (
-      <Card className="eventCard singular card-title shadow" border="dark">
+      <Card className="eventCard singular card-title shadow">
         <Card.Body>
           <Button
             variant="dark"
@@ -77,7 +77,7 @@ const EventCardSingular = (props) => {
     minute: "2-digit",
   });
   const likes = event.num_likes;
-  const city = event.city;
+  const city = event.address_data ? Utils.getLocationInfoAsString(event.address_data) : null;
   const category = event.category;
   const address = event.location;
   const desc = event.description;

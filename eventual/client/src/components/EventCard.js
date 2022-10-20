@@ -44,7 +44,7 @@ const EventCard = (props) => {
   const imgUrl = event.image_url;
   const desc = event.description;
   const likes = event.num_likes;
-  const city = event.city;
+  const city = event.address_data ? event.address_data.locality : null;
   const address = event.location;
 
   const startTimeObj = event.startTime;

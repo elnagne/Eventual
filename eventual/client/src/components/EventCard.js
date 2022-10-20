@@ -44,8 +44,12 @@ const EventCard = (props) => {
 
   async function likeEvent(id) {
     // passes the id of the event
-    await fetch(`http://localhost:5000/liked/add_like/${id}`, {
-        method: "POST"
+    await fetch(`http://localhost:5000/liked/add_like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent)
       });
       let newlikedBy =[...likedby, account_id];
       setLikedby((newlikedBy));
@@ -57,8 +61,12 @@ const EventCard = (props) => {
   // This method decrease the number of likes by 1
   async function dislikeEvent(id) {
     // passes the id of the event
-    await fetch(`http://localhost:5000/liked/add_dislike/${id}`, {
-        method: "POST"
+    await fetch(`http://localhost:5000/liked/add_dislike`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent),
       });
       let newlikedBy =likedby;
       newlikedBy.pop(account_id);
@@ -79,7 +87,10 @@ const EventCard = (props) => {
   const eventID = event._id;
   const [likedby, setLikedby]= useState(event.liked_by.map((user)=>user.account_id));
   const account_id = "632c889ad56e85f52f50ac78";
-
+  const accountEvent = {
+    account_id: account_id,
+    event_id: eventID
+  }
   const startTimeObj = event.startTime;
   const startTime = new Date(startTimeObj);
   const endTime = new Date(event.endTime);

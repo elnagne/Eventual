@@ -14,7 +14,7 @@ searchRoutes.route("/search").get((req, res) => {
 
   db_connect
     .collection("testEvents")
-    .find({})
+    .find({liked_by:{$exists:true}}) //**to be changed**/
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);

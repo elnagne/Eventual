@@ -24,17 +24,17 @@ likedRoutes.route("/liked").get(function (req, res) {
    });
 });
 
-likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
+likedRoutes.route("/liked/add_like").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId( req.body.event_id)};
   let newvalues = {
     $inc: {
       num_likes:1
     },
   };
   let likevalues = {
-    event_id:ObjectId( req.params.id),
-    account_id:ObjectId("632c889ad56e85f52f50ac78")
+    event_id:ObjectId( req.body.event_id),
+    account_id:ObjectId(req.body.account_id)
   };
   db_connect 
   .collection("testLikes")
@@ -44,8 +44,8 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
 
   db_connect
     .collection("testEvents")
-    .update({ _id: ObjectId( req.params.id )},
-    {$push:{"liked_by":{account_id:ObjectId("632c889ad56e85f52f50ac78")}}});
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$push:{"liked_by":{account_id:req.body.account_id}}});
 
   db_connect
     .collection("testEvents")
@@ -57,10 +57,10 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
   
 });
 
-likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
+likedRoutes.route("/liked/add_dislike").post(function (req, response) {
 
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId( req.body.event_id)};
   let newvalues = {
     $inc: {
       num_likes: -1
@@ -68,8 +68,8 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
   };
 
   let likevalues = {
-    event_id:ObjectId( req.params.id),
-    account_id:ObjectId("632c889ad56e85f52f50ac78")
+    event_id:ObjectId( req.body.event_id),
+    account_id:ObjectId(req.body.account_id)
   };
 
   db_connect
@@ -80,8 +80,8 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
 
   db_connect
     .collection("testEvents")
-    .update({ _id: ObjectId( req.params.id )},
-    {$pull:{"liked_by":{account_id:ObjectId("632c889ad56e85f52f50ac78")}}});
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$pull:{"liked_by":{account_id:req.body.account_id}}});
 
   db_connect
     .collection("testEvents")

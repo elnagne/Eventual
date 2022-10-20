@@ -45,7 +45,7 @@ likedRoutes.route("/liked/add_like").post(function (req, response) {
   db_connect
     .collection("testEvents")
     .update({ _id: ObjectId( req.body.event_id)},
-    {$push:{"liked_by":{account_id:req.body.account_id}}});
+    {$push:{"liked_by":{account_id:ObjectId(req.body.account_id)}}});
 
   db_connect
     .collection("testEvents")
@@ -81,7 +81,7 @@ likedRoutes.route("/liked/add_dislike").post(function (req, response) {
   db_connect
     .collection("testEvents")
     .update({ _id: ObjectId( req.body.event_id)},
-    {$pull:{"liked_by":{account_id:req.body.account_id}}});
+    {$pull:{"liked_by":{account_id:ObjectId(req.body.account_id)}}});
 
   db_connect
     .collection("testEvents")

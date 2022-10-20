@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useState, useEffect } from 'react';
-import { json } from 'react-router-dom';
+import { useState } from 'react';
 
 const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 

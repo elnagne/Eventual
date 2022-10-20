@@ -6,8 +6,8 @@ const passwordResetRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require("../db/conn");
 const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt");
 const crypto = require('crypto');
-const users = require('./users');
 
 // sets user to have a token and sends email
 passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
@@ -64,22 +64,23 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
 });
 
 // returns user if password reset token is valid
-passwordResetRoutes.route('/reset').get(async (req, response) => {
+passwordResetRoutes.route('/reset').post(async (req, response) => {
     const dbConnect = dbo.getDb();
+    console.log(req.body.PasswordResetToken);
     dbConnect.collection("mockUsers").findOne({
-        PasswordResetToken: req.query.PasswordResetToken,
+        PasswordResetToken: req.body.PasswordResetToken,
     }).then(user => {
         if (user == null || user.PasswordResetExpires > Date.now()) {
-            response.json('Password reset has either expired or is not valid.')
+            response.json('Password reset has either expired or is not valid.');
         } else {
-            response.status(200).send({
+            response.status(200).json({
                 username: user.username
             })
         }
     })
 });
 
-// updats password
+// updates password
 passwordResetRoutes.route('/update-forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
     const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -94,7 +95,7 @@ passwordResetRoutes.route('/update-forgot-password').post(async (req, response) 
                 PasswordResetToken: null
             }};
           
-            usersCollection.updateOne(user, updatedUser, (err, res) => {
+            dbConnect.collection("mockUsers").updateOne(user, updatedUser, (err, res) => {
               if (err) throw err;
               res.message = "Successfully updated password.";
               response.json(res);

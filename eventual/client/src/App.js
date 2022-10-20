@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:reset-code" element={<ResetPassword />} />
+        <Route path="/reset-password/*" element={<ResetPassword />} />
       </Routes>
     </Router>
   );

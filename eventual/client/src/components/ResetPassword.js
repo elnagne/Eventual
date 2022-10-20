@@ -1,44 +1,41 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-var sleep = function () {
-    setTimeout(function () {
-        ;
-    }, 5000);
-}
-
-const ResetPassword = () => {
+const ResetPassword = props => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [invalid, setInvalid] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    const params = useParams();
+
     useEffect ((e) => {
         async function checkToken() {
-            e.preventDefault();
+            const data = { PasswordResetToken: params['*'] };
 
-            await fetch("http://localhost:5000/reset", {
-                    method: "GET",
+            const response = await fetch("http://localhost:5000/reset/", {
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    PasswordResetToken: this.props.match.params.token
-            }).then(response => {
-                if (response.ok) {
-                    setLoading(false);
-                    setUsername(response.username);
-                } else {
-                    setInvalid(true);
-                    setLoading(false);
-                }
+                    body: JSON.stringify(data)
             }).catch(error => {
                 console.error(error.data);
             });
+
+            // information is correct up to here
+        
+            if (response.ok) {
+                let user = await response.json();
+                setUsername(user.username);
+                setLoading(false);
+            } else {
+                setInvalid(true);
+                setLoading(false);
+            }
         }
 
         checkToken();
@@ -47,17 +44,21 @@ const ResetPassword = () => {
     const resetPassword = e => {
         e.preventDefault();
 
+        const data = { 
+            username: username,
+            password: password
+        };
+
+        console.log(username);
+
         fetch("http://localhost:5000/update-forgot-password", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                username: username
+                body: JSON.stringify(data)
         }).then(response => {
             document.getElementById("response").innerHTML = "Password has been reset.";
-            // wait five seconds and then redirect to homepage
-            sleep();
-            window.location.href = "http://localhost:5000/";
         }).catch(error => {
             console.error(error.data);
         });
@@ -69,7 +70,7 @@ const ResetPassword = () => {
                 <div className="card-body p-4 p-md-5">
                     <div className="d-flex">
                         <div className="mx-auto p-5">
-                            <h3>Password link is invalid.</h3>
+                            <h5>Password reset has either expired or is not valid.</h5>
                         </div>
                     </div>       
                 </div>       
@@ -96,7 +97,7 @@ const ResetPassword = () => {
                                 <h3>Reset Password</h3>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>New Password</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                    <Form.Control type="password" placeholder="Enter new password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </Form.Group>
                                 <Button variant="primary" className="me-1" type="Submit" id="reset" onClick={resetPassword}>
                                     Reset

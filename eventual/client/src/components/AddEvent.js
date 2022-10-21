@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
+import { Widget } from '@uploadcare/react-widget';
 
 import Button from 'react-bootstrap/Button';
 

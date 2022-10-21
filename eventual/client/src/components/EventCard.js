@@ -133,14 +133,8 @@ const EventCard = (props) => {
     account_id: account_id,
     event_id: eventID
   }
-  const startTimeObj = event.startTime;
-  const startTime = new Date(startTimeObj);
-  const endTime = new Date(event.endTime);
   const [NoSpotsMsg, setnNSM] =useState("");
-  const startTimeStr = startTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
   const date = dateObj.toLocaleDateString("en-US", {

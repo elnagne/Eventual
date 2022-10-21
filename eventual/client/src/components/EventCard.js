@@ -92,7 +92,6 @@ const EventCard = (props) => {
       });
       let newJoinedBy =[...joinedby, account_id];
       setJoinedby((newJoinedBy));
-      console.log(account_id);
       console.log(joinedby.toString());
       console.log(newJoinedBy.toString());
       setNumJoined(numJoined+1);
@@ -129,7 +128,7 @@ const EventCard = (props) => {
   const [numJoined, setNumJoined] = useState(event.num_joined);
   const [joinedby, setJoinedby]= useState(event.attending_users.map((user)=>user.account_id));
   const num_slots = parseInt(event.num_slots); 
-  const account_id = localStorage.getItem("userid");
+  const account_id = "632c889ad56e85f52f50ac78";
   const accountEvent = {
     account_id: account_id,
     event_id: eventID

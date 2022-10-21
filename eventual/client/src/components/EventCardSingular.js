@@ -18,6 +18,7 @@ const EventCardSingular = (props) => {
   useEffect(() => {
     if (props.event && props.event.author) {
       async function getUser() {
+
         const response = await fetch(
           `http://localhost:5000/search/name/` + props.event.author
         );
@@ -42,6 +43,9 @@ const EventCardSingular = (props) => {
       });
       let newlikedBy =[...likedby, account_id];
       setLikedby((newlikedBy));
+      console.log("console loggggg");
+      console.log(account_id.toString());
+      console.log("console loggggg 2");
       console.log(likedby.toString());
       console.log(newlikedBy.toString());
       setLikes(likes+1);
@@ -198,7 +202,7 @@ const EventCardSingular = (props) => {
           <div className="title">{displayName ? displayName : "[NO EVENT NAME]"}</div>
           {startTimeObj && <div className="date">{date}</div>}
           {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-          {likes !== undefined && (
+          {likes !== undefined && account_id !== null &&(
             <div className="likes">
             {likedby.includes(account_id)
             ?

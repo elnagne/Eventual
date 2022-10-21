@@ -128,7 +128,7 @@ const EventCard = (props) => {
   const [numJoined, setNumJoined] = useState(event.num_joined);
   const [joinedby, setJoinedby]= useState(event.attending_users.map((user)=>user.account_id));
   const num_slots = parseInt(event.num_slots); 
-  const account_id = "632c889ad56e85f52f50ac78";
+  const account_id = localStorage.getItem("userid");
   const accountEvent = {
     account_id: account_id,
     event_id: eventID
@@ -221,7 +221,7 @@ const EventCard = (props) => {
         
         {desc && <div className="desc">{desc}</div>}
         {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-        {likes !== undefined && (
+        {likes !== undefined && account_id !== null &&(
           <div className="likes">
             {likedby.includes(account_id)
             ?

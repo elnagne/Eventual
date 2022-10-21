@@ -6,6 +6,7 @@ function Navbar() {
   const [username, setUsername] = useState(null);
   async function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("userid")
     await naviagate.push("/login");
   }
   useEffect(() => {

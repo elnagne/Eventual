@@ -47,15 +47,17 @@ const EventCard = (props) => {
   const city = event.address_data ? event.address_data.locality : null;
   const address = event.location;
 
-  const startTimeObj = event.startTime;
-  const startTime = new Date(startTimeObj);
-  const endTime = new Date(event.endTime);
-  const date = startTime.toDateString();
-  const startTimeStr = startTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+  const dateStr = event.date_of_event;
+  const dateObj = new Date(dateStr);
+  const date = dateObj.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
-  const endTimeStr = endTime.toLocaleTimeString([], {
+  const timeStr = event.time_of_event;
+  const timeObj = new Date("0000-01-01 " + timeStr);
+  const time = timeObj.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -84,13 +86,13 @@ const EventCard = (props) => {
         </div>
         <div>
           {name && <span className="title">{name}</span>}
-          {startTimeObj && <span className="date">{date}</span>}
+          {date && <span className="date">{date}</span>}
         </div>
         <div className="infoStrip">
-          {startTimeObj && (
+          {time && (
             <span>
               <span className="property">Time: </span>
-              {startTimeStr} - {endTimeStr}
+              {time}
             </span>
           )}
           {city && (

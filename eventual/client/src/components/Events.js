@@ -11,6 +11,7 @@ const Events = () => {
     womanOnly, setWomanOnly,
     startDate, setStartDate,
     endDate, setEndDate,
+    city, setCity
   } = useContext(SearchContext);
   const [events, setEvents] = useState([]);
 
@@ -40,7 +41,7 @@ const Events = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ filters: filtersArray, womanOnly: womanOnly, startDate: startDate, endDate: endDate }),
+      body: JSON.stringify({ filters: filtersArray, womanOnly: womanOnly, startDate: startDate, endDate: endDate, city: city }),
     });
 
     if (!response.ok) {

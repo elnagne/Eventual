@@ -79,7 +79,11 @@ const EventCard = (props) => {
   }
   async function joinEvent() {
     // passes the id of the event
-    await fetch(`http://localhost:5000/attend/add_attendance`, {
+    if(num_slots-parseInt(numJoined) == 0){
+      setnNSM("No spots left, please return another time when spots are available again or leave a like to keep track of the event");
+    }
+    else{
+      await fetch(`http://localhost:5000/attend/add_attendance`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,6 +95,7 @@ const EventCard = (props) => {
       console.log(joinedby.toString());
       console.log(newJoinedBy.toString());
       setNumJoined(numJoined+1);
+    }
   }
     // This method decrease the number of likes by 1
   async function notJoinEvent() {
@@ -132,6 +137,7 @@ const EventCard = (props) => {
   const startTime = new Date(startTimeObj);
   const endTime = new Date(event.endTime);
   const date = startTime.toDateString();
+  const [NoSpotsMsg, setnNSM] =useState("");
   const startTimeStr = startTime.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -203,7 +209,7 @@ const EventCard = (props) => {
               {address}
             </span>
           )}
-          {num_slots && (
+          {num_slots !== undefined&& (
             <span>
               {" "}
               <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
@@ -214,6 +220,7 @@ const EventCard = (props) => {
         </div>
         
         {desc && <div className="desc">{desc}</div>}
+        {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
         {likes !== undefined && (
           <div className="likes">
             {likedby.includes(account_id)

@@ -6,29 +6,10 @@ const eventsRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require('../db/conn');
 
-// Used for converting id from string to ObjectId for the _id attribute
-const ObjectId = require('mongodb').ObjectId;
 const bodyParser = require('body-parser');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const mongoose = require('mongoose');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads');
-//   },
-//   filename: function (req, file, cb) {
-//     cb(
-//       null,
-//       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
-const upload = multer({ dest: './uploads' });
 
 // Creating a new account
 eventsRoutes.route('/testEvents/add').post((req, response) => {
@@ -36,7 +17,9 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
   let event = {
     event_name: req.body.event_name,
     description: req.body.description,
-    image: req.body.image,
+    image_url: req.body.image,
+    email: req.body.email,
+    phone: req.body.phone,
     date_of_event: req.body.date_of_event,
     time_of_event: req.body.time_of_event,
     num_slots: req.body.num_slots,
@@ -44,6 +27,8 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     location: req.body.location,
     category: req.body.category,
     num_likes: 0,
+    liked_by: [],
+    attending_users: [],
   };
   dbConnect.collection('testEvents').insertOne(event, (err, res) => {
     if (err) throw err;

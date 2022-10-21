@@ -66,12 +66,13 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
 // returns user if password reset token is valid
 passwordResetRoutes.route('/reset').post(async (req, response) => {
     const dbConnect = dbo.getDb();
-    console.log(req.body.PasswordResetToken);
     dbConnect.collection("mockUsers").findOne({
         PasswordResetToken: req.body.PasswordResetToken,
     }).then(user => {
-        if (user == null || user.PasswordResetExpires > Date.now()) {
-            response.json('Password reset has either expired or is not valid.');
+        console.log(user);
+        console.log(Date.now());
+        if (user == null || user.PasswordResetExpires < Date.now()) {
+            response.status(401).json('Password reset has either expired or is not valid.');
         } else {
             response.status(200).json({
                 username: user.username
@@ -83,6 +84,7 @@ passwordResetRoutes.route('/reset').post(async (req, response) => {
 // updates password
 passwordResetRoutes.route('/update-forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
+    console.log(req.body.username);
     const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);
     dbConnect.collection("mockUsers").findOne({
         username: req.body.username

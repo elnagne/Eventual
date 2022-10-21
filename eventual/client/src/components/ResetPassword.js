@@ -29,9 +29,11 @@ const ResetPassword = props => {
             // information is correct up to here
         
             if (response.ok) {
-                let user = await response.json();
-                setUsername(user.username);
-                setLoading(false);
+                await response.json().then(user => {
+                    console.log(user);
+                    setUsername(user.username);
+                    setLoading(false);
+                });
             } else {
                 setInvalid(true);
                 setLoading(false);

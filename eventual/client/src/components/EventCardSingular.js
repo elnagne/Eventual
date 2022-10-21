@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { faHandshake } from "@fortawesome/free-solid-svg-icons";
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
@@ -29,13 +30,7 @@ const EventCardSingular = (props) => {
       return;
     }
   }, [props.event]);
-
-  let navigate = useNavigate();
-  function backToEventsPage() {
-    let path = "/events";
-    navigate(path);
-  }
-  async function likeEvent(id) {
+  async function likeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_like`, {
         method: "POST",
@@ -50,9 +45,8 @@ const EventCardSingular = (props) => {
       console.log(newlikedBy.toString());
       setLikes(likes+1);
   }
-  
-  // This method decrease the number of likes by 1
-  async function dislikeEvent(id) {
+    // This method decrease the number of likes by 1
+  async function dislikeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_dislike`, {
         method: "POST",
@@ -68,9 +62,25 @@ const EventCardSingular = (props) => {
       console.log(newlikedBy.toString());
     setLikes(likes-1)
   }
+  async function loadInitialValues(){
+    if(event.num_likes != undefined){
+      if (firstLoad == true){
+        setFirstLoad(false);
+        setLikes(event.num_likes);
+        setLikedby(event.liked_by.map((user)=>user.account_id));
+    }
+  }
+}
+  let navigate = useNavigate();
+  function backToEventsPage() {
+    let path = "/events";
+    navigate(path);
+  }
+  
   const event = props.event;
   const [likes, setLikes] = useState(0);
   const [likedby, setLikedby]= useState([]);
+  const [firstLoad, setFirstLoad]= useState(true);
   if (!event) {
     return (
       <Card className="eventCard singular card-title shadow" border="dark">
@@ -123,15 +133,16 @@ const EventCardSingular = (props) => {
   const authorName = author ? Utils.getUsersNameAsString(author) : null;
 
   return (
+    
     <Card className="eventCard singular card-title shadow">
-      <Card.Body>
+      <Card.Body onLoad={loadInitialValues()}>
         <div>
           {imgUrl && (
             <div className="pic">
               <img src={imgUrl} alt={name} />
             </div>
           )}
-          <Button
+          <Button 
             variant="dark"
             size="sm"
             className="back-btn"
@@ -179,7 +190,7 @@ const EventCardSingular = (props) => {
           )}
           <div className="main-btns">
             <Button variant="danger" size="lg" className="main-btn like-btn">
-              <FontAwesomeIcon icon={faHeart} /> I am{" "}
+              <FontAwesomeIcon icon={faHandshake} /> I am{" "}
               <strong>interested</strong> in this event!
             </Button>
             <Button variant="warning" size="lg" className="main-btn">

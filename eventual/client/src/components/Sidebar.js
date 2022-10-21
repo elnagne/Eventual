@@ -86,6 +86,9 @@ const Sidebar = () => {
         <Link to="/login" className="navbarItem">
           Login Page
         </Link>
+        <Link to="/forgot-password" className="navbarItem">
+          Forgot Password?
+        </Link>
       </div>
       <Register trigger={isModalOpen} setTrigger={setModalOpen} />
     </div>

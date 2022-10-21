@@ -86,10 +86,10 @@ const EventCard = (props) => {
         </div>
         <div>
           {name && <span className="title">{name}</span>}
-          {date && <span className="date">{date}</span>}
+          {dateStr && <span className="date">{date}</span>}
         </div>
         <div className="infoStrip">
-          {time && (
+          {timeStr && (
             <span>
               <span className="property">Time: </span>
               {time}

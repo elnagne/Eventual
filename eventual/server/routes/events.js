@@ -27,7 +27,7 @@ async function getAddressData(address) {
       addressData = JSON.parse(res.body);
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log("Positionstack error: " + err.message);
     });
   return addressData;
 }

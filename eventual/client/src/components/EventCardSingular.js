@@ -105,7 +105,7 @@ const EventCardSingular = (props) => {
           <div className="title">
             {displayName ? displayName : "[NO EVENT NAME]"}
           </div>
-          {date && <div className="date">{date}</div>}
+          {dateStr && <div className="date">{date}</div>}
           {likes !== undefined && (
             <div className="likes">
               <FontAwesomeIcon icon={faHeart} /> {likes}{" "}
@@ -127,7 +127,7 @@ const EventCardSingular = (props) => {
           <Row>
             <Col lg={5}>
               <div className="event-info">
-                {time && (
+                {timeStr && (
                   <div>
                     <span className="property">Time: </span>
                     {time}

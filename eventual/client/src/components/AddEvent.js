@@ -100,7 +100,7 @@ const AddEvent = () => {
             <input
               class="form-control"
               type="location"
-              placeholder="Enter Location"
+              placeholder="Enter a valid address"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />

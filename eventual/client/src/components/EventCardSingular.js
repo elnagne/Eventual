@@ -5,6 +5,7 @@ import {
   faHeart,
   faShare,
   faEarthAfrica,
+  faPerson,
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -142,6 +143,7 @@ const EventCardSingular = (props) => {
   const startTimeObj = event.startTime;
   const startTime = new Date(startTimeObj);
   const endTime = new Date(event.endTime);
+  const num_slots = parseInt(event.num_slots); 
   const date = startTime.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -264,6 +266,12 @@ const EventCardSingular = (props) => {
           <Row>
             <Col lg={5}>
               <div className="event-info">
+              {num_slots && (
+            <div>
+            <span className="property">Available Spots: </span>
+            {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xxs" />
+            </div>
+          )}
                 {startTimeObj && (
                   <div>
                     <span className="property">Time: </span>

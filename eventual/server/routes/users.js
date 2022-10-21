@@ -9,6 +9,7 @@ const usersRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require("../db/conn");
 const { json } = require("express");
+const { ObjectID } = require("mongodb");
 
 // Used for converting id from string to ObjectId for the _id attribute
 const ObjectId = require("mongodb").ObjectId;
@@ -104,6 +105,7 @@ usersRoutes.route("/users/login").post(async (req, res) => {
               return res.json({
                 message: "Success",
                 token: "Bearer " + token,
+                userid: user._id,
               });
             }
           );
@@ -173,19 +175,22 @@ usersRoutes.route("/users/delete/:id").delete((req, response) => {
 });
 
 // returns user info from username for profile page
-usersRoutes.route("/users/get-user-info").get((req, response) => {
+usersRoutes.route("/users/get-user-info/:id").get((req, response) => {
   const dbConnect = dbo.getDb();
   const usersCollection = dbConnect.collection("mockUsers");
 
+  console.log(req.params.id);
   usersCollection.findOne({ 
-    user: req.body.username 
+    _id: ObjectId(req.params.id),
   }).then((user) => {
+    console.log(user);
     if (user == null) response.status(404);
     else
       response.status(200).json({
         email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        username: user.username,
+        firstName: user.name.first,
+        lastName: user.name.last,
       });
   });
 })

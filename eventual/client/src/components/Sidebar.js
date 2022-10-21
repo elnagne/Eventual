@@ -53,13 +53,13 @@ const Sidebar = () => {
           Settings
         </Link>
         <Link to="/profile" className="navbarItem">Profile</Link>
-
         <div>
           <div onClick={logout} className="navbarItem">
             logout
           </div>
           <UserInfo username={username} className="navbarItem"></UserInfo>
         </div>
+        <Link to="/forgot-password" className="navbarItem">Forgot Password?</Link>
       </div>
     </div>
   ) : (
@@ -87,6 +87,7 @@ const Sidebar = () => {
         <Link to="/login" className="navbarItem">
           Login
         </Link>
+        <Link to="/forgot-password" className="navbarItem">Forgot Password?</Link>
       </div>
       <Register trigger={isModalOpen} setTrigger={setModalOpen}/>
     </div>

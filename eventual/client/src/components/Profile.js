@@ -7,6 +7,7 @@ import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react';
 
 const Profile = () => {
+    const [isset, setIsset] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -14,39 +15,31 @@ const Profile = () => {
     const [oldPassword,setOldPassword] = useState('');
     const [newPassword,setNewPassword] = useState('');
 
+    const userid = localStorage.getItem("userid");
+
     // get current user information and populate forms
     const getUser = async (e) => {
-                /*
-        const token = localStorage.getItem("token");
-        console.log();
-
-        const user = {
-            username: token.username,
-        }
-
-        await fetch("http://localhost:5000/users/get-user-info", {
+        const response = await fetch("http://localhost:5000/users/get-user-info/" + userid, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user)
-        }).then(response => {
-            if (response.ok) {
-                setUsername();
-                setEmail();
-                setFirstName();
-                setLastName();
-            } else {
-                window.location = 'http://localhost:3000';
-            }
-        }).catch(error => {
-            window.alert(error);
-            return;
-        });
-        */
+        })
+
+        if (response.ok) {
+            await response.json().then(user => {
+                setUsername(user.username);
+                setEmail(user.email);
+                setFirstName(user.firstName);
+                setLastName(user.lastName);
+            });
+        }
     };
 
-    getUser();
+    if (isset === false) {
+        setIsset(true);
+        getUser();
+    }
 
     // update user information on submit click
     const updateProfile = async (e) => {
@@ -58,7 +51,7 @@ const Profile = () => {
             name: {first: firstName, last: lastName}
         }
 
-        const response = await fetch("http://localhost:5000/users/update/:id", {
+        const response = await fetch("http://localhost:5000/users/update/" + userid, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -71,20 +64,14 @@ const Profile = () => {
 
         let message = await response.json();
         document.getElementById("profileResponse").innerHTML = message.message;
-
-        setUsername('');
-        setEmail('');
-        setFirstName('');
-        setLastName('');
     };
 
     // update password
     const updatePassword = async (e) => {
         e.preventDefault();
 
-        // if old password is not correct don't update TODO 
         /*
-        if () {
+        if (oldPassword ==) {
 
             return;
         }
@@ -142,7 +129,7 @@ const Profile = () => {
                         <Button variant="primary" className="me-1" type="Edit" onClick={toggleForms}>
                             Edit
                         </Button>
-                        <Button variant="primary" className="me-1" type="Submit" id="submit" onClick={updateProfile} disabled>
+                        <Button variant="primary" className="me-1" type="submit" id="submit" onClick={updateProfile}>
                             Submit
                         </Button>
                         <span className="m-3" id="profileResponse">{""}</span>
@@ -163,7 +150,7 @@ const Profile = () => {
                             <Button variant="primary" className="me-1" type="Edit" onClick={togglePassword}>
                                 Edit
                             </Button>
-                            <Button variant="primary" className="me-1" type="Submit" id="submitPassword" onClick={updatePassword} disabled>
+                            <Button variant="primary" className="me-1" type="submit" id="submitPassword" onClick={updatePassword}>
                                 Submit
                             </Button>
                             <span className="m-3" id="passwordResponse">{""}</span>
@@ -181,14 +168,12 @@ function toggleForms() {
     document.getElementById("lastName").disabled = !document.getElementById("lastName").disabled;
     document.getElementById("formBasicEmail").disabled = !document.getElementById("formBasicEmail").disabled;
     document.getElementById("formBasicUsername").disabled = !document.getElementById("formBasicUsername").disabled;
-    document.getElementById("submit").disabled = !document.getElementById("submit").disabled;
 }
 
 // toggles enabled and disabled for password forms
 function togglePassword() {
     document.getElementById("formOldPassword").disabled = !document.getElementById("formOldPassword").disabled;
     document.getElementById("formNewPassword").disabled = !document.getElementById("formNewPassword").disabled;
-    document.getElementById("submitPassword").disabled = !document.getElementById("submitPassword").disabled;
 }
 
 export default Profile

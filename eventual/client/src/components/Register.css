@@ -1,5 +1,6 @@
 #registerPopup {
     position: absolute;
+    z-index: 10;
     background-color: rgba(0,0,0,0.2);
     top: 0;
     width: 100%;

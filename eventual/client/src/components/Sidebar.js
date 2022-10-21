@@ -14,8 +14,9 @@ const Sidebar = () => {
 
   const [username, setUsername] = useState(null);
   async function logout() {
-    localStorage.removeItem('token');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userid");
+    navigate("/login");
   }
   useLayoutEffect(() => {
     fetch('http://localhost:5000/users/isUserAuth', {

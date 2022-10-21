@@ -24,23 +24,18 @@ likedRoutes.route("/liked").get(function (req, res) {
    });
 });
 
-likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
+likedRoutes.route("/liked/add_like").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId( req.body.event_id)};
   let newvalues = {
     $inc: {
       num_likes:1
     },
   };
-  let likevalues = {
-    event_id:ObjectId( req.params.id),
-    account_id:ObjectId("632c889ad56e85f52f50ac78")
-  };
-  db_connect 
-  .collection("testLikes")
-  .insertOne(likevalues, function (err, res) {
-    if (err) throw err;
-  });
+  db_connect
+    .collection("testEvents")
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$push:{"liked_by":{account_id:ObjectId(req.body.account_id)}}});
 
   db_connect
     .collection("testEvents")
@@ -52,26 +47,20 @@ likedRoutes.route("/liked/add_like/:id").post(function (req, response) {
   
 });
 
-likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
+likedRoutes.route("/liked/add_dislike").post(function (req, response) {
 
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId( req.body.event_id)};
   let newvalues = {
     $inc: {
       num_likes: -1
     }
   };
 
-  let likevalues = {
-    event_id:ObjectId( req.params.id),
-    account_id:ObjectId("632c889ad56e85f52f50ac78")
-  };
-
   db_connect
-    .collection("testLikes")
-    .remove(likevalues, function (err, res) {
-      if (err) throw err;
-    });
+    .collection("testEvents")
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$pull:{"liked_by":{account_id:ObjectId(req.body.account_id)}}});
 
   db_connect
     .collection("testEvents")
@@ -82,14 +71,50 @@ likedRoutes.route("/liked/add_dislike/:id").post(function (req, response) {
     });
 });
 
-likedRoutes.route("/liked/:id").get(function (req, res) {
+likedRoutes.route("/attend/add_attendance").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId( req.body.event_id)};
+  let newvalues = {
+    $inc: {
+      num_joined:1
+    },
+  };
   db_connect
-      .collection("testEvents")
-      .findOne(myquery, function (err, result) {
-        if (err) throw err;
-        res.json(result);
-      });
+    .collection("testEvents")
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$push:{"attending_users":{account_id:ObjectId(req.body.account_id)}}});
+
+  db_connect
+    .collection("testEvents")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 joined event");
+      response.json(res);
+    });
+  
+});
+
+likedRoutes.route("/attend/remove_attendance").post(function (req, response) {
+
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.body.event_id)};
+  let newvalues = {
+    $inc: {
+      num_joined: -1
+    }
+  };
+
+  db_connect
+    .collection("testEvents")
+    .update({ _id: ObjectId( req.body.event_id)},
+    {$pull:{"attending_users":{account_id:ObjectId(req.body.account_id)}}});
+
+  db_connect
+    .collection("testEvents")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 removed from event");
+      response.json(res);
+    });
 });
 module.exports = likedRoutes;

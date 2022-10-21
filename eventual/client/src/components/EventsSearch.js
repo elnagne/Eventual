@@ -9,6 +9,7 @@ const EventsSearch = ({ search }) => {
         womanOnly, setWomanOnly,
         startDate, setStartDate,
         endDate, setEndDate,
+        city, setCity,
         allFilters
     } = useContext(SearchContext);
 
@@ -39,6 +40,12 @@ const EventsSearch = ({ search }) => {
                         <div class="form-group mb-3 w-25 mx-3">
                             <label>End Date</label>
                             <input class="form-control" type="date" placeholder="Enter Date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        </div>
+                    </div>
+                    <div id="city" class="d-flex flex-row">
+                        <div class="form-group mb-3 w-25">
+                            <label>City</label>
+                            <input class="form-control" type="text" placeholder="Enter City" value={city} onChange={(e) => setCity(e.target.value)} />
                         </div>
                     </div>
                     <div>

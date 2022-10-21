@@ -28,9 +28,13 @@ searchRoutes.route("/search/filteredSearch").post((req, res) => {
   let activeFilters = req.body.filters;
   let startDate = req.body.startDate.length != 0 ? req.body.startDate : "0000-00-00"
   let endDate = req.body.endDate.length != 0 ? req.body.endDate : "9999-99-99";
-
-  let query = req.body.womanOnly ? { category: { $in: activeFilters }, woman_only: true, date_of_event: { $gte: startDate, $lte: endDate } }
-                                 : { category: { $in: activeFilters }, date_of_event: { $gte: startDate, $lte: endDate } }
+  let city = req.body.city;
+  
+  let query = req.body.womanOnly ? { category: { $in: activeFilters }, woman_only: true, date_of_event: { $gte: startDate, $lte: endDate }}
+                                 : { category: { $in: activeFilters }, date_of_event: { $gte: startDate, $lte: endDate }}
+  if (city) {
+    query['address_data.locality'] = city ;
+  }
 
   db_connect
     .collection("testEvents")
@@ -51,7 +55,7 @@ searchRoutes.route("/search/events/:id").get((req, res) => {
   });
 });
 
-// Find the name of a user given their id
+// Find a user given their id
 searchRoutes.route("/search/name/:id").get((req, res) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };

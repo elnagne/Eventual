@@ -131,7 +131,7 @@ const EventCardSingular = (props) => {
   const [NoSpotsMsg, setnNSM] =useState("");
   if (!event) {
     return (
-      <Card className="eventCard singular card-title shadow" border="dark">
+      <Card className="eventCard singular card-title shadow">
         <Card.Body>
           <Button
             variant="dark"
@@ -149,25 +149,31 @@ const EventCardSingular = (props) => {
   const name = event.event_name;
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
+
   const startTimeObj = event.startTime;
   const startTime = new Date(startTimeObj);
   const endTime = new Date(event.endTime);
-  const num_slots = parseInt(event.num_slots); 
+  const num_slots = parseInt(event.num_slots);
+  const dateStr = event.date_of_event;
+  const dateObj = new Date(dateStr); 
   const date = startTime.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-  const startTimeStr = startTime.toLocaleTimeString([], {
+  const timeStr = event.time_of_event;
+  const timeObj = new Date("0000-01-01 " + timeStr);
+  const time = timeObj.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
-  const endTimeStr = endTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const city = event.city;
+
+
+const city = event.address_data
+  ? Utils.getLocationInfoAsString(event.address_data)
+  : null;
+
   const category = event.category;
   const address = event.location;
   const desc = event.description;
@@ -199,10 +205,13 @@ const EventCardSingular = (props) => {
           >
             <FontAwesomeIcon icon={faCaretLeft} /> All Events
           </Button>
-          <div className="title">{displayName ? displayName : "[NO EVENT NAME]"}</div>
-          {startTimeObj && <div className="date">{date}</div>}
+
+          <div className="title">
+            {displayName ? displayName : "[NO EVENT NAME]"}
+          </div>
+          {dateStr && <div className="date">{date}</div>}
           {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-          {likes !== undefined && account_id !== null &&(
+          {likes !== undefined && (
             <div className="likes">
             {likedby.includes(account_id)
             ?
@@ -276,16 +285,18 @@ const EventCardSingular = (props) => {
           <Row>
             <Col lg={5}>
               <div className="event-info">
+
               {num_slots !== undefined&& (
             <span>
               <span className="property">Available Spots: </span>
               {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xxs" />
             </span> 
           )}
-                {startTimeObj && (
+                {timeStr && (
+
                   <div>
                     <span className="property">Time: </span>
-                    {startTimeStr} - {endTimeStr}
+                    {time}
                   </div>
                 )}
                 {city && (

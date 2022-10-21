@@ -1,12 +1,12 @@
-import React from "react";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { useState, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Register from "./Register";
-import { RegisterContext } from "./RegisterContext";
-import UserInfo from "./UserInfo";
-import "./registerbutton.css";
+import React from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { useState, useLayoutEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Register from './Register';
+import { RegisterContext } from './RegisterContext';
+import UserInfo from './UserInfo';
+import './registerbutton.css';
 const Sidebar = () => {
   let navigate = useNavigate();
 
@@ -19,9 +19,9 @@ const Sidebar = () => {
     navigate("/login");
   }
   useLayoutEffect(() => {
-    fetch("http://localhost:5000/users/isUserAuth", {
+    fetch('http://localhost:5000/users/isUserAuth', {
       headers: {
-        "x-access-token": localStorage.getItem("token"),
+        'x-access-token': localStorage.getItem('token'),
       },
     })
       .then((res) => res.json())
@@ -43,6 +43,9 @@ const Sidebar = () => {
         </Link>
         <Link to="/add-events" className="navbarItem">
           Add Events
+        </Link>
+        <Link to="/my-events" className="navbarItem">
+          My Events
         </Link>
         <Link to="/liked" className="navbarItem">
           Liked

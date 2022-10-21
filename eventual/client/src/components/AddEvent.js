@@ -1,14 +1,19 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
-
+import { Widget } from '@uploadcare/react-widget';
 import Button from 'react-bootstrap/Button';
 
-const today = new Date();
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
+  const [author, setAuthor] = useState(null);
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [date_of_event, setDate_of_event] = useState('');
   const [time_of_event, setTime_of_event] = useState('');
   const [num_slots, setNum_slots] = useState(0);
@@ -22,10 +27,17 @@ const AddEvent = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    toast('You Submitted an Event!');
+    console.log(localStorage.getItem('userid'));
+    await setAuthor(localStorage.getItem('userid'));
+    console.log(author);
     const newEvent = {
       event_name: event_name,
+      author: author,
       description: description,
+      image_url: image,
+      phone: phone,
+      email: email,
       date_of_event: date_of_event,
       time_of_event: time_of_event,
       num_slots: num_slots,
@@ -44,36 +56,89 @@ const AddEvent = () => {
       window.alert(error);
       return;
     });
+
+    setEvent_name('');
+    setDescription('');
+    setImage(null);
+    setEmail('');
+    setPhone('');
+    setDate_of_event('');
+    setTime_of_event('');
+    setNum_slots(0);
+    setWoman_only('');
+    setLocation('');
+    setCategory('');
   };
 
   return (
     <div className="dbWriteWrapper">
       <Sidebar />
       <div className="AddEvent">
-        <form className="AddEventForm" onSubmit={onSubmit}>
+        <form
+          name="event"
+          className="AddEventForm"
+          encType="multipart/form-data"
+          onSubmit={onSubmit}
+        >
           <h2 className="EventTitle">Add Event</h2>
-          <div class="form-group" className="AddEventElement">
+          <div className="AddEventElement">
             <label>Event Name</label>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
+              security=""
               placeholder="Enter Event Title"
               value={event_name}
               onChange={(e) => setEvent_name(e.target.value)}
             />
           </div>
-          <div class="form-group" className="AddEventElement">
+          <div className="AddEventElement">
             <label>Description</label>
             <textarea
               type="text"
               rows="6"
-              class="form-control input-lg"
+              className="form-control input-lg"
               placeholder="Enter Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <div class="form-group" className="AddEventElement">
+          <p>
+            <label htmlFor="file">Your file:</label>{' '}
+            <Widget
+              publicKey="6092add1783f1344a4e4"
+              type="hidden"
+              role="uploadcare-uploader"
+              name="my_file"
+              id="uploadcare-file"
+              value={image}
+              onChange={(info) => {
+                console.log(info.cdnUrl);
+                setImage(info.cdnUrl);
+              }}
+            />
+          </p>
+          <div className="AddEventElement">
+            <label>Phone</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div className="AddEventElement">
+            <label>Email</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="AddEventElement">
             <label>Date</label>
             <input
               class="form-control"
@@ -83,7 +148,7 @@ const AddEvent = () => {
               onChange={(e) => setDate_of_event(e.target.value)}
             />
           </div>
-          <div class="form-group" className="AddEventElement">
+          <div className="AddEventElement">
             <label>Time</label>
             <input
               class="form-control"
@@ -93,12 +158,12 @@ const AddEvent = () => {
               onChange={(e) => setTime_of_event(e.target.value)}
             />
           </div>
-          <div class="form-group" className="AddEventElement">
-            <label>Location</label>
+          <div className="AddEventElement">
+            <label>Address</label>
             <input
               class="form-control"
               type="location"
-              placeholder="Enter Location"
+              placeholder="Enter a valid address"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
@@ -112,12 +177,12 @@ const AddEvent = () => {
           >
             <option>Sport</option>
             <option>Entertainment</option>
-            <option>Indoor Game</option>
+            <option>Board Game</option>
             <option>Concert</option>
             <option>Charity</option>
           </select>
 
-          <div class="form-group" className="AddEventElement">
+          <div className="AddEventElement">
             <label>Number of Slots Available</label>
             <input
               class="form-control"
@@ -127,11 +192,11 @@ const AddEvent = () => {
               onChange={(e) => setNum_slots(e.target.value)}
             />
           </div>
-          <div class="form-group form-check">
-            <label class="form-check-label">Woman Only?</label>
+          <div className="form-group form-check">
+            <label className="form-check-label">Woman Only?</label>
             <input
               type="checkbox"
-              class="form-check-input"
+              className="form-check-input"
               value={woman_only}
               onChange={handleCheck}
             />
@@ -144,6 +209,7 @@ const AddEvent = () => {
           >
             Submit
           </Button>
+          <ToastContainer />
         </form>
       </div>
     </div>

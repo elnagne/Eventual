@@ -1,3 +1,4 @@
+import * as Utils from './Utils.js';
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +7,7 @@ import {
   faCircleDot,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const arrowDivStyle = {
   float: "right",
@@ -16,20 +18,6 @@ const arrowStyle = {
   fontSize: 25,
 };
 
-function getAuthorName(author) {
-  if (!author) return null;
-  if (author.name) {
-    const firstName = author.name.first;
-    const lastName = author.name.last;
-    var name = "";
-    if (firstName) name = name + firstName;
-    if (firstName && lastName) name = name + " ";
-    if (lastName) name = name + lastName;
-    return name;
-  }
-  return null;
-}
-
 const EventCard = (props) => {
   const [author, setAuthor] = useState([]);
 
@@ -39,22 +27,19 @@ const EventCard = (props) => {
         const response = await fetch(
           `http://localhost:5000/search/name/` + props.event.author
         );
-
         if (!response.ok) {
           return;
         }
-
         const author = await response.json();
         setAuthor(author);
       }
-
       getUser();
-
       return;
     }
-  });
+  }, [props.event.author]);
 
   const event = props.event;
+  const id = event._id;
   const name = event.event_name;
   const imgUrl = event.image_url;
   const desc = event.description;
@@ -66,16 +51,31 @@ const EventCard = (props) => {
   const startTime = new Date(startTimeObj);
   const endTime = new Date(event.endTime);
   const date = startTime.toDateString();
-  const startTimeStr = startTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  const endTimeStr = endTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  const startTimeStr = startTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const endTimeStr = endTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-  const authorName = getAuthorName(author);
+  const authorName = Utils.getUsersNameAsString(author);
+
+  let navigate = useNavigate();
+  function redirectToEvent() {
+    let path = "/events/" + id;
+    navigate(path);
+  }
 
   return (
-    <Card className="eventCard card-title shadow" border="dark">
+    <Card
+      className="eventCard clickable card-title shadow"
+      onClick={redirectToEvent}
+    >
       <Card.Body>
         {imgUrl && (
-          <div className="img">
+          <div className="pic">
             <img src={imgUrl} alt={name} />
           </div>
         )}

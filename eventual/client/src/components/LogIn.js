@@ -1,7 +1,18 @@
 import { Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLayoutEffect, useEffect, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import Register from "./Register";
+import { RegisterContext } from "./RegisterContext";
+import "./LogIn.css";
+import userInfo from "./UserInfo";
+
 const LogIn = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   let navigate = useNavigate();
+  const { isModalOpen, setModalOpen } = useContext(RegisterContext);
+
+  // move to the home page if successful
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -9,7 +20,6 @@ const LogIn = () => {
     // Grab the password and email and login
     let pw = document.querySelector("#pw").value;
     let email = document.querySelector("#email").value;
-
     document.querySelector("#signin-form").reset();
     await fetch("http://localhost:5000/users/login", {
       method: "POST",
@@ -18,32 +28,37 @@ const LogIn = () => {
       },
       body: JSON.stringify({ pw: pw, email: email }),
     })
-      //promise chaining
-      //do .then .then or away away
-      //first respose is a response promise
-      //second .then would be the data
-      //.catch is for the error
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        console.log(typeof data);
-        console.log(data.content);
-        if (data.content === "") {
-          console.log(data.content);
-        } else if (!data.isValid) {
-          // not valid case
-          console.log(data.content);
-        } else {
-          // valid case
+        console.log(data.userid);
+        if (data.message === "Success") {
+          //localStorage.setItem("token", data.token);
+          isAuth();
+          return;
+        }
+        alert(data.message);
+      })
+      .catch((error) => {
+        setErrorMessage(error);
+      });
+  };
+
+  const isAuth = async () => {
+    await fetch("http://localhost:5000/users/isUserAuth", {
+      method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isLoggedIn) {
           navigate("/");
         }
       })
       .catch((error) => {
-        window.alert(error);
-        return;
+        setErrorMessage(error);
       });
-
-    // move to the home page if successful
   };
 
   return (
@@ -76,24 +91,23 @@ const LogIn = () => {
         </Form>
 
         <div className="bottom-right">
-          <a
-            href="/register"
-            id="redirectRegister"
-            variant="secondary"
-            type="submit"
-            class="size"
+          <button
+            className="btn size"
+            varient="secondary"
+            onClick={() => setModalOpen(true)}
           >
             Register
-          </a>
+          </button>
         </div>
       </div>
       <div className="embed-responsive embed-responsive-4by3">
         <img
-          class="img"
+          className="img"
           alt=""
           src={process.env.PUBLIC_URL + "img/people.png"}
         ></img>
       </div>
+      <Register trigger={isModalOpen} setTrigger={setModalOpen} />
     </>
   );
 };

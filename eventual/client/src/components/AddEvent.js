@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
-
 import Button from 'react-bootstrap/Button';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
+  const [author, setAuthor] = useState(null);
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [email, setEmail] = useState('');
@@ -21,6 +21,8 @@ const AddEvent = () => {
   const [location, setLocation] = useState('');
   const [category, setCategory] = useState('');
 
+  const login_author = localStorage.getItem('userid');
+
   const handleCheck = () => {
     setWoman_only(true);
   };
@@ -28,8 +30,12 @@ const AddEvent = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     toast('You Submitted an Event!');
+    await console.log(localStorage.getItem('userid'));
+    await setAuthor(login_author);
+    console.log(login_author);
     const newEvent = {
       event_name: event_name,
+      author: login_author,
       description: description,
       image_url: image,
       phone: phone,
@@ -155,11 +161,11 @@ const AddEvent = () => {
             />
           </div>
           <div className="AddEventElement">
-            <label>Location</label>
+            <label>Address</label>
             <input
               class="form-control"
               type="location"
-              placeholder="Enter Location"
+              placeholder="Enter a valid address"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />

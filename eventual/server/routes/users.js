@@ -65,8 +65,6 @@ function verifyJWT(req, res, next) {
 }
 //login
 usersRoutes.route("/users/login").post(async (req, res) => {
-
-
   if (
     !("email" in req.body) ||
     req.body.email === "" ||
@@ -104,6 +102,7 @@ usersRoutes.route("/users/login").post(async (req, res) => {
               return res.json({
                 message: "Success",
                 token: "Bearer " + token,
+                userid: user._id,
               });
             }
           );

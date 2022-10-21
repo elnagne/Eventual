@@ -211,7 +211,7 @@ const city = event.address_data
           </div>
           {dateStr && <div className="date">{date}</div>}
           {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-          {likes !== undefined && (
+          {likes !== undefined && account_id !== null && (
             <div className="likes">
             {likedby.includes(account_id)
             ?

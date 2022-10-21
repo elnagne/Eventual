@@ -61,6 +61,7 @@ eventsRoutes.route("/testEvents/add").post((req, response) => {
   };
 
   getAddressData(req.body.location).then((address_data) => {
+    console.log(address_data);
     if (address_data && address_data.data && address_data.data.length) {
       event.address_data = address_data.data[0];
     }

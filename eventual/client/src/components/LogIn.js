@@ -30,9 +30,9 @@ const LogIn = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.userid);
+        //console.log(data.userid);
         if (data.message === "Success") {
-          //localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.token);
           isAuth();
           return;
         }

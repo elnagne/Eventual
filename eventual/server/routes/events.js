@@ -12,12 +12,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-const bodyParser = require('body-parser');
-const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-
-
 const got = require("got");
 const psApiKey = process.env.POSITIONSTACK_API_KEY;
 

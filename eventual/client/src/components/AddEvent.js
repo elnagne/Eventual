@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
+  const [author, setAuthor] = useState(null);
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [email, setEmail] = useState('');
@@ -28,8 +29,12 @@ const AddEvent = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     toast('You Submitted an Event!');
+    console.log(localStorage.getItem('userid'));
+    await setAuthor(localStorage.getItem('userid'));
+    console.log(author);
     const newEvent = {
       event_name: event_name,
+      author: author,
       description: description,
       image_url: image,
       phone: phone,

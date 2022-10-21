@@ -17,6 +17,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
   let event = {
     event_name: req.body.event_name,
     description: req.body.description,
+    author: req.body.author,
     image_url: req.body.image_url,
     email: req.body.email,
     phone: req.body.phone,

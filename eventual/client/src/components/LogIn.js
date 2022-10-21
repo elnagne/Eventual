@@ -1,14 +1,14 @@
-import { Form, Button } from "react-bootstrap";
-import { useLayoutEffect, useEffect, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import Register from "./Register";
-import { RegisterContext } from "./RegisterContext";
-import "./LogIn.css";
-import userInfo from "./UserInfo";
+import { Form, Button } from 'react-bootstrap';
+import { useLayoutEffect, useEffect, useState } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import Register from './Register';
+import { RegisterContext } from './RegisterContext';
+import './LogIn.css';
+import userInfo from './UserInfo';
 
 const LogIn = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   let navigate = useNavigate();
   const { isModalOpen, setModalOpen } = useContext(RegisterContext);
 
@@ -18,21 +18,22 @@ const LogIn = () => {
     e.preventDefault();
 
     // Grab the password and email and login
-    let pw = document.querySelector("#pw").value;
-    let email = document.querySelector("#email").value;
-    document.querySelector("#signin-form").reset();
-    await fetch("http://localhost:5000/users/login", {
-      method: "POST",
+    let pw = document.querySelector('#pw').value;
+    let email = document.querySelector('#email').value;
+    document.querySelector('#signin-form').reset();
+    await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ pw: pw, email: email }),
     })
       .then((res) => res.json())
       .then((data) => {
         //console.log(data.userid);
-        if (data.message === "Success") {
-          localStorage.setItem("token", data.token);
+        if (data.message === 'Success') {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userid', data.userid);
           isAuth();
           return;
         }
@@ -44,16 +45,16 @@ const LogIn = () => {
   };
 
   const isAuth = async () => {
-    await fetch("http://localhost:5000/users/isUserAuth", {
-      method: "GET",
+    await fetch('http://localhost:5000/users/isUserAuth', {
+      method: 'GET',
       headers: {
-        "x-access-token": localStorage.getItem("token"),
+        'x-access-token': localStorage.getItem('token'),
       },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.isLoggedIn) {
-          navigate("/");
+          navigate('/');
         }
       })
       .catch((error) => {
@@ -104,7 +105,7 @@ const LogIn = () => {
         <img
           className="img"
           alt=""
-          src={process.env.PUBLIC_URL + "img/people.png"}
+          src={process.env.PUBLIC_URL + 'img/people.png'}
         ></img>
       </div>
       <Register trigger={isModalOpen} setTrigger={setModalOpen} />

@@ -1,12 +1,14 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 // This router will act as a controller for users
 const usersRoutes = express.Router();
 
 // Used for connecting to the database
 const dbo = require("../db/conn");
+const { json } = require("express");
 
 // Used for converting id from string to ObjectId for the _id attribute
 const ObjectId = require("mongodb").ObjectId;
@@ -37,16 +39,42 @@ usersRoutes.route("/users/register").post(async (req, response) => {
     });
   }
 });
-// User login
+
+usersRoutes.get("/users/isUserAuth", verifyJWT, (req, res, next) => {
+  res.json({ isLoggedIn: true, username: req.user.username });
+});
+//Sign JSON Web Token / Login
+function verifyJWT(req, res, next) {
+  const token = req.headers["x-access-token"]?.split(" ")[1];
+  if (token) {
+    jwt.verify(token, process.env.PASSPORTSECRET, (err, decoded) => {
+      if (err) {
+        return res.json({
+          isloggedIn: false,
+          message: "Authentication failed",
+        });
+      }
+      req.user = {};
+      req.user.id = decoded.id;
+      req.user.username = decoded.username;
+      next();
+    });
+  } else {
+    res.json({ message: "Invalid token", isLoggedIn: false });
+  }
+}
+//login
 usersRoutes.route("/users/login").post(async (req, res) => {
-  if (!("email" in req.body))
-    return res
-      .status(400)
-      .json({ content: "email is missing", isValid: false });
-  if (!("pw" in req.body))
-    return res
-      .status(400)
-      .json({ content: "password is missing", isvalid: false });
+
+
+  if (
+    !("email" in req.body) ||
+    req.body.email === "" ||
+    !("pw" in req.body) ||
+    req.body.pw === ""
+  ) {
+    return res.status(400).json({ message: "missing input field " });
+  }
 
   const dbConnect = dbo.getDb();
 
@@ -57,18 +85,35 @@ usersRoutes.route("/users/login").post(async (req, res) => {
     .collection("mockUsers")
     .findOne({ email: email }, function (err, user) {
       if (err) return res.status(500).json(err);
-      if (!user)
-        return res
-          .status(401)
-          .json({ content: "access denied", isValid: false });
-        
-      bcrypt.compare(pw, user.password, function (err, valid) {
-        if (err) return res.status(500).json(err);
-        if (!valid)
+      if (!user) return res.status(401).json({ message: "access denied" });
+
+      bcrypt.compare(pw, user.password).then((valid) => {
+        if (valid) {
+          const payload = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+          };
+          //create a token to send to the front end
+          jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: 3600 },
+            (err, token) => {
+              if (err) return res.json({ message: err });
+              return res.json({
+                message: "Success",
+                token: "Bearer " + token,
+              });
+            }
+          );
+
+          // return res.json({ content: user.username, isValid: true });
+        } else {
           return res
             .status(401)
-            .json({ content: "Incorrect email or Password", isValid: false });
-        return res.json({ content: user.username, isValid: true });
+            .json({ message: "Incorrect email or Password" });
+        }
       });
     });
 });

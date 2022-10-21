@@ -104,6 +104,7 @@ usersRoutes.route("/users/login").post(async (req, res) => {
               return res.json({
                 message: "Success",
                 token: "Bearer " + token,
+                userid: user._id,
               });
             }
           );

@@ -168,7 +168,7 @@ const EventCardSingular = (props) => {
   const address = event.location;
   const desc = event.description;
 
-  const account_id = "632c889ad56e85f52f50ac78";
+  const account_id = localStorage.getItem("userid");
   const eventID = event._id;
   const accountEvent = {
     account_id: account_id,

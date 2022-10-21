@@ -22,10 +22,6 @@ body {
     margin: 20px;
 }
 
-.eventCard.clickable{
-    cursor: pointer;
-}
-
 .eventCard.clickable:hover {
     background-color: #ECECEC;
 }

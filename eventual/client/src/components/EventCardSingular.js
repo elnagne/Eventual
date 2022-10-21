@@ -64,8 +64,11 @@ const EventCardSingular = (props) => {
     setLikes(likes-1)
   }
   async function joinEvent() {
-    // passes the id of the event
-    await fetch(`http://localhost:5000/attend/add_attendance`, {
+    if(num_slots-parseInt(numJoined) == 0){
+      setnNSM("No spots left, please return another time when spots are available again or leave a like to keep track of the event");
+    }
+    else{
+      await fetch(`http://localhost:5000/attend/add_attendance`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,6 +80,7 @@ const EventCardSingular = (props) => {
       console.log(joinedby.toString());
       console.log(newJoinedBy.toString());
       setNumJoined(numJoined+1);
+    }
   }
     // This method decrease the number of likes by 1
   async function notJoinEvent() {
@@ -120,6 +124,7 @@ const EventCardSingular = (props) => {
   const [numJoined, setNumJoined] = useState(0);
   const [joinedby, setJoinedby]= useState([]);
   const [firstLoad, setFirstLoad]= useState(true);
+  const [NoSpotsMsg, setnNSM] =useState("");
   if (!event) {
     return (
       <Card className="eventCard singular card-title shadow" border="dark">
@@ -192,6 +197,7 @@ const EventCardSingular = (props) => {
           </Button>
           <div className="title">{displayName ? displayName : "[NO EVENT NAME]"}</div>
           {startTimeObj && <div className="date">{date}</div>}
+          {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
           {likes !== undefined && (
             <div className="likes">
             {likedby.includes(account_id)
@@ -266,11 +272,11 @@ const EventCardSingular = (props) => {
           <Row>
             <Col lg={5}>
               <div className="event-info">
-              {num_slots && (
-            <div>
-            <span className="property">Available Spots: </span>
-            {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xxs" />
-            </div>
+              {num_slots !== undefined&& (
+            <span>
+              <span className="property">Available Spots: </span>
+              {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xxs" />
+            </span> 
           )}
                 {startTimeObj && (
                   <div>

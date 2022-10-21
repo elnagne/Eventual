@@ -6,6 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import './Likebtn.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandshake } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart,
   faCircleDot,
@@ -76,6 +77,38 @@ const EventCard = (props) => {
       console.log(newlikedBy.toString());
     setLikes(likes-1)
   }
+  async function joinEvent() {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/attend/add_attendance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent)
+      });
+      let newJoinedBy =[...joinedby, account_id];
+      setJoinedby((newJoinedBy));
+      console.log(joinedby.toString());
+      console.log(newJoinedBy.toString());
+      setNumJoined(numJoined+1);
+  }
+    // This method decrease the number of likes by 1
+  async function notJoinEvent() {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/attend/remove_attendance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent),
+      });
+      let newJoinedBy =joinedby;
+      newJoinedBy.pop(account_id);
+      setJoinedby(newJoinedBy);
+      console.log(joinedby.toString());
+      console.log(newJoinedBy.toString());
+      setNumJoined(numJoined-1)
+  }
 
   const event = props.event;
   const id = event._id;
@@ -87,6 +120,8 @@ const EventCard = (props) => {
   const address = event.location;
   const eventID = event._id;
   const [likedby, setLikedby]= useState(event.liked_by.map((user)=>user.account_id));
+  const [numJoined, setNumJoined] = useState(event.num_joined);
+  const [joinedby, setJoinedby]= useState(event.attending_users.map((user)=>user.account_id));
   const account_id = "632c889ad56e85f52f50ac78";
   const accountEvent = {
     account_id: account_id,
@@ -202,8 +237,36 @@ const EventCard = (props) => {
               </Button>
               </OverlayTrigger>
             }
-            {likes}{" "}
-            {likes === 1 ? "person is" : "people are"} interested in this event
+            {likes}{"     "}
+            {joinedby.includes(account_id)
+            ?
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>}
+              >
+              <Button id = "a" variant="liked" 
+              onClick={() => {
+                notJoinEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHandshake} />
+              </Button>
+              </OverlayTrigger>
+              :
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Join Event</Tooltip>}
+              >
+              <Button id = "a" variant="like" 
+              onClick={() => {
+                joinEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHandshake} />
+              </Button>
+              </OverlayTrigger>}{numJoined}
           </div>
         )}
       </Card.Body>

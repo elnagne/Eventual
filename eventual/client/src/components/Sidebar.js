@@ -5,7 +5,8 @@ import { useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Register from "./Register";
 import { RegisterContext } from "./RegisterContext";
-
+import UserInfo from "./UserInfo";
+import "./registerbutton.css";
 const Sidebar = () => {
   let navigate = useNavigate();
 
@@ -14,25 +15,53 @@ const Sidebar = () => {
   const [username, setUsername] = useState(null);
   async function logout() {
     localStorage.removeItem("token");
-    await navigate.push("/login");
+    navigate("/login");
   }
   useLayoutEffect(() => {
-    fetch("/isUserAuth", {
+    fetch("http://localhost:5000/users/isUserAuth", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
-      //.then((data) => (data.isLooggedIn ? setUsername(data.username) : null ));
       .then((data) => {
         if (data.isLoggedIn) {
           setUsername(data.username);
-          console.log("DATA :" + data);
         }
       })
-      // .catch((err) => alert(err));
+      .catch((err) => alert(err));
   }, []);
-  return (
+  return username ? (
+    <div>
+      <div className="sidebarWrapper">
+        <Link to="/" className="navbarItem">
+          Home
+        </Link>
+        <Link to="/events" className="navbarItem">
+          Events
+        </Link>
+        <Link to="/add-events" className="navbarItem">
+          Add Events
+        </Link>
+        <Link to="/liked" className="navbarItem">
+          Liked
+        </Link>
+        <Link to="/history" className="navbarItem">
+          History
+        </Link>
+        <Link to="/settings" className="navbarItem">
+          Settings
+        </Link>
+
+        <div>
+          <div onClick={logout} className="navbarItem">
+            logout
+          </div>
+          <UserInfo username={username} className="navbarItem"></UserInfo>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div>
       <div className="sidebarWrapper">
         <Link to="/" className="navbarItem">
@@ -54,19 +83,9 @@ const Sidebar = () => {
           Settings
         </Link>
         <button onClick={() => setModalOpen(true)}>Register</button>
-
-        {username ? (
-          <div>
-            <userInfo username={username} className="navbarItem"></userInfo>
-            <div onClick={logout}>logout</div>
-          </div>
-        ) : (
-          <div>
-            <Link to="/login" className="navbarItem">
-              Login
-            </Link>
-          </div>
-        )}
+        <Link to="/login" className="navbarItem">
+          Login Page
+        </Link>
       </div>
       <Register trigger={isModalOpen} setTrigger={setModalOpen} />
     </div>

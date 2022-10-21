@@ -9,7 +9,7 @@ import DbWriteTemp from "./components/DbWriteTemp";
 import Register from "./components/Register";
 import AddEvents from "./components/AddEvent";
 import LogIn from "./components/LogIn";
-import UserInfo from "./components/userInfo";
+import UserInfo from "./components/UserInfo";
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

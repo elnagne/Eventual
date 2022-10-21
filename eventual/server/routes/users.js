@@ -39,6 +39,30 @@ usersRoutes.route("/users/register").post(async (req, response) => {
     });
   }
 });
+
+usersRoutes.get("/users/isUserAuth", verifyJWT, (req, res, next) => {
+  res.json({ isLoggedIn: true, username: req.user.username });
+});
+//Sign JSON Web Token / Login
+function verifyJWT(req, res, next) {
+  const token = req.headers["x-access-token"]?.split(" ")[1];
+  if (token) {
+    jwt.verify(token, process.env.PASSPORTSECRET, (err, decoded) => {
+      if (err) {
+        return res.json({
+          isloggedIn: false,
+          message: "Authentication failed",
+        });
+      }
+      req.user = {};
+      req.user.id = decoded.id;
+      req.user.username = decoded.username;
+      next();
+    });
+  } else {
+    res.json({ message: "Invalid token", isLoggedIn: false });
+  }
+}
 //login
 usersRoutes.route("/users/login").post(async (req, res) => {
   if (!("email" in req.body))
@@ -58,24 +82,18 @@ usersRoutes.route("/users/login").post(async (req, res) => {
       if (!user) return res.status(401).json({ message: "access denied" });
 
       bcrypt.compare(pw, user.password).then((valid) => {
-       //console.log(valid);
         if (valid) {
           const payload = {
             id: user._id,
             username: user.username,
             email: user.email,
           };
-          //console.log("hello");
           //create a token to send to the front end
           jwt.sign(
             payload,
             process.env.JWT_SECRET,
             { expiresIn: 3600 },
             (err, token) => {
-              // bearer = t.split(" ")[0];
-              // to = t.split(" ")[1];
-              // console.log("token:"+to);
-              // console.log("BEARER:"+bearer );
               if (err) return res.json({ message: err });
               return res.json({
                 message: "Success",

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import Register from "./Register";
 import { RegisterContext } from "./RegisterContext";
 import "./LogIn.css";
-import userInfo from "./userInfo";
+import userInfo from "./UserInfo";
 
 const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,18 +31,22 @@ const LogIn = () => {
       .then((res) => res.json())
       .then((data) => {
         localStorage.setItem("token", data.token);
-
+        console.log(data.token);
+        if (data.message === "Success") {
+          isAuth();
+        }
         //navigate("/login")
-        console.log(localStorage.getItem("token"));
+        //console.log(localStorage.getItem("token"));
       })
       .catch((error) => {
         setErrorMessage(error);
       });
   };
-  useEffect(() => {
-    console.log("California");
 
-    fetch("/isUserAuth", {
+  const isAuth = async () => {
+    console.log("before fetching UserAuth");
+    await fetch("http://localhost:5000/users/isUserAuth", {
+      method: "GET",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -56,7 +60,7 @@ const LogIn = () => {
       .catch((error) => {
         setErrorMessage(error);
       });
-  }, []);
+  };
 
   return (
     <>

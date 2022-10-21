@@ -23,8 +23,6 @@ passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
             response.status(403).send('Email not found');
         } else {
             const token = crypto.randomBytes(20).toString('hex');
-            // TODO check if update adds fields
-
             dbConnect.collection("mockUsers").updateOne(
                 { email: req.body.email },
                 { $set:
@@ -89,7 +87,6 @@ passwordResetRoutes.route('/update-forgot-password').post(async (req, response) 
     dbConnect.collection("mockUsers").findOne({
         username: req.body.username
     }).then(user => {
-        // TODO create a function that both users password update and this can use
         if (user != null) {
             const updatedUser = { $set: {
                 password: updatedHashedPassword,

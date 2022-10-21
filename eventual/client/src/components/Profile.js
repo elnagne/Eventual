@@ -7,37 +7,46 @@ import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react';
 
 const Profile = () => {
-    const [firstName, setFirstName] = useState('Test');
-    const [lastName, setLastName] = useState('Test');
-    const [email, setEmail] = useState('Test');
-    const [username,setUsername] = useState('Test');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [username,setUsername] = useState('');
     const [oldPassword,setOldPassword] = useState('');
     const [newPassword,setNewPassword] = useState('');
 
     // get current user information and populate forms
     const getUser = async (e) => {
-        //e.preventDefault();
+                /*
+        const token = localStorage.getItem("token");
+        console.log();
 
-        const currUser = {
-            username: username,
-            password: oldPassword,
-            email: email,
-            name: {first: firstName, last: lastName}
+        const user = {
+            username: token.username,
         }
 
-        /*
-        const response = await fetch("http://localhost:5000/users/register", {
-            method: "POST",
+        await fetch("http://localhost:5000/users/get-user-info", {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(currUser),
+            body: JSON.stringify(user)
+        }).then(response => {
+            if (response.ok) {
+                setUsername();
+                setEmail();
+                setFirstName();
+                setLastName();
+            } else {
+                window.location = 'http://localhost:3000';
+            }
         }).catch(error => {
             window.alert(error);
             return;
         });
         */
     };
+
+    getUser();
 
     // update user information on submit click
     const updateProfile = async (e) => {

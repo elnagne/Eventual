@@ -37,6 +37,7 @@ usersRoutes.route("/users/register").post(async (req, response) => {
     });
   }
 });
+
 // User login
 usersRoutes.route("/users/login").post(async (req, res) => {
   if (!("email" in req.body))
@@ -126,6 +127,24 @@ usersRoutes.route("/users/delete/:id").delete((req, response) => {
     response.json(res);
   });
 });
+
+// returns user info from username for profile page
+usersRoutes.route("/users/get-user-info").get((req, response) => {
+  const dbConnect = dbo.getDb();
+  const usersCollection = dbConnect.collection("mockUsers");
+
+  usersCollection.findOne({ 
+    user: req.body.username 
+  }).then((user) => {
+    if (user == null) response.status(404);
+    else
+      response.status(200).json({
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+  });
+})
 
 // Export usersRoutes so we can use we different CRUD operations established here in server.js
 module.exports = usersRoutes;

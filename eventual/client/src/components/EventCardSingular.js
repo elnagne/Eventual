@@ -62,15 +62,51 @@ const EventCardSingular = (props) => {
       console.log(newlikedBy.toString());
     setLikes(likes-1)
   }
+  async function joinEvent() {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/attend/add_attendance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent)
+      });
+      let newJoinedBy =[...joinedby, account_id];
+      setJoinedby((newJoinedBy));
+      console.log(joinedby.toString());
+      console.log(newJoinedBy.toString());
+      setNumJoined(numJoined+1);
+  }
+    // This method decrease the number of likes by 1
+  async function notJoinEvent() {
+    // passes the id of the event
+    await fetch(`http://localhost:5000/attend/remove_attendance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+      },
+        body:JSON.stringify(accountEvent),
+      });
+      let newJoinedBy =joinedby;
+      newJoinedBy.pop(account_id);
+      setJoinedby(newJoinedBy);
+      console.log(joinedby.toString());
+      console.log(newJoinedBy.toString());
+      setNumJoined(numJoined-1)
+  }
   async function loadInitialValues(){
     if(event.num_likes != undefined){
       if (firstLoad == true){
         setFirstLoad(false);
         setLikes(event.num_likes);
         setLikedby(event.liked_by.map((user)=>user.account_id));
+        setNumJoined(event.num_joined);
+        setJoinedby(event.attending_users.map((user)=>user.account_id));
     }
   }
 }
+
+
   let navigate = useNavigate();
   function backToEventsPage() {
     let path = "/events";
@@ -80,6 +116,8 @@ const EventCardSingular = (props) => {
   const event = props.event;
   const [likes, setLikes] = useState(0);
   const [likedby, setLikedby]= useState([]);
+  const [numJoined, setNumJoined] = useState(0);
+  const [joinedby, setJoinedby]= useState([]);
   const [firstLoad, setFirstLoad]= useState(true);
   if (!event) {
     return (
@@ -184,15 +222,39 @@ const EventCardSingular = (props) => {
               </Button>
               </OverlayTrigger>
             }
-            {likes}{" "}
-            {likes === 1 ? "person is" : "people are"} interested in this event
+            {likes}{"     "}
+            {joinedby.includes(account_id)
+            ?
+                <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>}
+              >
+              <Button id = "a" variant="liked" 
+              onClick={() => {
+                notJoinEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHandshake} />
+              </Button>
+              </OverlayTrigger>
+              :
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180}}
+                overlay={<Tooltip id="button-tooltip-2">Join Event</Tooltip>}
+              >
+              <Button id = "a" variant="like" 
+              onClick={() => {
+                joinEvent(eventID);
+                return true
+              }}
+              > <FontAwesomeIcon icon={faHandshake} />
+              </Button>
+              </OverlayTrigger>}{numJoined}
           </div>
           )}
           <div className="main-btns">
-            <Button variant="danger" size="lg" className="main-btn like-btn">
-              <FontAwesomeIcon icon={faHandshake} /> I am{" "}
-              <strong>interested</strong> in this event!
-            </Button>
             <Button variant="warning" size="lg" className="main-btn">
               <FontAwesomeIcon icon={faShare} /> <strong>Share</strong> Event
             </Button>

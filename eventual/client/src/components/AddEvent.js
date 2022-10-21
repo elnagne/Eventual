@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
-
 import Button from 'react-bootstrap/Button';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -160,11 +159,11 @@ const AddEvent = () => {
             />
           </div>
           <div className="AddEventElement">
-            <label>Location</label>
+            <label>Address</label>
             <input
               class="form-control"
               type="location"
-              placeholder="Enter Location"
+              placeholder="Enter a valid address"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />

@@ -14,9 +14,10 @@ export const SearchContextProvider = ({ children }) => {
     const [womanOnly, setWomanOnly] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [city, setCity] = useState('');
   
     return (
-        <SearchContext.Provider value={{ activeFilters, setActiveFilters, womanOnly, setWomanOnly, startDate, setStartDate, endDate, setEndDate, allFilters }}>
+        <SearchContext.Provider value={{ activeFilters, setActiveFilters, womanOnly, setWomanOnly, startDate, setStartDate, endDate, setEndDate, city, setCity, allFilters }}>
             {children}
         </SearchContext.Provider>
     );

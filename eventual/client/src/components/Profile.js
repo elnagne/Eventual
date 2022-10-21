@@ -70,34 +70,38 @@ const Profile = () => {
     const updatePassword = async (e) => {
         e.preventDefault();
 
-        /*
-        if (oldPassword ==) {
-
-            return;
-        }
-        */
-
-        const newProfile = {
-            password: newPassword
+        const oldPass = {
+            password: oldPassword
         }
 
-        const response = await fetch("http://localhost:5000/users/updatePassword/:id", {
+        const response = await fetch("http://localhost:5000/users/check-password/" + userid, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newProfile),
-        }).catch(error => {
-            window.alert(error);
-            return;
+            body: JSON.stringify(oldPass),
         });
 
-        let message = await response.json();
-        document.getElementById("passwordResponse").innerHTML = message.message;
+        if (response.ok) {
+            const newPass = {
+                password: newPassword
+            }
 
-        setOldPassword('');
-        setNewPassword('');
-    };
+            const res = await fetch("http://localhost:5000/users/updatePassword/" + userid, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newPass),
+            })
+
+            let message = await res.json();
+            document.getElementById("passwordResponse").innerHTML = message.message;
+            setOldPassword('');
+            setNewPassword('');
+        }
+        
+    }
 
     return (
         <div className="d-flex">
@@ -143,7 +147,7 @@ const Profile = () => {
                             <Form.Control type="password" placeholder="Old Password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} disabled/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formNewPassword">
-                            <Form.Label>Enter Current Password</Form.Label>
+                            <Form.Label>Enter New Password</Form.Label>
                             <Form.Control type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} disabled/>
                         </Form.Group>
                         <div class='col-xs-3'>

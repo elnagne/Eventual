@@ -195,5 +195,25 @@ usersRoutes.route("/users/get-user-info/:id").get((req, response) => {
   });
 })
 
+// returns if old password submitted is equal to the real password
+usersRoutes.route("/users/check-password/:id").post((req, response) => {
+  const dbConnect = dbo.getDb();
+
+  dbConnect
+    .collection("mockUsers")
+    .findOne({ _id: ObjectId(req.params.id), }, function (err, user) {
+      if (err) return res.status(500).json(err);
+      if (!user) return res.status(401).json({ message: "access denied" });
+
+      bcrypt.compare(req.body.password, user.password).then((valid) => {
+        console.log(valid);
+        if (valid)
+          response.status(200).send("same");
+        else
+          response.status(404).send("not same");
+      });
+    });
+});
+
 // Export usersRoutes so we can use we different CRUD operations established here in server.js
 module.exports = usersRoutes;

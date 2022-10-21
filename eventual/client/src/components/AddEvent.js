@@ -5,6 +5,9 @@ import { Widget } from '@uploadcare/react-widget';
 
 import Button from 'react-bootstrap/Button';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AddEvent = () => {
   const [event_name, setEvent_name] = useState('');
   const [description, setDescription] = useState('');
@@ -24,7 +27,7 @@ const AddEvent = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(image);
+    toast('You Submitted an Event!');
     const newEvent = {
       event_name: event_name,
       description: description,
@@ -49,6 +52,18 @@ const AddEvent = () => {
       window.alert(error);
       return;
     });
+
+    setEvent_name('');
+    setDescription('');
+    setImage(null);
+    setEmail('');
+    setPhone('');
+    setDate_of_event('');
+    setTime_of_event('');
+    setNum_slots(0);
+    setWoman_only('');
+    setLocation('');
+    setCategory('');
   };
 
   return (
@@ -190,6 +205,7 @@ const AddEvent = () => {
           >
             Submit
           </Button>
+          <ToastContainer />
         </form>
       </div>
     </div>

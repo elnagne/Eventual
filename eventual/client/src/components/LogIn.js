@@ -30,13 +30,13 @@ const LogIn = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("token", data.token);
-        console.log(data.token);
+        //console.log(data.token);
         if (data.message === "Success") {
+          localStorage.setItem("token", data.token);
           isAuth();
+          return;
         }
-        //navigate("/login")
-        //console.log(localStorage.getItem("token"));
+        alert(data.message);
       })
       .catch((error) => {
         setErrorMessage(error);
@@ -44,7 +44,6 @@ const LogIn = () => {
   };
 
   const isAuth = async () => {
-    console.log("before fetching UserAuth");
     await fetch("http://localhost:5000/users/isUserAuth", {
       method: "GET",
       headers: {

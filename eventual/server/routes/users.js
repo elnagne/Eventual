@@ -65,10 +65,16 @@ function verifyJWT(req, res, next) {
 }
 //login
 usersRoutes.route("/users/login").post(async (req, res) => {
-  if (!("email" in req.body))
-    return res.status(400).json({ message: "email is missing" });
-  if (!("pw" in req.body))
-    return res.status(400).json({ message: "password is missing" });
+
+
+  if (
+    !("email" in req.body) ||
+    req.body.email === "" ||
+    !("pw" in req.body) ||
+    req.body.pw === ""
+  ) {
+    return res.status(400).json({ message: "missing input field " });
+  }
 
   const dbConnect = dbo.getDb();
 

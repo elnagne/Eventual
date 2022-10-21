@@ -6,7 +6,6 @@ const eventsRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require("../db/conn");
 
-
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -17,7 +17,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
   let event = {
     event_name: req.body.event_name,
     description: req.body.description,
-    image_url: req.body.image,
+    image_url: req.body.image_url,
     email: req.body.email,
     phone: req.body.phone,
     date_of_event: req.body.date_of_event,
@@ -27,6 +27,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     location: req.body.location,
     category: req.body.category,
     num_likes: 0,
+    num_joined: 0,
     liked_by: [],
     attending_users: [],
   };

@@ -3,8 +3,6 @@ import Sidebar from './Sidebar';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 
-import { Buffer } from 'buffer';
-
 import Button from 'react-bootstrap/Button';
 
 const AddEvent = () => {
@@ -96,6 +94,7 @@ const AddEvent = () => {
               id="uploadcare-file"
               value={image}
               onChange={(info) => {
+                console.log(info.cdnUrl);
                 setImage(info.cdnUrl);
               }}
             />

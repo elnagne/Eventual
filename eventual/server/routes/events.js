@@ -12,8 +12,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-// Used for converting id from string to ObjectId for the _id attribute
-const ObjectId = require('mongodb').ObjectId;
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 
 const got = require("got");

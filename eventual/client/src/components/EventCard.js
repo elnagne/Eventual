@@ -10,7 +10,7 @@ import { faHandshake } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart,
   faCircleDot,
-  faAngleRight,
+  faPerson,
   faCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -122,6 +122,7 @@ const EventCard = (props) => {
   const [likedby, setLikedby]= useState(event.liked_by.map((user)=>user.account_id));
   const [numJoined, setNumJoined] = useState(event.num_joined);
   const [joinedby, setJoinedby]= useState(event.attending_users.map((user)=>user.account_id));
+  const num_slots = parseInt(event.num_slots); 
   const account_id = "632c889ad56e85f52f50ac78";
   const accountEvent = {
     account_id: account_id,
@@ -201,6 +202,14 @@ const EventCard = (props) => {
               <span className="property">Address: </span>
               {address}
             </span>
+          )}
+          {num_slots && (
+            <span>
+              {" "}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
+              <span className="property">Available Spots: </span>
+              {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xs" />
+            </span> 
           )}
         </div>
         

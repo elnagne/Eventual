@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useState, useEffect, useRef, useContext } from 'react';
 import { RegisterContext } from './RegisterContext';
+import { Link } from 'react-router-dom';
 
 const Register = (props) => {
     const [firstName, setFirstName] = useState('');
@@ -89,6 +90,7 @@ const Register = (props) => {
                                         </Button>
                                         <span className="p-3" id="response">{""}</span>
                                     </p>
+                                    <p><Link to={'/forgot-password'}>Forgot Password?</Link></p>
                                 </Col>
                             </div>
                         </div>

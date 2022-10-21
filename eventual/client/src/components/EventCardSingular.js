@@ -150,18 +150,15 @@ const EventCardSingular = (props) => {
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
 
-  const startTimeObj = event.startTime;
-  const startTime = new Date(startTimeObj);
-  const endTime = new Date(event.endTime);
   const num_slots = parseInt(event.num_slots);
+
   const dateStr = event.date_of_event;
-  const dateObj = new Date(dateStr); 
-  const date = startTime.toLocaleDateString("en-US", {
+  const dateObj = new Date(dateStr);
+  const date = dateObj.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
-  });
+    day: "numeric",})
   const timeStr = event.time_of_event;
   const timeObj = new Date("0000-01-01 " + timeStr);
   const time = timeObj.toLocaleTimeString([], {

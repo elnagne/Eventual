@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import SidebarPro from './SidebarPro'
 import { useState } from 'react'
 
 /*
@@ -48,7 +48,7 @@ const DbWriteTemp = () => {
 
     return (
         <div className="dbWriteWrapper">
-            <Sidebar/>
+            <SidebarPro/>
             <div className="dbWriteContent">
                 <h3>This is a temporary page that exists in order to prove that we can write data to the database.</h3>
                 <form className='writeForm' onSubmit={onSubmit}>

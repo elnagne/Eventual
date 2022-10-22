@@ -14,14 +14,48 @@ searchRoutes.route("/search").get((req, res) => {
 
   db_connect
     .collection("testEvents")
-    .find({})
+    .find({liked_by:{$exists:true}}) //**to be changed**/
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
     });
 });
 
-// Find the name of a user given their id
+// Search for events based on filters
+searchRoutes.route("/search/filteredSearch").post((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+
+  let activeFilters = req.body.filters;
+  let startDate = req.body.startDate.length != 0 ? req.body.startDate : "0000-00-00"
+  let endDate = req.body.endDate.length != 0 ? req.body.endDate : "9999-99-99";
+  let city = req.body.city;
+  
+  let query = req.body.womanOnly ? { category: { $in: activeFilters }, woman_only: true, date_of_event: { $gte: startDate, $lte: endDate }}
+                                 : { category: { $in: activeFilters }, date_of_event: { $gte: startDate, $lte: endDate }}
+  if (city) {
+    query['address_data.locality'] = city ;
+  }
+
+  db_connect
+    .collection("testEvents")
+    .find(query)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+// Find a singular event given their id
+searchRoutes.route("/search/events/:id").get((req, res) => {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection("testEvents").findOne(myquery, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+// Find a user given their id
 searchRoutes.route("/search/name/:id").get((req, res) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
@@ -29,6 +63,32 @@ searchRoutes.route("/search/name/:id").get((req, res) => {
     if (err) throw err;
     res.json(result);
   });
+});
+
+// Getting every event liked by :id
+searchRoutes.route("/search/liked/:id").get((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+  let myquery = { "liked_by":{$elemMatch:{account_id:ObjectId(req.params.id)}}};
+  db_connect
+    .collection("testEvents")
+    .find(myquery)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+// Getting every event joined by :id
+searchRoutes.route("/search/attending/:id").get((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+  let myquery = { "attending_user":{$elemMatch:{account_id:ObjectId(req.params.id)}}};
+  db_connect
+    .collection("testEvents")
+    .find(myquery)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
 });
 
 // Export searchRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)

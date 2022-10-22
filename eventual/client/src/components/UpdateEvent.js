@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SidebarPro from './SidebarPro';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddEvent = () => {
+const UpdateEvent = () => {
+  const { id } = useParams();
+  console.log(id);
+  const [event, setEvent] = useState(null);
   const [event_name, setEvent_name] = useState('');
   const [author, setAuthor] = useState(null);
   const [description, setDescription] = useState('');
@@ -23,13 +27,43 @@ const AddEvent = () => {
 
   const login_author = localStorage.getItem('userid');
 
+  useEffect(() => {
+    getEvents();
+    return;
+  }, []);
+
+  async function getEvents() {
+    const response = await fetch('http://localhost:5000/search/events/' + id);
+
+    if (!response.ok) {
+      setEvent(null);
+      return;
+    }
+
+    const event = await response.json();
+    console.log(event);
+    setEvent(event);
+
+    setEvent_name(event.event_name);
+    setDescription(event.description);
+    setImage(event.image_url);
+    setEmail(event.email);
+    setPhone(event.phone);
+    setDate_of_event(event.date_of_event);
+    setTime_of_event(event.time_of_event);
+    setNum_slots(event.num_slots);
+    setWoman_only(event.woman_only);
+    setLocation(event.location);
+    setCategory(event.category);
+  }
+
   const handleCheck = () => {
     setWoman_only(true);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast('You added an Event!');
+    toast('You Updated Your Event!');
     await console.log(localStorage.getItem('userid'));
     await setAuthor(login_author);
     console.log(login_author);
@@ -48,7 +82,7 @@ const AddEvent = () => {
       category: category,
     };
 
-    await fetch('http://localhost:5000/testEvents/add', {
+    await fetch('http://localhost:5000/testEvents/update/' + id, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,6 +106,10 @@ const AddEvent = () => {
     setCategory('');
   };
 
+  //   const namePlaceholder = event.hasOwnProperty('event_name')
+  //     ? event.event_name
+  //     : 'Add a name';
+
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
@@ -82,14 +120,16 @@ const AddEvent = () => {
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
-          <h2 className="EventTitle">Add Event</h2>
+          <br />
+          <br />
+          <h2 className="EventTitle">Update Event</h2>
           <div className="AddEventElement">
             <label>Event Name</label>
             <input
               className="form-control"
               type="text"
               security=""
-              placeholder="Enter Event Title"
+              placeholder="Name of Events"
               value={event_name}
               onChange={(e) => setEvent_name(e.target.value)}
             />
@@ -209,7 +249,7 @@ const AddEvent = () => {
             type="submit"
             value="send"
           >
-            Submit
+            Update
           </Button>
           <br />
           <br />
@@ -222,4 +262,4 @@ const AddEvent = () => {
   );
 };
 
-export default AddEvent;
+export default UpdateEvent;

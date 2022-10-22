@@ -1,10 +1,10 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import SidebarPro from './SidebarPro'
 
 const Home = () => {
   return (
     <div className="homeWrapper">
-        <Sidebar/>
+        <SidebarPro/>
         <div className="homeContent">
             <h1>Home</h1>
         </div>

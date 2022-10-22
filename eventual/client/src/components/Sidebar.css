@@ -1,0 +1,35 @@
+.sidebarproHeader {
+    padding: 24px;
+    font-weight: bold;
+    font-size: 16;
+    letter-spacing: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.sidebarproFooter {
+    padding: 24px;
+    font-size: 12;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6b5f73;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7b7c98;
+}

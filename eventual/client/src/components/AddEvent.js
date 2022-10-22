@@ -29,7 +29,7 @@ const AddEvent = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast('You Submitted an Event!');
+    toast('You added an Event!');
     await console.log(localStorage.getItem('userid'));
     await setAuthor(login_author);
     console.log(login_author);
@@ -82,6 +82,8 @@ const AddEvent = () => {
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
+          <br />
+          <br />
           <h2 className="EventTitle">Add Event</h2>
           <div className="AddEventElement">
             <label>Event Name</label>

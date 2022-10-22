@@ -29,7 +29,7 @@ const AddEvent = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast('You Submitted an Event!');
+    toast('You added an Event!');
     await console.log(localStorage.getItem('userid'));
     await setAuthor(login_author);
     console.log(login_author);
@@ -211,6 +211,10 @@ const AddEvent = () => {
           >
             Submit
           </Button>
+          <br />
+          <br />
+          <br />
+          <br />
           <ToastContainer />
         </form>
       </div>

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import EventCardSingular from './EventCardSingular';
-import Sidebar from './Sidebar';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import EventCardSingular from "./EventCardSingular";
+import SidebarPro from "./SidebarPro";
 
 const Event = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const Event = () => {
 
   return (
     <div className="eventsWrapper">
-      <Sidebar />
+      <SidebarPro />
       <div className="eventContent">
         <div>
           <EventCardSingular event={event} id={id} />

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Sidebar from './Sidebar'
+import SidebarPro from './SidebarPro'
 import { useState, useEffect } from 'react';
 
 const Profile = () => {
@@ -105,9 +105,8 @@ const Profile = () => {
 
     return (
         <div className="d-flex">
-            <div className="d-flex">
-                <Sidebar />
-            </div>
+            <SidebarPro />
+            <div className="profileContent">
             <div class="row">
                 <Col className="col-xs-12 col-sm-12 col-md-6 justify-content-start p-5">
                     <h3>Change Profile Information</h3>
@@ -161,6 +160,7 @@ const Profile = () => {
                         </div>
                     </Row>
                 </Col>
+            </div>
             </div>
         </div>
     );

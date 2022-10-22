@@ -6,6 +6,7 @@ import Register from './Register';
 import { RegisterContext } from './RegisterContext';
 import './LogIn.css';
 import userInfo from './UserInfo';
+import SidebarPro from "./SidebarPro";
 
 const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -63,8 +64,9 @@ const LogIn = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="loginWrapper">
+      <SidebarPro />
+      <div className="loginContent">
         <Form className="pageCard" id="signin-form" onSubmit={onSubmit}>
           <div class="c">
             <h1 className="text-center size">
@@ -100,16 +102,16 @@ const LogIn = () => {
             Register
           </button>
         </div>
-      </div>
-      <div className="embed-responsive embed-responsive-4by3">
+        <div className="embed-responsive embed-responsive-4by3">
         <img
           className="img"
           alt=""
           src={process.env.PUBLIC_URL + 'img/people.png'}
         ></img>
       </div>
+      </div>
       <Register trigger={isModalOpen} setTrigger={setModalOpen} />
-    </>
+    </div>
   );
 };
 

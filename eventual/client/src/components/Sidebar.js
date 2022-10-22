@@ -10,12 +10,13 @@ import './registerbutton.css';
 const Sidebar = () => {
   let navigate = useNavigate();
 
-  const { isModalOpen, setModalOpen } = useContext(RegisterContext);
+  const {isModalOpen, setModalOpen} = useContext(RegisterContext);
 
   const [username, setUsername] = useState(null);
   async function logout() {
-    localStorage.removeItem('token');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userid");
+    navigate("/login");
   }
   useLayoutEffect(() => {
     fetch('http://localhost:5000/users/isUserAuth', {
@@ -55,13 +56,14 @@ const Sidebar = () => {
         <Link to="/settings" className="navbarItem">
           Settings
         </Link>
-
+        <Link to="/profile" className="navbarItem">Profile</Link>
         <div>
           <div onClick={logout} className="navbarItem">
             logout
           </div>
           <UserInfo username={username} className="navbarItem"></UserInfo>
         </div>
+        <Link to="/forgot-password" className="navbarItem">Forgot Password?</Link>
       </div>
     </div>
   ) : (
@@ -87,15 +89,13 @@ const Sidebar = () => {
         </Link>
         <button onClick={() => setModalOpen(true)}>Register</button>
         <Link to="/login" className="navbarItem">
-          Login Page
+          Login
         </Link>
-        <Link to="/forgot-password" className="navbarItem">
-          Forgot Password?
-        </Link>
+        <Link to="/forgot-password" className="navbarItem">Forgot Password?</Link>
       </div>
-      <Register trigger={isModalOpen} setTrigger={setModalOpen} />
+      <Register trigger={isModalOpen} setTrigger={setModalOpen}/>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

@@ -22,10 +22,6 @@ body {
     margin: 20px;
 }
 
-.eventCard.clickable{
-    cursor: pointer;
-}
-
 .eventCard.clickable:hover {
     background-color: #ECECEC;
 }
@@ -53,6 +49,10 @@ body {
     margin-right: 0.7rem;
 }
 
+.eventCard .alert {
+    color: #E510A3;
+    font-size: 16px;
+}
 .eventCard.singular .title {
     font-size: 62.5px;
 }
@@ -74,6 +74,10 @@ body {
 
 .eventCard.singular .date {
     font-size: 35px;
+}
+.eventCard .singular {
+    color: #E510A3;
+    font-size: 18px;
 }
 
 .eventCard .infoStrip {

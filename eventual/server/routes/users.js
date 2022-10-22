@@ -7,8 +7,9 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const usersRoutes = express.Router();
 
 // Used for connecting to the database
-const dbo = require('../db/conn');
-const { json } = require('express');
+const dbo = require("../db/conn");
+const { json } = require("express");
+const { ObjectID } = require("mongodb");
 
 // Used for converting id from string to ObjectId for the _id attribute
 const ObjectId = require('mongodb').ObjectId;
@@ -169,6 +170,47 @@ usersRoutes.route('/users/delete/:id').delete((req, response) => {
     res.message = 'Successfully deleted user';
     response.json(res);
   });
+});
+
+// returns user info from username for profile page
+usersRoutes.route("/users/get-user-info/:id").get((req, response) => {
+  const dbConnect = dbo.getDb();
+  const usersCollection = dbConnect.collection("mockUsers");
+
+  console.log(req.params.id);
+  usersCollection.findOne({ 
+    _id: ObjectId(req.params.id),
+  }).then((user) => {
+    console.log(user);
+    if (user == null) response.status(404);
+    else
+      response.status(200).json({
+        email: user.email,
+        username: user.username,
+        firstName: user.name.first,
+        lastName: user.name.last,
+      });
+  });
+})
+
+// returns if old password submitted is equal to the real password
+usersRoutes.route("/users/check-password/:id").post((req, response) => {
+  const dbConnect = dbo.getDb();
+
+  dbConnect
+    .collection("mockUsers")
+    .findOne({ _id: ObjectId(req.params.id), }, function (err, user) {
+      if (err) return res.status(500).json(err);
+      if (!user) return res.status(401).json({ message: "access denied" });
+
+      bcrypt.compare(req.body.password, user.password).then((valid) => {
+        console.log(valid);
+        if (valid)
+          response.status(200).send("same");
+        else
+          response.status(404).send("not same");
+      });
+    });
 });
 
 // Export usersRoutes so we can use we different CRUD operations established here in server.js

@@ -27,6 +27,9 @@ Eventual will also allow the hosts of free events to post their events online in
 3. Navigate to `\eventual\server` and create a file named `config.env` with the following content (Credentials can be found in the Discord server linked in `team.md` or by contacting one of the team members):
    ```
    ATLAS_URI=
+   POSITIONSTACK_API_KEY=
+   EMAIL=
+   PASSWORD=
    ```
  
 4. Start the backend (default port 5000)

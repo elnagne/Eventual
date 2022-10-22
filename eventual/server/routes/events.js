@@ -39,7 +39,6 @@ async function getAddressData(address) {
 // Updating a new account
 eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
   let db_connect = dbo.getDb();
-  let event = [];
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection('testEvents').replaceOne(myquery, {
     event_name: req.body.event_name,

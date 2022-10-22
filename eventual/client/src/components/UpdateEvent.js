@@ -43,17 +43,27 @@ const UpdateEvent = () => {
     const event = await response.json();
     console.log(event);
     setEvent(event);
+
+    setEvent_name(event.event_name);
+    setDescription(event.description);
+    setImage(event.image_url);
+    setEmail(event.email);
+    setPhone(event.phone);
+    setDate_of_event(event.date_of_event);
+    setTime_of_event(event.time_of_event);
+    setNum_slots(event.num_slots);
+    setWoman_only(event.woman_only);
+    setLocation(event.location);
+    setCategory(event.category);
   }
 
   const handleCheck = () => {
     setWoman_only(true);
   };
 
-  //   console.log(query.get('event'));
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast('You Submitted an Event!');
+    toast('You Updated Your Event!');
     await console.log(localStorage.getItem('userid'));
     await setAuthor(login_author);
     console.log(login_author);
@@ -110,6 +120,8 @@ const UpdateEvent = () => {
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
+          <br />
+          <br />
           <h2 className="EventTitle">Update Event</h2>
           <div className="AddEventElement">
             <label>Event Name</label>
@@ -237,8 +249,12 @@ const UpdateEvent = () => {
             type="submit"
             value="send"
           >
-            Submit
+            Update
           </Button>
+          <br />
+          <br />
+          <br />
+          <br />
           <ToastContainer />
         </form>
       </div>

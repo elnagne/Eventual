@@ -1,5 +1,13 @@
 import * as Utils from './Utils.js';
-import { Card, Button, Container, Row, OverlayTrigger, Col, Tooltip } from 'react-bootstrap';
+import {
+  Card,
+  Button,
+  Container,
+  Row,
+  Col,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import {
@@ -181,6 +189,7 @@ const EventCardSingular = (props) => {
   const desc = event.description;
 
   const account_id = localStorage.getItem('userid');
+  const author_id = event.author;
   const eventID = event._id;
   const accountEvent = {
     account_id: account_id,
@@ -299,14 +308,16 @@ const EventCardSingular = (props) => {
             <Button variant="warning" size="lg" className="main-btn">
               <FontAwesomeIcon icon={faShare} /> <strong>Share</strong> Event
             </Button>
-            <Button
-              variant="info"
-              size="lg"
-              onClick={goToUpdatePage}
-              className="main-btn"
-            >
-              Update Event
-            </Button>
+            {account_id == author_id && (
+              <Button
+                variant="info"
+                size="lg"
+                onClick={goToUpdatePage}
+                className="main-btn"
+              >
+                Update Event
+              </Button>
+            )}
           </div>
         </div>
         <Container>
@@ -364,17 +375,6 @@ const EventCardSingular = (props) => {
                   <div className="full-desc">{desc}</div>
                 </div>
               )}
-              {/* <UpdateEvent event={event} /> */}
-              {/* <Link
-                to={{
-                  pathname: `/update-events/`,
-                  query: {
-                    event: event,
-                  },
-                }}
-              >
-                Update Event
-              </Link> */}
             </Col>
           </Row>
         </Container>

@@ -82,8 +82,6 @@ const AddEvent = () => {
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
-          <br />
-          <br />
           <h2 className="EventTitle">Add Event</h2>
           <div className="AddEventElement">
             <label>Event Name</label>
@@ -213,6 +211,10 @@ const AddEvent = () => {
           >
             Submit
           </Button>
+          <br />
+          <br />
+          <br />
+          <br />
           <ToastContainer />
         </form>
       </div>

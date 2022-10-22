@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Sidebar from "./Sidebar";
+import SidebarPro from "./SidebarPro";
 import EventsDisplay from "./EventsDisplay";
 import EventsSearch from "./EventsSearch";
 import { SearchContext } from './SearchContext';
@@ -7,11 +7,11 @@ import Alert from 'react-bootstrap/Alert';
 
 const Events = () => {
   const {
-    activeFilters, setActiveFilters,
-    womanOnly, setWomanOnly,
-    startDate, setStartDate,
-    endDate, setEndDate,
-    city, setCity
+    activeFilters,
+    womanOnly,
+    startDate,
+    endDate,
+    city
   } = useContext(SearchContext);
   const [events, setEvents] = useState([]);
 
@@ -56,7 +56,7 @@ const Events = () => {
 
   return (
     <div className="eventsWrapper">
-      <Sidebar />
+      <SidebarPro />
       <div className="eventContent">
         <EventsSearch search={getFilteredEvents} />
         {events.length > 0 ? <EventsDisplay events={events} /> : <Alert variant='primary' className="mx-4 my-4">No events found.</Alert>}

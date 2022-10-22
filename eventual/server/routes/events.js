@@ -6,6 +6,8 @@ const eventsRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require('../db/conn');
 
+const ObjectId = require('mongodb').ObjectId;
+
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,30 +37,28 @@ async function getAddressData(address) {
 }
 
 // Updating a new account
-eventsRoutes.route('/testEvents/update/:id').post((req, response) => {
-  let dbConnect = dbo.getDb();
-  let event = dbConnect.collection('testEvents').findOne(req.params.id);
-  if (!event) {
-    response.status(404).send('data is not found');
-  } else {
-    event.event_name = req.body.event_name;
-    event.description = req.body.description;
-    event.author = req.body.author;
-    event.image_url = req.body.image_url;
-    event.email = req.body.email;
-    event.phone = req.body.phone;
-    event.date_of_event = req.body.date_of_event;
-    event.time_of_event = req.body.time_of_event;
-    event.num_slots = req.body.num_slots;
-    event.woman_only = req.body.woman_only;
-    event.location = req.body.location;
-    event.category = req.body.category;
-    event.num_likes = 0;
-    event.num_joined = 0;
-    event.liked_by = [];
-    event.attending_users = [];
-    event.updateOne();
-  }
+eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
+  let db_connect = dbo.getDb();
+  let event = [];
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection('testEvents').replaceOne(myquery, {
+    event_name: req.body.event_name,
+    description: req.body.description,
+    author: req.body.author,
+    image_url: req.body.image_url,
+    email: req.body.email,
+    phone: req.body.phone,
+    date_of_event: req.body.date_of_event,
+    time_of_event: req.body.time_of_event,
+    num_slots: req.body.num_slots,
+    woman_only: req.body.woman_only,
+    location: req.body.location,
+    category: req.body.category,
+    num_likes: 0,
+    num_joined: 0,
+    liked_by: [],
+    attending_users: [],
+  });
 });
 
 // Creating a new account

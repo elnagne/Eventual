@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Sidebar from './Sidebar';
+import SidebarPro from './SidebarPro';
 import EventsDisplay from './EventsDisplay';
 import EventsSearch from './EventsSearch';
 import { SearchContext } from './SearchContext';
@@ -51,7 +51,7 @@ const Events = () => {
 
   return (
     <div className="eventsWrapper">
-      <Sidebar />
+      <SidebarPro />
       <div className="eventContent">
         {events_authors.length > 0 ? (
           <EventsDisplay events={events_authors} />

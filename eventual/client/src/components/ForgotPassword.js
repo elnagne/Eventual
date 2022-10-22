@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import SidebarPro from './SidebarPro'
 
 const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
@@ -27,6 +28,7 @@ const ForgotPassword = () => {
 
     return (
         <div className="vh-100 d-flex justify-content-center align-items-center">
+            <SidebarPro/>
             <div className="card rounded-3 mx-auto">
                 <div className="card-body p-4 p-md-5">
                     <div className="d-flex">

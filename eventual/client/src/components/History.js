@@ -1,10 +1,10 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import SidebarPro from './SidebarPro'
 
 const History = () => {
   return (
     <div className="historyWrapper">
-        <Sidebar/>
+        <SidebarPro/>
         <div className="historyContent">
             <h1>History</h1>
         </div>

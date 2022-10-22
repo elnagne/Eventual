@@ -1,10 +1,10 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import SidebarPro from './SidebarPro'
 
 const Settings = () => {
   return (
     <div className="settingsWrapper">
-        <Sidebar/>
+        <SidebarPro/>
         <div className="settingsContent">
             <h1>Settings</h1>
         </div>

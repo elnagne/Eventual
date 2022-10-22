@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
+import SidebarPro from "./SidebarPro";
 import EventsDisplay from "./EventsDisplay";
 
 const LikedEvents = () => {
@@ -27,7 +27,7 @@ const LikedEvents = () => {
 
   return (
     <div className="eventsWrapper">
-      <Sidebar />
+      <SidebarPro />
       <div className="eventContent">
         <EventsDisplay events={events} />
       </div>

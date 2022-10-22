@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import SidebarPro from './SidebarPro';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 import Button from 'react-bootstrap/Button';
@@ -74,7 +74,7 @@ const AddEvent = () => {
 
   return (
     <div className="dbWriteWrapper">
-      <Sidebar />
+      <SidebarPro />
       <div className="AddEvent">
         <form
           name="event"

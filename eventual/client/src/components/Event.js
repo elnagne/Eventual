@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import EventCardSingular from "./EventCardSingular";
-import Sidebar from "./Sidebar";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import EventCardSingular from './EventCardSingular';
+import Sidebar from './Sidebar';
 
 const Event = () => {
   const { id } = useParams();
@@ -9,7 +9,7 @@ const Event = () => {
 
   useEffect(() => {
     async function getEvents() {
-      const response = await fetch("http://localhost:5000/search/events/" + id);
+      const response = await fetch('http://localhost:5000/search/events/' + id);
 
       if (!response.ok) {
         setEvent(null);
@@ -31,7 +31,7 @@ const Event = () => {
       <Sidebar />
       <div className="eventContent">
         <div>
-          <EventCardSingular event={event} />
+          <EventCardSingular event={event} id={id} />
         </div>
       </div>
     </div>

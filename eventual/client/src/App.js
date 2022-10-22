@@ -9,6 +9,7 @@ import Settings from './components/Settings';
 import DbWriteTemp from './components/DbWriteTemp';
 import Register from './components/Register';
 import AddEvents from './components/AddEvent';
+import UpdateEvents from './components/UpdateEvent';
 import MyEvents from './components/MyEvents';
 import LogIn from './components/LogIn';
 import UserInfo from './components/UserInfo';
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/add-events" element={<AddEvents />} />
+        <Route path="/update-events/:id" element={<UpdateEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />
         <Route path="/login" element={<LogIn />} />

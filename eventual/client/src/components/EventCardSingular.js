@@ -1,14 +1,16 @@
-import * as Utils from "./Utils.js";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as Utils from './Utils.js';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useParams } from 'react-router-dom';
 import {
   faHeart,
   faShare,
   faEarthAfrica,
   faCaretLeft,
-} from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
@@ -32,7 +34,12 @@ const EventCardSingular = (props) => {
 
   let navigate = useNavigate();
   function backToEventsPage() {
-    let path = "/events";
+    let path = '/events';
+    navigate(path);
+  }
+
+  function goToUpdatePage() {
+    let path = '/update-events/' + props.id;
     navigate(path);
   }
 
@@ -62,19 +69,19 @@ const EventCardSingular = (props) => {
 
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
-  const date = dateObj.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const date = dateObj.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   const timeStr = event.time_of_event;
-  const timeObj = new Date("0000-01-01 " + timeStr);
+  const timeObj = new Date('0000-01-01 ' + timeStr);
   const time = timeObj.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
-  
+
   const likes = event.num_likes;
   const city = event.address_data
     ? Utils.getLocationInfoAsString(event.address_data)
@@ -103,23 +110,31 @@ const EventCardSingular = (props) => {
             <FontAwesomeIcon icon={faCaretLeft} /> All Events
           </Button>
           <div className="title">
-            {displayName ? displayName : "[NO EVENT NAME]"}
+            {displayName ? displayName : '[NO EVENT NAME]'}
           </div>
           {dateStr && <div className="date">{date}</div>}
           {likes !== undefined && (
             <div className="likes">
-              <FontAwesomeIcon icon={faHeart} /> {likes}{" "}
-              {likes === 1 ? "PERSON is" : "PEOPLE are"} interested in this
+              <FontAwesomeIcon icon={faHeart} /> {likes}{' '}
+              {likes === 1 ? 'PERSON is' : 'PEOPLE are'} interested in this
               event
             </div>
           )}
           <div className="main-btns">
             <Button variant="danger" size="lg" className="main-btn like-btn">
-              <FontAwesomeIcon icon={faHeart} /> I am{" "}
+              <FontAwesomeIcon icon={faHeart} /> I am{' '}
               <strong>interested</strong> in this event!
             </Button>
             <Button variant="warning" size="lg" className="main-btn">
               <FontAwesomeIcon icon={faShare} /> <strong>Share</strong> Event
+            </Button>
+            <Button
+              variant="info"
+              size="lg"
+              onClick={goToUpdatePage}
+              className="main-btn"
+            >
+              Update Event
             </Button>
           </div>
         </div>
@@ -158,8 +173,8 @@ const EventCardSingular = (props) => {
                   </div>
                 )}
                 <Button variant="success" className="maps-btn">
-                  {" "}
-                  <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
+                  {' '}
+                  <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
                   <strong>MAPS</strong>
                 </Button>
               </div>
@@ -171,6 +186,17 @@ const EventCardSingular = (props) => {
                   <div className="full-desc">{desc}</div>
                 </div>
               )}
+              {/* <UpdateEvent event={event} /> */}
+              {/* <Link
+                to={{
+                  pathname: `/update-events/`,
+                  query: {
+                    event: event,
+                  },
+                }}
+              >
+                Update Event
+              </Link> */}
             </Col>
           </Row>
         </Container>

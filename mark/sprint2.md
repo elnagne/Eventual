@@ -272,10 +272,10 @@ Tracking on Trello Total Mark: 24 / 24
     - 1 mark = documentation has been created for frontend and backend systems with some errors
     - 0 marks = documentation has not been created
 
-  Your Mark: 12 / 14
+  Your Mark: 13 / 14
 
 ---
 
 ## Total Mark
 
-90 / 93
+91 / 93

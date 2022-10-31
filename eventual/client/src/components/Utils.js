@@ -28,3 +28,13 @@ export function getLocationInfoAsString(address_data) {
   }
   return locationStr;
 }
+
+export function getGoogleMapsURL(address_data) {
+  const latitude = address_data.latitude;
+  const longitude = address_data.longitude;
+  if (!latitude || !longitude) {
+    return null;
+  }
+
+  return `https://maps.google.com/?q=${latitude},${longitude}`;
+}

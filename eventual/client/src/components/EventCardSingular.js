@@ -15,6 +15,7 @@ import {
   faEarthAfrica,
   faPerson,
   faCaretLeft,
+  faRefresh,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -187,9 +188,10 @@ const EventCardSingular = (props) => {
     ? Utils.getLocationInfoAsString(event.address_data)
     : null;
 
-  const googleMapsURL = event.address_data
-    ? Utils.getGoogleMapsURL(event.address_data)
-    : null;
+  const googleMapsURL = Utils.getGoogleMapsURL(
+    event.address_data,
+    event.location
+  );
 
   const category = event.category;
   const address = event.location;
@@ -322,7 +324,8 @@ const EventCardSingular = (props) => {
                 onClick={goToUpdatePage}
                 className="main-btn"
               >
-                <strong>Update</strong> Event
+                <FontAwesomeIcon icon={faRefresh} /> <strong>Update</strong>{" "}
+                Event
               </Button>
             )}
           </div>

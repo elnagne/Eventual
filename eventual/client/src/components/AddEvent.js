@@ -91,6 +91,7 @@ const AddEvent = () => {
               security=""
               placeholder="Enter Event Title"
               value={event_name}
+              required
               onChange={(e) => setEvent_name(e.target.value)}
             />
           </div>
@@ -102,6 +103,7 @@ const AddEvent = () => {
               className="form-control input-lg"
               placeholder="Enter Description"
               value={description}
+              required
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -114,6 +116,7 @@ const AddEvent = () => {
               name="my_file"
               id="uploadcare-file"
               value={image}
+              required
               onChange={(info) => {
                 console.log(info.cdnUrl);
                 setImage(info.cdnUrl);
@@ -127,6 +130,7 @@ const AddEvent = () => {
               type="text"
               placeholder="Enter Phone"
               value={phone}
+              required
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
@@ -137,6 +141,7 @@ const AddEvent = () => {
               type="text"
               placeholder="Enter Email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -147,6 +152,7 @@ const AddEvent = () => {
               type="date"
               placeholder="Enter Date"
               value={date_of_event}
+              required
               onChange={(e) => setDate_of_event(e.target.value)}
             />
           </div>
@@ -157,6 +163,7 @@ const AddEvent = () => {
               type="time"
               placeholder="Enter Time"
               value={time_of_event}
+              required
               onChange={(e) => setTime_of_event(e.target.value)}
             />
           </div>
@@ -167,6 +174,7 @@ const AddEvent = () => {
               type="location"
               placeholder="Enter a valid address"
               value={location}
+              required
               onChange={(e) => setLocation(e.target.value)}
             />
           </div>
@@ -175,6 +183,7 @@ const AddEvent = () => {
             class="form-control"
             className="AddEventElement"
             value={category}
+            required
             onChange={(e) => setCategory(e.target.value)}
           >
             <option>Sport</option>
@@ -191,6 +200,7 @@ const AddEvent = () => {
               type="number"
               placeholder="Enter Number of Slots"
               value={num_slots}
+              required
               onChange={(e) => setNum_slots(e.target.value)}
             />
           </div>

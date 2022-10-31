@@ -91,5 +91,20 @@ searchRoutes.route("/search/attending/:id").get((req, res) => {
     });
 });
 
+// Getting every notification by user
+searchRoutes.route("/search/my-notifications/:id").get((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+  // should be objectId but too lazy at this point
+  let myquery = {$or:[{ "joined_by":{$elemMatch:{account_id:req.params.id}}},
+                      { "liked_by":{$elemMatch:{account_id:req.params.id}}}]};
+  db_connect
+    .collection("notifications")
+    .find(myquery)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
 // Export searchRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)
 module.exports = searchRoutes;

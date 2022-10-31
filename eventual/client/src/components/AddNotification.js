@@ -51,7 +51,7 @@ const AddNotification = () => {
     await console.log(localStorage.getItem('userid'));
     console.log(login_author);
     const newNotif = {
-      event_id: setEvent_id,
+      event_id: event_id,
       title: title,
       description: description,
       liked_by: liked_by,

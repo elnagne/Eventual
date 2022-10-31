@@ -14,7 +14,6 @@ app.set('view engine', 'ejs');
 notificationsRoutes.route('/notif/add').post((req, response) => {
     let dbConnect = dbo.getDb();
     let event = {
-      event_name: req.body.event_name,
       event_id: req.body.event_id,
       description: req.body.description,
       title: req.body.title,

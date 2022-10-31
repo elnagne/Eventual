@@ -30,6 +30,9 @@ export function getLocationInfoAsString(address_data) {
 }
 
 export function getGoogleMapsURL(address_data, locationStr) {
+  if (!locationStr) {
+    return null;
+  }
   if (!address_data) {
     const query = encodeURIComponent(locationStr);
     return `https://www.google.com/maps/search/?api=1&query=${query}`;

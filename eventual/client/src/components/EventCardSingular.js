@@ -16,6 +16,7 @@ import {
   faPerson,
   faCaretLeft,
   faRefresh,
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -136,6 +137,11 @@ const EventCardSingular = (props) => {
 
   function goToUpdatePage() {
     let path = "/update-events/" + props.id;
+    navigate(path);
+  }
+
+  function goToAddNotifications() {
+    let path = '/add-notifications/' + props.id;
     navigate(path);
   }
 
@@ -319,14 +325,25 @@ const EventCardSingular = (props) => {
             </Button>
             {account_id == author_id && (
               <Button
-                variant="info"
-                size="lg"
-                onClick={goToUpdatePage}
-                className="main-btn"
-              >
-                <FontAwesomeIcon icon={faRefresh} /> <strong>Update</strong>{" "}
-                Event
-              </Button>
+              variant="info"
+              size="lg"
+              onClick={goToUpdatePage}
+              className="main-btn"
+            >
+              Update Event
+            </Button>
+            )}
+            {account_id == author_id && (
+              <Button
+              variant="secondary"
+              size="lg"
+              onClick={goToAddNotifications}
+              className="main-btn"
+            >
+              <FontAwesomeIcon icon={faMessage} />
+              {' '} Add Notification
+            </Button>
+              
             )}
           </div>
         </div>

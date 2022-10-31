@@ -7,6 +7,7 @@ import Liked from './components/Liked';
 import History from './components/History';
 import Settings from './components/Settings';
 import DbWriteTemp from './components/DbWriteTemp';
+import AddNotification from './components/AddNotification';
 import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import UpdateEvents from './components/UpdateEvent';
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/add-events" element={<AddEvents />} />
+        <Route path="/add-notifications/:id" element={<AddNotification />} />
         <Route path="/update-events/:id" element={<UpdateEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/attending-events" element={<AttendingEvents />} />

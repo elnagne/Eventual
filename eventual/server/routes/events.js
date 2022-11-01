@@ -53,10 +53,10 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
     woman_only: req.body.woman_only,
     location: req.body.location,
     category: req.body.category,
-    num_likes: 0,
-    num_joined: 0,
-    liked_by: [],
-    attending_users: [],
+    num_likes: req.body.num_likes,
+    num_joined: req.body.num_joined,
+    liked_by: req.body.liked_by,
+    attending_users: req.body.attending_users,
   });
 });
 

@@ -5,7 +5,7 @@ const eventsRoutes = express.Router();
 
 // Used for connecting to the database
 const dbo = require('../db/conn');
-
+const nodemailer = require('nodemailer');
 const ObjectId = require('mongodb').ObjectId;
 
 const bodyParser = require('body-parser');
@@ -50,15 +50,15 @@ async function send_event(id, update) {
             if (update)
               text += "This message is because the event you are following has updated their event information\n\n"
 
-            text += "<b>Description: </b>" + event.description + "\n"
-                  + "<b>Location: </b>" + event.location + "\n"
-                  + "<b>Author: </b>" + event.author + "\n"
-                  + "<b>Date: </b>" + event.date_of_event + "\n"
-                  + "<b>Time: </b>" + event.time_of_event + "\n"
-                  + "<b>Email: </b>" + event.email + "\n"
-                  + "<b>Phone number: </b>" + event.phone + "\n"
-                  + "<b>Number of Slots: </b>" + event.num_slots + "\n"
-                  + "<b>Woman Only: </b>" + event.woman_only + "\n";
+            text += "Description: " + event.description + "\n"
+                  + "Location: " + event.location + "\n"
+                  + "Author: " + event.author + "\n"
+                  + "Date: " + event.date_of_event + "\n"
+                  + "Time: " + event.time_of_event + "\n"
+                  + "<b>Email: " + event.email + "\n"
+                  + "Phone number: " + event.phone + "\n"
+                  + "Number of Slots: " + event.num_slots + "\n"
+                  + "Woman Only: " + event.woman_only + "\n";
 
             console.log("Creating mail options");
 

@@ -11,6 +11,7 @@ import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import UpdateEvents from './components/UpdateEvent';
 import MyEvents from './components/MyEvents';
+import AttendingEvents from './components/AttendingEvents';
 import LogIn from './components/LogIn';
 import UserInfo from './components/UserInfo';
 import ForgotPassword from './components/ForgotPassword';
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/add-events" element={<AddEvents />} />
         <Route path="/update-events/:id" element={<UpdateEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
+        <Route path="/attending-events" element={<AttendingEvents />} />
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />

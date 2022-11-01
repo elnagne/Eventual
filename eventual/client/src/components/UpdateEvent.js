@@ -24,6 +24,10 @@ const UpdateEvent = () => {
   const [woman_only, setWoman_only] = useState(false);
   const [location, setLocation] = useState('');
   const [category, setCategory] = useState('');
+  const [num_likes, setNum_likes] = useState(0);
+  const [num_joined, setNum_joined] = useState(0);
+  const [liked_by, setLiked_by] = useState(null);
+  const [attending_users, setAttending_users] = useState(null);
 
   const login_author = localStorage.getItem('userid');
 
@@ -55,6 +59,10 @@ const UpdateEvent = () => {
     setWoman_only(event.woman_only);
     setLocation(event.location);
     setCategory(event.category);
+    setNum_likes(event.num_likes);
+    setNum_joined(event.num_joined);
+    setLiked_by(event.liked_by);
+    setAttending_users(event.attending_users);
   }
 
   const handleCheck = () => {
@@ -80,6 +88,10 @@ const UpdateEvent = () => {
       woman_only: woman_only,
       location: location,
       category: category,
+      num_likes: num_likes,
+      num_joined: num_joined,
+      liked_by: liked_by,
+      attending_users: attending_users,
     };
 
     await fetch('http://localhost:5000/testEvents/update/' + id, {
@@ -131,6 +143,7 @@ const UpdateEvent = () => {
               security=""
               placeholder="Name of Events"
               value={event_name}
+              required
               onChange={(e) => setEvent_name(e.target.value)}
             />
           </div>
@@ -142,6 +155,7 @@ const UpdateEvent = () => {
               className="form-control input-lg"
               placeholder="Enter Description"
               value={description}
+              required
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -154,6 +168,7 @@ const UpdateEvent = () => {
               name="my_file"
               id="uploadcare-file"
               value={image}
+              required
               onChange={(info) => {
                 console.log(info.cdnUrl);
                 setImage(info.cdnUrl);
@@ -167,6 +182,7 @@ const UpdateEvent = () => {
               type="text"
               placeholder="Enter Phone"
               value={phone}
+              required
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
@@ -177,6 +193,7 @@ const UpdateEvent = () => {
               type="text"
               placeholder="Enter Email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -197,6 +214,7 @@ const UpdateEvent = () => {
               type="time"
               placeholder="Enter Time"
               value={time_of_event}
+              required
               onChange={(e) => setTime_of_event(e.target.value)}
             />
           </div>
@@ -207,6 +225,7 @@ const UpdateEvent = () => {
               type="location"
               placeholder="Enter a valid address"
               value={location}
+              required
               onChange={(e) => setLocation(e.target.value)}
             />
           </div>
@@ -215,6 +234,7 @@ const UpdateEvent = () => {
             class="form-control"
             className="AddEventElement"
             value={category}
+            required
             onChange={(e) => setCategory(e.target.value)}
           >
             <option>Sport</option>
@@ -231,6 +251,7 @@ const UpdateEvent = () => {
               type="number"
               placeholder="Enter Number of Slots"
               value={num_slots}
+              required
               onChange={(e) => setNum_slots(e.target.value)}
             />
           </div>

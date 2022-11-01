@@ -50,12 +50,21 @@ const AddNotification = () => {
     toast('Notification Added!');
     await console.log(localStorage.getItem('userid'));
     console.log(login_author);
+    var currentdate = new Date(); 
+    var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear()  + " "
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
     const newNotif = {
       event_id: event_id,
       title: title,
       description: description,
       liked_by: liked_by,
-      attending_users: attending_users
+      attending_users: attending_users,
+      event_name: event_name,
+      time_created:datetime,
     };
 
     await fetch('http://localhost:5000/notif/add', {
@@ -87,8 +96,6 @@ const AddNotification = () => {
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
-          <br />
-          <br />
           <h2 className="EventTitle">Add Notification</h2>
           <div className="AddEventElement">
             <label>Event Name</label>
@@ -132,10 +139,7 @@ const AddNotification = () => {
           >
             Add
           </Button>
-          <br />
-          <br />
-          <br />
-          <br />
+
           <ToastContainer />
         </form>
       </div>

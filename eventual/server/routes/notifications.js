@@ -15,6 +15,8 @@ notificationsRoutes.route('/notif/add').post((req, response) => {
     let dbConnect = dbo.getDb();
     let event = {
       event_id: req.body.event_id,
+      event_name: req.body.event_name,
+      time_created: req.body.time_created,
       description: req.body.description,
       title: req.body.title,
       liked_by: req.body.liked_by,

@@ -99,7 +99,7 @@ searchRoutes.route("/search/my-notifications/:id").get((req, res) => {
                       { "liked_by":{$elemMatch:{account_id:req.params.id}}}]};
   db_connect
     .collection("notifications")
-    .find(myquery)
+    .find(myquery).sort({$natural:-1})
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);

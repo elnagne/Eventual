@@ -3,6 +3,7 @@ import React from 'react';
 import Home from './components/Home';
 import Events from './components/Events';
 import Event from './components/Event';
+import EventNotif from './components/EventNotification';
 import Liked from './components/Liked';
 import History from './components/History';
 import Settings from './components/Settings';
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/events" element={<SearchContextProvider><Events /></SearchContextProvider>} />
         <Route path="/events/:id" element={<EventContextProvider><Event /></EventContextProvider>} />
+        <Route path="/eventsNotif/:id" element={<EventNotif />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />

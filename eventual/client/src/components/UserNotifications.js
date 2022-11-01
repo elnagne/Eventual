@@ -28,7 +28,6 @@ const MyNotifications = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div>TEMPORARY </div>
       <div className="eventContent">
         <NotificationsDisplay events={events} />
       </div>

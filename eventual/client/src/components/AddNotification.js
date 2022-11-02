@@ -66,6 +66,20 @@ const AddNotification = () => {
       event_name: event_name,
       time_created:datetime,
     };
+    const newNotifMail = {
+      subject: event_name,
+      text:description,
+    };
+    await fetch('http://localhost:5000/receive-response/' + event_id,{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newNotifMail),
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });;
 
     await fetch('http://localhost:5000/notif/add', {
       method: 'POST',

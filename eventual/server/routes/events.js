@@ -5,7 +5,7 @@ const eventsRoutes = express.Router();
 
 // Used for connecting to the database
 const dbo = require('../db/conn');
-
+const nodemailer = require('nodemailer');
 const ObjectId = require('mongodb').ObjectId;
 
 const bodyParser = require('body-parser');
@@ -14,7 +14,80 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 const got = require('got');
+const { response } = require('express');
 const psApiKey = process.env.POSITIONSTACK_API_KEY;
+
+// sends email to all users who have joined _id = id event with event_name as subject and text as formatted event information
+async function send_event(id, update) {
+  const dbConnect = dbo.getDb();
+  // TODO switch to non-test events for release
+
+  var sentAll = true;
+
+  dbConnect
+  .collection("testEvents")
+  .findOne({ _id: ObjectId(id), }).then((event) => {
+    console.log(event.attending_users);
+    for (const user of event.attending_users) {
+      console.log(user.account_id);
+      dbConnect.collection("mockUsers").findOne({ _id: ObjectId(user.account_id), }).then((user) => {
+        if (user == null) {
+            response.status(403).send('Email not found');
+        } else {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: 'true',
+                auth: {
+                    user: `${process.env.EMAIL}`,
+                    pass: `${process.env.PASSWORD}`
+                }
+            });
+
+            console.log("Creating message");
+
+            text = "";
+
+            if (update)
+              text += "This message is because the event you are following has updated their event information\n\n"
+
+            text += "Description: " + event.description + "\n"
+                  + "Location: " + event.location + "\n"
+                  + "Author: " + event.author + "\n"
+                  + "Date: " + event.date_of_event + "\n"
+                  + "Time: " + event.time_of_event + "\n"
+                  + "<b>Email: " + event.email + "\n"
+                  + "Phone number: " + event.phone + "\n"
+                  + "Number of Slots: " + event.num_slots + "\n"
+                  + "Woman Only: " + event.woman_only + "\n";
+
+            console.log("Creating mail options");
+
+            const mailOptions = {
+                from: `${process.env.EMAIL}`,
+                to: `${user.email}`,
+                subject: event.event_name,
+                text: text
+            };
+
+            console.log("Sending email");
+
+            transporter.sendMail(mailOptions, (err, response) => {
+                if (err) {
+                    console.error("Could not send to " + user.email + ":", err);
+                    sentAll = false;
+                } else {
+                    console.log('email sent');
+                }
+            });
+        }
+    });
+  }});
+
+  if (sentAll)
+    return true;
+  else
+    return false;
+}
 
 // Uses the positionstack API to get address data (longitude, latitude, city, country)
 async function getAddressData(address) {
@@ -57,6 +130,12 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
     num_joined: req.body.num_joined,
     liked_by: req.body.liked_by,
     attending_users: req.body.attending_users,
+  }).then(() => {
+    result = send_event(req.params.id, true);
+    if (result)
+      res.json("Sent All Emails");
+    else
+      res.json("Couldn't send all Emails");
   });
 });
 

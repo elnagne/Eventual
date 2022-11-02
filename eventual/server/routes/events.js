@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 
 // This router will act as a controller for accounts
 const eventsRoutes = express.Router();
@@ -172,6 +173,56 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
       response.json(res);
     });
   });
+});
+
+// sends email to all users in req.body._id event with req.body.subject as subject and req.body.text as message
+eventsRoutes.route('/receive-response/:id').post(async (req, response) => {
+  const dbConnect = dbo.getDb();
+  // TODO switch to non-test events for release
+
+  var sentAll = true;
+
+  dbConnect
+  .collection("testEvents")
+  .findOne({ _id: ObjectId(req.params.id), }).then((event) => {
+    for (const user of event.attending_users) {
+      console.log(user.account_id);
+      dbConnect.collection("mockUsers").findOne({ _id: ObjectId(user.account_id), }).then((user) => {
+        if (user == null) {
+            response.status(403).send('Email not found');
+        } else {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: 'true',
+                auth: {
+                    user: `${process.env.EMAIL}`,
+                    pass: `${process.env.PASSWORD}`
+                }
+            });
+
+            const mailOptions = {
+                from: `${process.env.EMAIL}`,
+                to: `${user.email}`,
+                subject: req.body.subject,
+                text: req.body.text,
+            };
+
+            transporter.sendMail(mailOptions, (err, response) => {
+                if (err) {
+                    console.error("Could not send to " + user.email + ":", err);
+                    sentAll = false;
+                } else {
+                    response.status(200).json('email sent');
+                }
+            });
+        }
+    });
+  }});
+
+  if (sentAll)
+    response.status(200).json('Sent all emails');
+  else
+    response.status(404).json('Not all emails sent');
 });
 
 // Export eventsRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)

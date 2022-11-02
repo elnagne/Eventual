@@ -155,6 +155,7 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
       num_joined: req.body.num_joined,
       liked_by: req.body.liked_by,
       attending_users: req.body.attending_users,
+      comments: req.body.comments,
     })
     .then(() => {
       result = send_event(req.params.id, true);

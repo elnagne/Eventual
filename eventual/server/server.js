@@ -11,6 +11,7 @@ app.use(require("./routes/users"));
 app.use(require("./routes/events"));
 app.use(require("./routes/search"));
 app.use(require("./routes/likesDAO"));
+app.use(require("./routes/comments"));
 app.use(require('./routes/PasswordReset'));
 // get driver connection
 const dbo = require("./db/conn");

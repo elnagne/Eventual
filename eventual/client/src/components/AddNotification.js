@@ -89,10 +89,10 @@ const AddNotification = () => {
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
-      <div className="AddEvent">
+      <div className="AddNotif">
         <form
           name="notification"
-          className="AddEventForm"
+          className="AddNotifForm"
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
@@ -139,39 +139,6 @@ const AddNotification = () => {
           >
             Add
           </Button>
-          
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <ToastContainer />
         </form>
       </div>

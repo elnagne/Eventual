@@ -202,6 +202,31 @@ body {
     justify-content: center;
 }
 
+.AddNotif {
+
+    height: 50vh;
+    width: -webkit-calc(100% - 80px);
+
+    margin-left: 80px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.AddNotifElement {
+    margin-bottom: 10px;
+}
+.AddNotifForm {
+    width: 600px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.AddNotifSubmit {
+    margin-top: 10px;
+}
+
 .EventTitle {
     display:flex;
     color: rgb(118, 16, 212);

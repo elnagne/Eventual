@@ -28,6 +28,7 @@ const UpdateEvent = () => {
   const [num_joined, setNum_joined] = useState(0);
   const [liked_by, setLiked_by] = useState(null);
   const [attending_users, setAttending_users] = useState(null);
+  const [comments, setComments] = useState(null);
 
   const login_author = localStorage.getItem('userid');
 
@@ -63,6 +64,7 @@ const UpdateEvent = () => {
     setNum_joined(event.num_joined);
     setLiked_by(event.liked_by);
     setAttending_users(event.attending_users);
+    setComments(event.comments);
   }
 
   const handleCheck = () => {
@@ -92,6 +94,7 @@ const UpdateEvent = () => {
       num_joined: num_joined,
       liked_by: liked_by,
       attending_users: attending_users,
+      comments: comments,
     };
 
     await fetch('http://localhost:5000/testEvents/update/' + id, {

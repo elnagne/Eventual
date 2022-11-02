@@ -1,5 +1,4 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 
 // This router will act as a controller for accounts
 const eventsRoutes = express.Router();

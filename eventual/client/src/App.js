@@ -17,6 +17,7 @@ import UserInfo from './components/UserInfo';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import { SearchContextProvider } from './components/SearchContext';
+import { EventContextProvider } from './components/EventContext';
 import Profile from './components/Profile';
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -27,15 +28,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
-        <Route
-          path="/events"
-          element={
-            <SearchContextProvider>
-              <Events />
-            </SearchContextProvider>
-          }
-        />
-        <Route path="/events/:id" element={<Event />} />
+        <Route path="/events" element={<SearchContextProvider><Events /></SearchContextProvider>} />
+        <Route path="/events/:id" element={<EventContextProvider><Event /></EventContextProvider>} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />

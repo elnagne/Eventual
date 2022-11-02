@@ -1,4 +1,4 @@
-import * as Utils from "./Utils.js";
+import * as Utils from './Utils.js';
 import {
   Card,
   Button,
@@ -7,8 +7,8 @@ import {
   Col,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHeart,
   faShare,
@@ -16,10 +16,11 @@ import {
   faPerson,
   faCaretLeft,
   faRefresh,
-} from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { faHandshake } from "@fortawesome/free-solid-svg-icons";
+  faFaceTired,
+} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
@@ -43,17 +44,17 @@ const EventCardSingular = (props) => {
   async function likeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_like`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
     let newlikedBy = [...likedby, account_id];
     setLikedby(newlikedBy);
-    console.log("console loggggg");
+    console.log('console loggggg');
     console.log(account_id.toString());
-    console.log("console loggggg 2");
+    console.log('console loggggg 2');
     console.log(likedby.toString());
     console.log(newlikedBy.toString());
     setLikes(likes + 1);
@@ -62,9 +63,9 @@ const EventCardSingular = (props) => {
   async function dislikeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_dislike`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
@@ -78,13 +79,13 @@ const EventCardSingular = (props) => {
   async function joinEvent() {
     if (num_slots - parseInt(numJoined) == 0) {
       setnNSM(
-        "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
+        'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
       );
     } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(accountEvent),
       });
@@ -95,13 +96,34 @@ const EventCardSingular = (props) => {
       setNumJoined(numJoined + 1);
     }
   }
+  async function joinEvent() {
+    fetch(`http://localhost:5000/attend/add_attendance`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    });
+  }
+
+  async function spamIt() {
+    fetch(`http://localhost:5000/spam`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accountEvent),
+    });
+    setSpam(true);
+  }
+
   // This method decrease the number of likes by 1
   async function notJoinEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/attend/remove_attendance`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
@@ -117,6 +139,7 @@ const EventCardSingular = (props) => {
       if (firstLoad == true) {
         setFirstLoad(false);
         setLikes(event.num_likes);
+        setSpam(event.spam);
         setLikedby(event.liked_by.map((user) => user.account_id));
         setNumJoined(event.num_joined);
         setJoinedby(event.attending_users.map((user) => user.account_id));
@@ -126,26 +149,27 @@ const EventCardSingular = (props) => {
 
   let navigate = useNavigate();
   function backToEventsPage() {
-    let path = "/events";
+    let path = '/events';
     navigate(path);
   }
 
   const openInNewTab = (url) => {
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   function goToUpdatePage() {
-    let path = "/update-events/" + props.id;
+    let path = '/update-events/' + props.id;
     navigate(path);
   }
 
   const event = props.event;
   const [likes, setLikes] = useState(0);
   const [likedby, setLikedby] = useState([]);
+  const [spam, setSpam] = useState(false);
   const [numJoined, setNumJoined] = useState(0);
   const [joinedby, setJoinedby] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [NoSpotsMsg, setnNSM] = useState("");
+  const [NoSpotsMsg, setnNSM] = useState('');
   if (!event) {
     return (
       <Card className="eventCard singular card-title shadow">
@@ -171,17 +195,17 @@ const EventCardSingular = (props) => {
 
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
-  const date = dateObj.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const date = dateObj.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   const timeStr = event.time_of_event;
-  const timeObj = new Date("0000-01-01 " + timeStr);
+  const timeObj = new Date('0000-01-01 ' + timeStr);
   const time = timeObj.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   const city = event.address_data
@@ -196,8 +220,7 @@ const EventCardSingular = (props) => {
   const category = event.category;
   const address = event.location;
   const desc = event.description;
-
-  const account_id = localStorage.getItem("userid");
+  const account_id = localStorage.getItem('userid');
   const author_id = event.author;
   const eventID = event._id;
   const accountEvent = {
@@ -226,10 +249,10 @@ const EventCardSingular = (props) => {
           </Button>
 
           <div className="title">
-            {displayName ? displayName : "[NO EVENT NAME]"}
+            {displayName ? displayName : '[NO EVENT NAME]'}
           </div>
           {dateStr && <div className="date">{date}</div>}
-          {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
+          {NoSpotsMsg !== '' && <span className="alert">{NoSpotsMsg}</span>}
           {likes !== undefined && account_id !== null && (
             <div className="likes">
               {likedby.includes(account_id) ? (
@@ -246,7 +269,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHeart} />
                   </Button>
                 </OverlayTrigger>
@@ -264,13 +287,13 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHeart} />
                   </Button>
                 </OverlayTrigger>
               )}
               {likes}
-              {"     "}
+              {'     '}
               {joinedby.includes(account_id) ? (
                 <OverlayTrigger
                   placement="top"
@@ -287,7 +310,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHandshake} />
                   </Button>
                 </OverlayTrigger>
@@ -305,7 +328,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHandshake} />
                   </Button>
                 </OverlayTrigger>
@@ -315,8 +338,25 @@ const EventCardSingular = (props) => {
           )}
           <div className="main-btns">
             <Button variant="warning" size="lg" className="main-btn">
-              <FontAwesomeIcon icon={faShare} /> <strong>Share</strong> Event
+              <FontAwesomeIcon icon={faShare} /> <strong>Share</strong>
             </Button>
+            {spam == true ? (
+              <strong>This event has been reported as spam</strong>
+            ) : (
+              <Button
+                variant="danger"
+                size="lg"
+                className="main-btn"
+                onClick={() => {
+                  spamIt(eventID);
+                  return true;
+                }}
+              >
+                <FontAwesomeIcon icon={faFaceTired} />
+                <strong> Spam</strong>
+              </Button>
+            )}
+
             {account_id == author_id && (
               <Button
                 variant="info"
@@ -324,7 +364,7 @@ const EventCardSingular = (props) => {
                 onClick={goToUpdatePage}
                 className="main-btn"
               >
-                <FontAwesomeIcon icon={faRefresh} /> <strong>Update</strong>{" "}
+                <FontAwesomeIcon icon={faRefresh} /> <strong>Update</strong>{' '}
                 Event
               </Button>
             )}
@@ -337,7 +377,7 @@ const EventCardSingular = (props) => {
                 {num_slots !== undefined && (
                   <span>
                     <span className="property">Available Spots: </span>
-                    {num_slots - parseInt(numJoined)}{" "}
+                    {num_slots - parseInt(numJoined)}{' '}
                     <FontAwesomeIcon icon={faPerson} size="xxs" />
                   </span>
                 )}
@@ -377,8 +417,8 @@ const EventCardSingular = (props) => {
                     className="maps-btn"
                     onClick={() => openInNewTab(googleMapsURL)}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
+                    {' '}
+                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
                     <strong>MAPS</strong>
                   </Button>
                 )}

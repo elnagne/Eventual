@@ -148,4 +148,24 @@ likedRoutes.route('/attend/remove_attendance').post(function (req, response) {
       response.json(res);
     });
 });
+
+likedRoutes.route('/spam').post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.body.event_id) };
+  var obj = {
+    spam: true,
+  };
+  let newvalues = {
+    $set: obj,
+  };
+
+  db_connect
+    .collection('testEvents')
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log('reported as spam');
+      response.json(res);
+    });
+});
+
 module.exports = likedRoutes;

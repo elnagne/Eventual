@@ -1,5 +1,4 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 
 // This router will act as a controller for accounts
 const eventsRoutes = express.Router();
@@ -185,6 +184,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     num_joined: 0,
     liked_by: [],
     attending_users: [],
+    comments: [],
   };
 
   getAddressData(req.body.location).then((address_data) => {

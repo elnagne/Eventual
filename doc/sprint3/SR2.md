@@ -1,4 +1,4 @@
-# Sprint Retrospective 1
+# Sprint Retrospective 2
 
 ## Participants
 - Anabelle Hsiao

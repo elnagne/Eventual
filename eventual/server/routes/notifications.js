@@ -20,7 +20,7 @@ notificationsRoutes.route('/notif/add').post((req, response) => {
       description: req.body.description,
       title: req.body.title,
       liked_by: req.body.liked_by,
-      joined_by: req.body.liked_by,
+      joined_by: req.body.attending_users,
 
     };
 

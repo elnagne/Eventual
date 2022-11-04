@@ -1,4 +1,4 @@
-import * as Utils from "./Utils.js";
+import * as Utils from './Utils.js';
 import {
   Card,
   Button,
@@ -7,20 +7,20 @@ import {
   Col,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useParams } from 'react-router-dom';
 import {
   faHeart,
   faShare,
   faEarthAfrica,
   faPerson,
   faCaretLeft,
-  faRefresh,
   faMessage,
-} from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { faHandshake } from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
@@ -44,17 +44,17 @@ const EventCardSingular = (props) => {
   async function likeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_like`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
     let newlikedBy = [...likedby, account_id];
     setLikedby(newlikedBy);
-    console.log("console loggggg");
+    console.log('console loggggg');
     console.log(account_id.toString());
-    console.log("console loggggg 2");
+    console.log('console loggggg 2');
     console.log(likedby.toString());
     console.log(newlikedBy.toString());
     setLikes(likes + 1);
@@ -63,9 +63,9 @@ const EventCardSingular = (props) => {
   async function dislikeEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_dislike`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
@@ -79,13 +79,13 @@ const EventCardSingular = (props) => {
   async function joinEvent() {
     if (num_slots - parseInt(numJoined) == 0) {
       setnNSM(
-        "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
+        'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
       );
     } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(accountEvent),
       });
@@ -100,9 +100,9 @@ const EventCardSingular = (props) => {
   async function notJoinEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/attend/remove_attendance`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountEvent),
     });
@@ -126,17 +126,13 @@ const EventCardSingular = (props) => {
   }
 
   let navigate = useNavigate();
-  function backToEventsPage() {
-    let path = "/events";
+  function backToNotificationsPage() {
+    let path = '/my-notifications';
     navigate(path);
   }
 
-  const openInNewTab = (url) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   function goToUpdatePage() {
-    let path = "/update-events/" + props.id;
+    let path = '/update-events/' + props.id;
     navigate(path);
   }
 
@@ -151,7 +147,7 @@ const EventCardSingular = (props) => {
   const [numJoined, setNumJoined] = useState(0);
   const [joinedby, setJoinedby] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [NoSpotsMsg, setnNSM] = useState("");
+  const [NoSpotsMsg, setnNSM] = useState('');
   if (!event) {
     return (
       <Card className="eventCard singular card-title shadow">
@@ -160,9 +156,9 @@ const EventCardSingular = (props) => {
             variant="dark"
             size="sm"
             className="back-btn"
-            onClick={backToEventsPage}
+            onClick={backToNotificationsPage}
           >
-            <FontAwesomeIcon icon={faCaretLeft} /> All Events
+            <FontAwesomeIcon icon={faCaretLeft} /> Notifications
           </Button>
           <h1>Sorry, that event doesn't exist.</h1>
         </Card.Body>
@@ -177,33 +173,28 @@ const EventCardSingular = (props) => {
 
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
-  const date = dateObj.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const date = dateObj.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   const timeStr = event.time_of_event;
-  const timeObj = new Date("0000-01-01 " + timeStr);
+  const timeObj = new Date('0000-01-01 ' + timeStr);
   const time = timeObj.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   const city = event.address_data
     ? Utils.getLocationInfoAsString(event.address_data)
     : null;
 
-  const googleMapsURL = Utils.getGoogleMapsURL(
-    event.address_data,
-    event.location
-  );
-
   const category = event.category;
   const address = event.location;
   const desc = event.description;
 
-  const account_id = localStorage.getItem("userid");
+  const account_id = localStorage.getItem('userid');
   const author_id = event.author;
   const eventID = event._id;
   const accountEvent = {
@@ -226,16 +217,16 @@ const EventCardSingular = (props) => {
             variant="dark"
             size="sm"
             className="back-btn"
-            onClick={backToEventsPage}
+            onClick={backToNotificationsPage}
           >
-            <FontAwesomeIcon icon={faCaretLeft} /> All Events
+            <FontAwesomeIcon icon={faCaretLeft} /> Notifications
           </Button>
 
           <div className="title">
-            {displayName ? displayName : "[NO EVENT NAME]"}
+            {displayName ? displayName : '[NO EVENT NAME]'}
           </div>
           {dateStr && <div className="date">{date}</div>}
-          {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
+          {NoSpotsMsg !== '' && <span className="alert">{NoSpotsMsg}</span>}
           {likes !== undefined && account_id !== null && (
             <div className="likes">
               {likedby.includes(account_id) ? (
@@ -252,7 +243,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHeart} />
                   </Button>
                 </OverlayTrigger>
@@ -270,13 +261,13 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHeart} />
                   </Button>
                 </OverlayTrigger>
               )}
               {likes}
-              {"     "}
+              {'     '}
               {joinedby.includes(account_id) ? (
                 <OverlayTrigger
                   placement="top"
@@ -293,7 +284,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHandshake} />
                   </Button>
                 </OverlayTrigger>
@@ -311,7 +302,7 @@ const EventCardSingular = (props) => {
                       return true;
                     }}
                   >
-                    {" "}
+                    {' '}
                     <FontAwesomeIcon icon={faHandshake} />
                   </Button>
                 </OverlayTrigger>
@@ -354,7 +345,7 @@ const EventCardSingular = (props) => {
                 {num_slots !== undefined && (
                   <span>
                     <span className="property">Available Spots: </span>
-                    {num_slots - parseInt(numJoined)}{" "}
+                    {num_slots - parseInt(numJoined)}{' '}
                     <FontAwesomeIcon icon={faPerson} size="xxs" />
                   </span>
                 )}
@@ -388,17 +379,11 @@ const EventCardSingular = (props) => {
                     {address}
                   </div>
                 )}
-                {googleMapsURL && (
-                  <Button
-                    variant="success"
-                    className="maps-btn"
-                    onClick={() => openInNewTab(googleMapsURL)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
-                    <strong>MAPS</strong>
-                  </Button>
-                )}
+                <Button variant="success" className="maps-btn">
+                  {' '}
+                  <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                  <strong>MAPS</strong>
+                </Button>
               </div>
             </Col>
             <Col lg={7}>

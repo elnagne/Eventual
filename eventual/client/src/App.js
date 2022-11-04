@@ -3,10 +3,12 @@ import React from 'react';
 import Home from './components/Home';
 import Events from './components/Events';
 import Event from './components/Event';
+import EventNotif from './components/EventNotification';
 import Liked from './components/Liked';
 import History from './components/History';
 import Settings from './components/Settings';
 import DbWriteTemp from './components/DbWriteTemp';
+import AddNotification from './components/AddNotification';
 import Register from './components/Register';
 import AddEvents from './components/AddEvent';
 import UpdateEvents from './components/UpdateEvent';
@@ -16,12 +18,13 @@ import LogIn from './components/LogIn';
 import UserInfo from './components/UserInfo';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import UserNotifications from './components/UserNotifications';
 import { SearchContextProvider } from './components/SearchContext';
 import { EventContextProvider } from './components/EventContext';
+
 import Profile from './components/Profile';
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 const App = () => {
   return (
     <Router>
@@ -30,10 +33,12 @@ const App = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/events" element={<SearchContextProvider><Events /></SearchContextProvider>} />
         <Route path="/events/:id" element={<EventContextProvider><Event /></EventContextProvider>} />
+        <Route path="/eventsNotif/:id" element={<EventNotif />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/add-events" element={<AddEvents />} />
+        <Route path="/add-notifications/:id" element={<AddNotification />} />
         <Route path="/update-events/:id" element={<UpdateEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/attending-events" element={<AttendingEvents />} />
@@ -43,10 +48,10 @@ const App = () => {
         <Route path="/userInfo" element={<UserInfo />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/*" element={<ResetPassword />} />
+        <Route path="/my-notifications" element={<UserNotifications />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
 };
-
 export default App;

@@ -23,13 +23,13 @@ const Register = (props) => {
   const handleChange = () => {
     //console.log("the checkbox");
     setFemale(!female);
-    console.log(female);
+    //console.log(female);
   };
 
   const submit = async (e) => {
     e.preventDefault();
 
-    console.log(female);
+    //console.log(female);
     const newAccount = {
       username: username,
       password: password,

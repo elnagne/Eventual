@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SidebarPro from "./SidebarPro";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Profile = () => {
@@ -15,7 +16,7 @@ const Profile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [female, setFemale] = useState(false);
-
+ // let navigate = useNavigate();
   const userid = localStorage.getItem("userid");
 
   // get current user information and populate forms
@@ -37,6 +38,7 @@ const Profile = () => {
         setFirstName(user.firstName);
         setLastName(user.lastName);
         setFemale(user.female);
+   //     navigate("/profile");
       });
     }
   };
@@ -49,14 +51,15 @@ const Profile = () => {
   // update user information on submit click
   const updateProfile = async (e) => {
     e.preventDefault();
-
+     
     const newProfile = {
       username: username,
       email: email,
       name: { first: firstName, last: lastName },
       female: female,
     };
-
+   
+    //document.querySelector("flexCheckDisabled").ariaChecked.reset();
     const response = await fetch(
       "http://localhost:5000/users/update/" + userid,
       {
@@ -73,6 +76,7 @@ const Profile = () => {
 
     let message = await response.json();
     document.getElementById("profileResponse").innerHTML = message.message;
+    window.location.reload();
   };
 
   // update password
@@ -173,7 +177,6 @@ const Profile = () => {
               />
             </Form.Group>
 
-
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -196,7 +199,6 @@ const Profile = () => {
               )}
             </div>
 
-
             <div class="col-xs-3">
               <Button
                 variant="primary"
@@ -206,15 +208,19 @@ const Profile = () => {
               >
                 Edit
               </Button>
+
               <Button
                 variant="primary"
                 className="me-1"
                 type="submit"
                 id="submit"
                 onClick={updateProfile}
+                
               >
                 Submit
               </Button>
+
+            
               <span className="m-3" id="profileResponse">
                 {""}
               </span>

@@ -42,7 +42,6 @@ const EventCard = (props) => {
     if (response.ok) {
       await response.json().then((user) => {
         setFemale(user.female);
-       
       });
     }
   };
@@ -121,7 +120,7 @@ const EventCard = (props) => {
         // console.log(newJoinedBy.toString());
         setNumJoined(numJoined + 1);
       } else {
-        alert("this is a women-friendly event");
+        alert("th is is a women-friendly event");
       }
     }
   }
@@ -135,13 +134,17 @@ const EventCard = (props) => {
       },
       body: JSON.stringify(accountEvent),
     });
-    await fetch(`http://localhost:5000/users/get-user-info/`+localStorage.getItem("userid"), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(accountEvent),
-    });
+    await fetch(
+      `http://localhost:5000/users/get-user-info/` +
+        localStorage.getItem("userid"),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(accountEvent),
+      }
+    );
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);

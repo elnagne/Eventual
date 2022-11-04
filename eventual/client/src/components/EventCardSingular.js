@@ -173,7 +173,7 @@ const EventCardSingular = (props) => {
   }
 
   function goToAddNotifications() {
-    let path = '/add-notifications/' + props.id;
+    let path = "/add-notifications/" + props.id;
     navigate(path);
   }
 
@@ -358,25 +358,23 @@ const EventCardSingular = (props) => {
             </Button>
             {account_id == author_id && (
               <Button
-              variant="info"
-              size="lg"
-              onClick={goToUpdatePage}
-              className="main-btn"
-            >
-              Update Event
-            </Button>
+                variant="info"
+                size="lg"
+                onClick={goToUpdatePage}
+                className="main-btn"
+              >
+                Update Event
+              </Button>
             )}
             {account_id == author_id && (
               <Button
-              variant="secondary"
-              size="lg"
-              onClick={goToAddNotifications}
-              className="main-btn"
-            >
-              <FontAwesomeIcon icon={faMessage} />
-              {' '} Add Notification
-            </Button>
-              
+                variant="secondary"
+                size="lg"
+                onClick={goToAddNotifications}
+                className="main-btn"
+              >
+                <FontAwesomeIcon icon={faMessage} /> Add Notification
+              </Button>
             )}
           </div>
         </div>

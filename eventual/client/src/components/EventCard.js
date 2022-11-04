@@ -120,7 +120,7 @@ const EventCard = (props) => {
         // console.log(newJoinedBy.toString());
         setNumJoined(numJoined + 1);
       } else {
-        alert("th is is a women-friendly event");
+        alert("this is a women-friendly event");
       }
     }
   }

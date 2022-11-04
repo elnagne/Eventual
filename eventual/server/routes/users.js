@@ -20,6 +20,7 @@ usersRoutes.route('/users/register').post(async (req, response) => {
   const usersCollection = dbConnect.collection('mockUsers');
 
   const user = req.body;
+  //console.log(req.body)
   const takenUsername = await usersCollection.findOne({
     username: user.username,
   });
@@ -189,6 +190,7 @@ usersRoutes.route("/users/get-user-info/:id").get((req, response) => {
         username: user.username,
         firstName: user.name.first,
         lastName: user.name.last,
+        female:user.female
       });
   });
 })

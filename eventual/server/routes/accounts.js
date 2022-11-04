@@ -16,7 +16,8 @@ accountsRoutes.route("/accounts/add").post((req, response) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        name: req.body.name
+        name: req.body.name,
+        female:req.body.female
     };
     dbConnect.collection("accounts").insertOne(account, (err, res) => {
         if (err) throw err;

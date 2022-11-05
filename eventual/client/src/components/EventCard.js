@@ -26,6 +26,25 @@ const arrowStyle = {
 
 const EventCard = (props) => {
   const [author, setAuthor] = useState([]);
+  const [female, setFemale] = useState([]);
+  const getUserGender = async () => {
+    const response = await fetch(
+      "http://localhost:5000/users/get-user-info/" +
+        localStorage.getItem("userid"),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      await response.json().then((user) => {
+        setFemale(user.female);
+      });
+    }
+  };
 
   useEffect(() => {
     if (props.event.author) {
@@ -40,6 +59,7 @@ const EventCard = (props) => {
         setAuthor(author);
       }
       getUser();
+      getUserGender();
       return;
     }
   }, [props.event.author]);
@@ -91,18 +111,17 @@ const EventCard = (props) => {
         },
         body: JSON.stringify(accountEvent),
       });
-      await fetch(`http://localhost:5000/attend/add_attending`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(accountEvent),
-      });
       let newJoinedBy = [...joinedby, account_id];
-      setJoinedby(newJoinedBy);
-      console.log(joinedby.toString());
-      console.log(newJoinedBy.toString());
-      setNumJoined(numJoined + 1);
+      let outcome = event.woman_only && female;
+      if (!event.woman_only || outcome) {
+        //console.log(event);
+        setJoinedby(newJoinedBy);
+        // console.log(joinedby.toString());
+        // console.log(newJoinedBy.toString());
+        setNumJoined(numJoined + 1);
+      } else {
+        alert("this is a women-friendly event");
+      }
     }
   }
   // This method decrease the number of likes by 1

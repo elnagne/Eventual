@@ -24,6 +24,26 @@ import { faHandshake } from "@fortawesome/free-solid-svg-icons";
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
+  const [female, setFemale] = useState([]);
+  const getUserGender = async () => {
+    const response = await fetch(
+      "http://localhost:5000/users/get-user-info/" +
+        localStorage.getItem("userid"),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      await response.json().then((user) => {
+        setFemale(user.female);
+        //console.log("user.  \n" + female);
+      });
+    }
+  };
 
   useEffect(() => {
     if (props.event && props.event.author) {
@@ -38,6 +58,7 @@ const EventCardSingular = (props) => {
         setAuthor(author);
       }
       getUser();
+      getUserGender();
       return;
     }
   }, [props.event]);
@@ -72,8 +93,8 @@ const EventCardSingular = (props) => {
     let newlikedBy = likedby;
     newlikedBy.pop(account_id);
     setLikedby(newlikedBy);
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
+    // console.log(likedby.toString());
+    // console.log(newlikedBy.toString());
     setLikes(likes - 1);
   }
   async function joinEvent() {
@@ -90,10 +111,17 @@ const EventCardSingular = (props) => {
         body: JSON.stringify(accountEvent),
       });
       let newJoinedBy = [...joinedby, account_id];
-      setJoinedby(newJoinedBy);
-      console.log(joinedby.toString());
-      console.log(newJoinedBy.toString());
-      setNumJoined(numJoined + 1);
+      // console.log("event women only:  " + event.woman_only);
+      // console.log("user gender:   " + female);
+      let outcome = event.woman_only && female;
+      if (!event.woman_only || outcome) {
+        setJoinedby(newJoinedBy);
+        // console.log(joinedby.toString());
+        // console.log(newJoinedBy.toString());
+        setNumJoined(numJoined + 1);
+      } else {
+        alert("this is a women-friendly event");
+      }
     }
   }
   // This method decrease the number of likes by 1
@@ -109,8 +137,8 @@ const EventCardSingular = (props) => {
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);
-    console.log(joinedby.toString());
-    console.log(newJoinedBy.toString());
+    // console.log(joinedby.toString());
+    // console.log(newJoinedBy.toString());
     setNumJoined(numJoined - 1);
   }
   async function loadInitialValues() {
@@ -121,6 +149,10 @@ const EventCardSingular = (props) => {
         setLikedby(event.liked_by.map((user) => user.account_id));
         setNumJoined(event.num_joined);
         setJoinedby(event.attending_users.map((user) => user.account_id));
+
+        getUserGender();
+        //female = event.attending_users.map((user) => user.female);
+        //console.log(female);
       }
     }
   }
@@ -141,7 +173,7 @@ const EventCardSingular = (props) => {
   }
 
   function goToAddNotifications() {
-    let path = '/add-notifications/' + props.id;
+    let path = "/add-notifications/" + props.id;
     navigate(path);
   }
 
@@ -170,6 +202,7 @@ const EventCardSingular = (props) => {
     );
   }
   const name = event.event_name;
+
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
 
@@ -325,25 +358,23 @@ const EventCardSingular = (props) => {
             </Button>
             {account_id == author_id && (
               <Button
-              variant="info"
-              size="lg"
-              onClick={goToUpdatePage}
-              className="main-btn"
-            >
-              Update Event
-            </Button>
+                variant="info"
+                size="lg"
+                onClick={goToUpdatePage}
+                className="main-btn"
+              >
+                Update Event
+              </Button>
             )}
             {account_id == author_id && (
               <Button
-              variant="secondary"
-              size="lg"
-              onClick={goToAddNotifications}
-              className="main-btn"
-            >
-              <FontAwesomeIcon icon={faMessage} />
-              {' '} Add Notification
-            </Button>
-              
+                variant="secondary"
+                size="lg"
+                onClick={goToAddNotifications}
+                className="main-btn"
+              >
+                <FontAwesomeIcon icon={faMessage} /> Add Notification
+              </Button>
             )}
           </div>
         </div>

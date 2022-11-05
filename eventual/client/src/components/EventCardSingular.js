@@ -15,7 +15,7 @@ import {
   faEarthAfrica,
   faPerson,
   faCaretLeft,
-  faRefresh,
+  faMessage,
   faFaceTired,
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';

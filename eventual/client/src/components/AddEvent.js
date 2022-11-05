@@ -70,6 +70,7 @@ const AddEvent = () => {
     setWoman_only('');
     setLocation('');
     setCategory('');
+    window.location.reload();
   };
 
   return (

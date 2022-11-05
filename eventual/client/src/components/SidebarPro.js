@@ -33,6 +33,7 @@ import {
   faSignIn,
   faSignOut,
   faCalendarCheck,
+  faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 
 const SidebarPro = () => {
@@ -111,6 +112,12 @@ const SidebarPro = () => {
                 <Link to="/liked" />
               </MenuItem>
             )}
+            {username &&
+                <MenuItem icon={<FontAwesomeIcon icon={faMessage} />}>
+                    Notifications
+                    <Link to="/my-notifications" />
+                </MenuItem>
+            }
             {username && (
               <MenuItem icon={<FontAwesomeIcon icon={faHistory} />}>
                 History

@@ -1,23 +1,23 @@
 import * as Utils from './Utils.js';
-import React, { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
+import React, { useEffect, useState } from 'react';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import './Likebtn.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandshake } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 import {
   faHeart,
   faCircleDot,
   faPerson,
   faCaretRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+} from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const arrowDivStyle = {
-  float: "right",
-  margin: "50px auto",
+  float: 'right',
+  margin: '50px auto',
 };
 
 const arrowStyle = {
@@ -26,6 +26,25 @@ const arrowStyle = {
 
 const EventCard = (props) => {
   const [author, setAuthor] = useState([]);
+  const [female, setFemale] = useState([]);
+  const getUserGender = async () => {
+    const response = await fetch(
+      "http://localhost:5000/users/get-user-info/" +
+        localStorage.getItem("userid"),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      await response.json().then((user) => {
+        setFemale(user.female);
+      });
+    }
+  };
 
   useEffect(() => {
     if (props.event.author) {
@@ -40,6 +59,7 @@ const EventCard = (props) => {
         setAuthor(author);
       }
       getUser();
+      getUserGender();
       return;
     }
   }, [props.event.author]);
@@ -47,72 +67,79 @@ const EventCard = (props) => {
   async function likeEvent(id) {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_like`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-        body:JSON.stringify(accountEvent)
-      });
-      let newlikedBy =[...likedby, account_id];
-      setLikedby((newlikedBy));
-      console.log(likedby.toString());
-      console.log(newlikedBy.toString());
-      setLikes(likes+1);
+      body: JSON.stringify(accountEvent),
+    });
+    let newlikedBy = [...likedby, account_id];
+    setLikedby(newlikedBy);
+    console.log(likedby.toString());
+    console.log(newlikedBy.toString());
+    setLikes(likes + 1);
   }
-  
+
   // This method decrease the number of likes by 1
   async function dislikeEvent(id) {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_dislike`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-        body:JSON.stringify(accountEvent),
-      });
-      let newlikedBy =likedby;
-      newlikedBy.pop(account_id);
-      setLikedby(newlikedBy);
-      console.log(likedby.toString());
-      console.log(newlikedBy.toString());
-    setLikes(likes-1)
+      body: JSON.stringify(accountEvent),
+    });
+    let newlikedBy = likedby;
+    newlikedBy.pop(account_id);
+    setLikedby(newlikedBy);
+    console.log(likedby.toString());
+    console.log(newlikedBy.toString());
+    setLikes(likes - 1);
   }
   async function joinEvent() {
     // passes the id of the event
-    if(num_slots-parseInt(numJoined) == 0){
-      setnNSM("No spots left, please return another time when spots are available again or leave a like to keep track of the event");
-    }
-    else{
+    if (num_slots - parseInt(numJoined) == 0) {
+      setnNSM(
+        'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
+      );
+    } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-      },
-        body:JSON.stringify(accountEvent)
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(accountEvent),
       });
-      let newJoinedBy =[...joinedby, account_id];
-      setJoinedby((newJoinedBy));
-      console.log(joinedby.toString());
-      console.log(newJoinedBy.toString());
-      setNumJoined(numJoined+1);
+      let newJoinedBy = [...joinedby, account_id];
+      let outcome = event.woman_only && female;
+      if (!event.woman_only || outcome) {
+        //console.log(event);
+        setJoinedby(newJoinedBy);
+        // console.log(joinedby.toString());
+        // console.log(newJoinedBy.toString());
+        setNumJoined(numJoined + 1);
+      } else {
+        alert("this is a women-friendly event");
+      }
     }
   }
-    // This method decrease the number of likes by 1
+  // This method decrease the number of likes by 1
   async function notJoinEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/attend/remove_attendance`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-        body:JSON.stringify(accountEvent),
-      });
-      let newJoinedBy =joinedby;
-      newJoinedBy.pop(account_id);
-      setJoinedby(newJoinedBy);
-      console.log(joinedby.toString());
-      console.log(newJoinedBy.toString());
-      setNumJoined(numJoined-1)
+      body: JSON.stringify(accountEvent),
+    });
+    let newJoinedBy = joinedby;
+    newJoinedBy.pop(account_id);
+    setJoinedby(newJoinedBy);
+    console.log(joinedby.toString());
+    console.log(newJoinedBy.toString());
+    setNumJoined(numJoined - 1);
   }
 
   const event = props.event;
@@ -124,43 +151,46 @@ const EventCard = (props) => {
   const city = event.address_data ? event.address_data.locality : null;
   const address = event.location;
   const eventID = event._id;
-  const [likedby, setLikedby]= useState(event.liked_by.map((user)=>user.account_id));
+  const [likedby, setLikedby] = useState(
+    event.liked_by.map((user) => user.account_id)
+  );
   const [numJoined, setNumJoined] = useState(event.num_joined);
-  const [joinedby, setJoinedby]= useState(event.attending_users.map((user)=>user.account_id));
-  const num_slots = parseInt(event.num_slots); 
-  const account_id = localStorage.getItem("userid");
+  const [joinedby, setJoinedby] = useState(
+    event.attending_users.map((user) => user.account_id)
+  );
+  const num_slots = parseInt(event.num_slots);
+  const account_id = localStorage.getItem('userid');
   const accountEvent = {
     account_id: account_id,
-    event_id: eventID
-  }
-  const [NoSpotsMsg, setnNSM] =useState("");
+    event_id: eventID,
+  };
+  const [NoSpotsMsg, setnNSM] = useState('');
 
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
-  const date = dateObj.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",})
+  const date = dateObj.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
   const timeStr = event.time_of_event;
-  const timeObj = new Date("0000-01-01 " + timeStr);
+  const timeObj = new Date('0000-01-01 ' + timeStr);
   const time = timeObj.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   const authorName = Utils.getUsersNameAsString(author);
 
   let navigate = useNavigate();
   function redirectToEvent() {
-    let path = "/events/" + id;
+    let path = '/events/' + id;
     navigate(path);
   }
 
   return (
-    <Card
-      className="eventCard clickable card-title shadow"
-    >
+    <Card className="eventCard clickable card-title shadow">
       <Card.Body>
         {imgUrl && (
           <div className="pic">
@@ -168,14 +198,14 @@ const EventCard = (props) => {
           </div>
         )}
         <Button
-            variant="dark"
-            size="sm"
-            className="back-btn"
-            onClick={redirectToEvent}
-          >
-             More Info <FontAwesomeIcon icon={faCaretRight} />
-          </Button>
-      
+          variant="dark"
+          size="sm"
+          className="back-btn"
+          onClick={redirectToEvent}
+        >
+          More Info <FontAwesomeIcon icon={faCaretRight} />
+        </Button>
+
         <div>
           {name && <span className="title">{name}</span>}
           {dateStr && <span className="date">{date}</span>}
@@ -189,102 +219,122 @@ const EventCard = (props) => {
           )}
           {city && (
             <span>
-              {" "}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
+              {' '}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
               <span className="property">City: </span>
               {city}
             </span>
           )}
           {authorName && (
             <span>
-              {" "}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
+              {' '}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
               <span className="property">Hosted By: </span>
               {authorName}
             </span>
           )}
           {address && (
             <span>
-              {" "}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
+              {' '}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
               <span className="property">Address: </span>
               {address}
             </span>
           )}
-          {num_slots !== undefined&& (
+          {num_slots !== undefined && (
             <span>
-              {" "}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
+              {' '}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
               <span className="property">Available Spots: </span>
-              {num_slots-parseInt(numJoined)}{" "}<FontAwesomeIcon icon={faPerson} size="xs" />
-            </span> 
+              {num_slots - parseInt(numJoined)}{' '}
+              <FontAwesomeIcon icon={faPerson} size="xs" />
+            </span>
           )}
         </div>
-        
+
         {desc && <div className="desc">{desc}</div>}
-        {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-        {likes !== undefined && account_id !== null &&(
+        {NoSpotsMsg !== '' && <span className="alert">{NoSpotsMsg}</span>}
+        {likes !== undefined && account_id !== null && (
           <div className="likes">
-            {likedby.includes(account_id)
-            ?
-                <OverlayTrigger
+            {likedby.includes(account_id) ? (
+              <OverlayTrigger
                 placement="top"
-                delay={{ show: 200, hide: 180}}
+                delay={{ show: 200, hide: 180 }}
                 overlay={<Tooltip id="button-tooltip-2">Remove Like</Tooltip>}
               >
-              <Button id = "a" variant="liked" 
-              onClick={() => {
-                dislikeEvent(eventID);
-                return true
-              }}
-              > <FontAwesomeIcon icon={faHeart} />
-              </Button>
+                <Button
+                  id="a"
+                  variant="liked"
+                  onClick={() => {
+                    dislikeEvent(eventID);
+                    return true;
+                  }}
+                >
+                  {' '}
+                  <FontAwesomeIcon icon={faHeart} />
+                </Button>
               </OverlayTrigger>
-              :
+            ) : (
               <OverlayTrigger
                 placement="top"
-                delay={{ show: 200, hide: 180}}
+                delay={{ show: 200, hide: 180 }}
                 overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
               >
-              <Button id = "a" variant="like" 
-              onClick={() => {
-                likeEvent(eventID);
-                return true
-              }}
-              > <FontAwesomeIcon icon={faHeart} />
-              </Button>
+                <Button
+                  id="a"
+                  variant="like"
+                  onClick={() => {
+                    likeEvent(eventID);
+                    return true;
+                  }}
+                >
+                  {' '}
+                  <FontAwesomeIcon icon={faHeart} />
+                </Button>
               </OverlayTrigger>
-            }
-            {likes}{"     "}
-            {joinedby.includes(account_id)
-            ?
-                <OverlayTrigger
-                placement="top"
-                delay={{ show: 200, hide: 180}}
-                overlay={<Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>}
-              >
-              <Button id = "a" variant="liked" 
-              onClick={() => {
-                notJoinEvent(eventID);
-                return true
-              }}
-              > <FontAwesomeIcon icon={faHandshake} />
-              </Button>
-              </OverlayTrigger>
-              :
+            )}
+            {likes}
+            {'     '}
+            {joinedby.includes(account_id) ? (
               <OverlayTrigger
                 placement="top"
-                delay={{ show: 200, hide: 180}}
+                delay={{ show: 200, hide: 180 }}
+                overlay={
+                  <Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>
+                }
+              >
+                <Button
+                  id="a"
+                  variant="liked"
+                  onClick={() => {
+                    notJoinEvent(eventID);
+                    return true;
+                  }}
+                >
+                  {' '}
+                  <FontAwesomeIcon icon={faHandshake} />
+                </Button>
+              </OverlayTrigger>
+            ) : (
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 200, hide: 180 }}
                 overlay={<Tooltip id="button-tooltip-2">Join Event</Tooltip>}
               >
-              <Button id = "a" variant="like" 
-              onClick={() => {
-                joinEvent(eventID);
-                return true
-              }}
-              > <FontAwesomeIcon icon={faHandshake} />
-              </Button>
-              </OverlayTrigger>}{numJoined}
+                <Button
+                  id="a"
+                  variant="like"
+                  onClick={() => {
+                    joinEvent(eventID);
+                    return true;
+                  }}
+                >
+                  {' '}
+                  <FontAwesomeIcon icon={faHandshake} />
+                </Button>
+              </OverlayTrigger>
+            )}
+            {numJoined}
           </div>
         )}
       </Card.Body>

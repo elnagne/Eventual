@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useParams } from 'react-router-dom';
 import {
   faHeart,
   faShare,
@@ -16,7 +17,6 @@ import {
   faPerson,
   faCaretLeft,
   faMessage,
-  faFaceTired,
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,26 +24,6 @@ import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
-  const [female, setFemale] = useState([]);
-  const getUserGender = async () => {
-    const response = await fetch(
-      "http://localhost:5000/users/get-user-info/" +
-        localStorage.getItem("userid"),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (response.ok) {
-      await response.json().then((user) => {
-        setFemale(user.female);
-        //console.log("user.  \n" + female);
-      });
-    }
-  };
 
   useEffect(() => {
     if (props.event && props.event.author) {
@@ -58,7 +38,6 @@ const EventCardSingular = (props) => {
         setAuthor(author);
       }
       getUser();
-      getUserGender();
       return;
     }
   }, [props.event]);
@@ -93,8 +72,8 @@ const EventCardSingular = (props) => {
     let newlikedBy = likedby;
     newlikedBy.pop(account_id);
     setLikedby(newlikedBy);
-    // console.log(likedby.toString());
-    // console.log(newlikedBy.toString());
+    console.log(likedby.toString());
+    console.log(newlikedBy.toString());
     setLikes(likes - 1);
   }
   async function joinEvent() {
@@ -111,40 +90,12 @@ const EventCardSingular = (props) => {
         body: JSON.stringify(accountEvent),
       });
       let newJoinedBy = [...joinedby, account_id];
-      // console.log("event women only:  " + event.woman_only);
-      // console.log("user gender:   " + female);
-      let outcome = event.woman_only && female;
-      if (!event.woman_only || outcome) {
-        setJoinedby(newJoinedBy);
-        // console.log(joinedby.toString());
-        // console.log(newJoinedBy.toString());
-        setNumJoined(numJoined + 1);
-      } else {
-        alert("this is a women-friendly event");
-      }
+      setJoinedby(newJoinedBy);
+      console.log(joinedby.toString());
+      console.log(newJoinedBy.toString());
+      setNumJoined(numJoined + 1);
     }
   }
-  async function joinEvent() {
-    fetch(`http://localhost:5000/attend/add_attendance`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    });
-  }
-
-  async function spamIt() {
-    fetch(`http://localhost:5000/spam`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(accountEvent),
-    });
-    setSpam(true);
-  }
-
   // This method decrease the number of likes by 1
   async function notJoinEvent() {
     // passes the id of the event
@@ -158,8 +109,8 @@ const EventCardSingular = (props) => {
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);
-    // console.log(joinedby.toString());
-    // console.log(newJoinedBy.toString());
+    console.log(joinedby.toString());
+    console.log(newJoinedBy.toString());
     setNumJoined(numJoined - 1);
   }
   async function loadInitialValues() {
@@ -167,27 +118,18 @@ const EventCardSingular = (props) => {
       if (firstLoad == true) {
         setFirstLoad(false);
         setLikes(event.num_likes);
-        setSpam(event.spam);
         setLikedby(event.liked_by.map((user) => user.account_id));
         setNumJoined(event.num_joined);
         setJoinedby(event.attending_users.map((user) => user.account_id));
-
-        getUserGender();
-        //female = event.attending_users.map((user) => user.female);
-        //console.log(female);
       }
     }
   }
 
   let navigate = useNavigate();
-  function backToEventsPage() {
-    let path = '/events';
+  function backToNotificationsPage() {
+    let path = '/my-notifications';
     navigate(path);
   }
-
-  const openInNewTab = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
 
   function goToUpdatePage() {
     let path = '/update-events/' + props.id;
@@ -195,14 +137,13 @@ const EventCardSingular = (props) => {
   }
 
   function goToAddNotifications() {
-    let path = "/add-notifications/" + props.id;
+    let path = '/add-notifications/' + props.id;
     navigate(path);
   }
 
   const event = props.event;
   const [likes, setLikes] = useState(0);
   const [likedby, setLikedby] = useState([]);
-  const [spam, setSpam] = useState(false);
   const [numJoined, setNumJoined] = useState(0);
   const [joinedby, setJoinedby] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
@@ -215,9 +156,9 @@ const EventCardSingular = (props) => {
             variant="dark"
             size="sm"
             className="back-btn"
-            onClick={backToEventsPage}
+            onClick={backToNotificationsPage}
           >
-            <FontAwesomeIcon icon={faCaretLeft} /> All Events
+            <FontAwesomeIcon icon={faCaretLeft} /> Notifications
           </Button>
           <h1>Sorry, that event doesn't exist.</h1>
         </Card.Body>
@@ -225,7 +166,6 @@ const EventCardSingular = (props) => {
     );
   }
   const name = event.event_name;
-
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
 
@@ -250,14 +190,10 @@ const EventCardSingular = (props) => {
     ? Utils.getLocationInfoAsString(event.address_data)
     : null;
 
-  const googleMapsURL = Utils.getGoogleMapsURL(
-    event.address_data,
-    event.location
-  );
-
   const category = event.category;
   const address = event.location;
   const desc = event.description;
+
   const account_id = localStorage.getItem('userid');
   const author_id = event.author;
   const eventID = event._id;
@@ -281,9 +217,9 @@ const EventCardSingular = (props) => {
             variant="dark"
             size="sm"
             className="back-btn"
-            onClick={backToEventsPage}
+            onClick={backToNotificationsPage}
           >
-            <FontAwesomeIcon icon={faCaretLeft} /> All Events
+            <FontAwesomeIcon icon={faCaretLeft} /> Notifications
           </Button>
 
           <div className="title">
@@ -376,44 +312,29 @@ const EventCardSingular = (props) => {
           )}
           <div className="main-btns">
             <Button variant="warning" size="lg" className="main-btn">
-              <FontAwesomeIcon icon={faShare} /> <strong>Share</strong>
+              <FontAwesomeIcon icon={faShare} /> <strong>Share</strong> Event
             </Button>
-            {spam == true ? (
-              <strong>This event has been reported as spam</strong>
-            ) : (
-              <Button
-                variant="danger"
-                size="lg"
-                className="main-btn"
-                onClick={() => {
-                  spamIt(eventID);
-                  return true;
-                }}
-              >
-                <FontAwesomeIcon icon={faFaceTired} />
-                <strong> Spam</strong>
-              </Button>
-            )}
-
             {account_id == author_id && (
               <Button
-                variant="info"
-                size="lg"
-                onClick={goToUpdatePage}
-                className="main-btn"
-              >
-                Update Event
-              </Button>
+              variant="info"
+              size="lg"
+              onClick={goToUpdatePage}
+              className="main-btn"
+            >
+              Update Event
+            </Button>
             )}
             {account_id == author_id && (
               <Button
-                variant="secondary"
-                size="lg"
-                onClick={goToAddNotifications}
-                className="main-btn"
-              >
-                <FontAwesomeIcon icon={faMessage} /> Add Notification
-              </Button>
+              variant="secondary"
+              size="lg"
+              onClick={goToAddNotifications}
+              className="main-btn"
+            >
+              <FontAwesomeIcon icon={faMessage} />
+              {' '} Add Notification
+            </Button>
+              
             )}
           </div>
         </div>
@@ -458,17 +379,11 @@ const EventCardSingular = (props) => {
                     {address}
                   </div>
                 )}
-                {googleMapsURL && (
-                  <Button
-                    variant="success"
-                    className="maps-btn"
-                    onClick={() => openInNewTab(googleMapsURL)}
-                  >
-                    {' '}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
-                    <strong>MAPS</strong>
-                  </Button>
-                )}
+                <Button variant="success" className="maps-btn">
+                  {' '}
+                  <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                  <strong>MAPS</strong>
+                </Button>
               </div>
             </Col>
             <Col lg={7}>

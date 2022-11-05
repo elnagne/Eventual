@@ -1,31 +1,36 @@
-import React, { useEffect } from 'react';
-import SidebarPro from './SidebarPro';
-import { useState } from 'react';
-import { Widget } from '@uploadcare/react-widget';
-import Button from 'react-bootstrap/Button';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import SidebarPro from "./SidebarPro";
+import { useState } from "react";
+import { Widget } from "@uploadcare/react-widget";
+import Button from "react-bootstrap/Button";
+import { useParams } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateEvent = () => {
   const { id } = useParams();
   console.log(id);
   const [event, setEvent] = useState(null);
-  const [event_name, setEvent_name] = useState('');
+  const [event_name, setEvent_name] = useState("");
   const [author, setAuthor] = useState(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [date_of_event, setDate_of_event] = useState('');
-  const [time_of_event, setTime_of_event] = useState('');
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date_of_event, setDate_of_event] = useState("");
+  const [time_of_event, setTime_of_event] = useState("");
   const [num_slots, setNum_slots] = useState(0);
   const [woman_only, setWoman_only] = useState(false);
   const [location, setLocation] = useState('');
   const [category, setCategory] = useState('');
+  const [num_likes, setNum_likes] = useState(0);
+  const [num_joined, setNum_joined] = useState(0);
+  const [liked_by, setLiked_by] = useState(null);
+  const [attending_users, setAttending_users] = useState(null);
+  const [comments, setComments] = useState(null);
 
-  const login_author = localStorage.getItem('userid');
+  const login_author = localStorage.getItem("userid");
 
   useEffect(() => {
     getEvents();
@@ -33,7 +38,7 @@ const UpdateEvent = () => {
   }, []);
 
   async function getEvents() {
-    const response = await fetch('http://localhost:5000/search/events/' + id);
+    const response = await fetch("http://localhost:5000/search/events/" + id);
 
     if (!response.ok) {
       setEvent(null);
@@ -55,6 +60,11 @@ const UpdateEvent = () => {
     setWoman_only(event.woman_only);
     setLocation(event.location);
     setCategory(event.category);
+    setNum_likes(event.num_likes);
+    setNum_joined(event.num_joined);
+    setLiked_by(event.liked_by);
+    setAttending_users(event.attending_users);
+    setComments(event.comments);
   }
 
   const handleCheck = () => {
@@ -63,8 +73,8 @@ const UpdateEvent = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    toast('You Updated Your Event!');
-    await console.log(localStorage.getItem('userid'));
+    toast("You Updated Your Event!");
+    await console.log(localStorage.getItem("userid"));
     await setAuthor(login_author);
     console.log(login_author);
     const newEvent = {
@@ -80,12 +90,17 @@ const UpdateEvent = () => {
       woman_only: woman_only,
       location: location,
       category: category,
+      num_likes: num_likes,
+      num_joined: num_joined,
+      liked_by: liked_by,
+      attending_users: attending_users,
+      comments: comments,
     };
 
-    await fetch('http://localhost:5000/testEvents/update/' + id, {
-      method: 'POST',
+    await fetch("http://localhost:5000/testEvents/update/" + id, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(newEvent),
     }).catch((error) => {
@@ -93,17 +108,18 @@ const UpdateEvent = () => {
       return;
     });
 
-    setEvent_name('');
-    setDescription('');
+    setEvent_name("");
+    setDescription("");
     setImage(null);
-    setEmail('');
-    setPhone('');
-    setDate_of_event('');
-    setTime_of_event('');
+    setEmail("");
+    setPhone("");
+    setDate_of_event("");
+    setTime_of_event("");
     setNum_slots(0);
-    setWoman_only('');
-    setLocation('');
-    setCategory('');
+    setWoman_only("");
+    setLocation("");
+    setCategory("");
+    window.location.reload();
   };
 
   //   const namePlaceholder = event.hasOwnProperty('event_name')
@@ -131,6 +147,7 @@ const UpdateEvent = () => {
               security=""
               placeholder="Name of Events"
               value={event_name}
+              required
               onChange={(e) => setEvent_name(e.target.value)}
             />
           </div>
@@ -142,11 +159,12 @@ const UpdateEvent = () => {
               className="form-control input-lg"
               placeholder="Enter Description"
               value={description}
+              required
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <p>
-            <label htmlFor="file">Your file:</label>{' '}
+            <label htmlFor="file">Your file:</label>{" "}
             <Widget
               publicKey="6092add1783f1344a4e4"
               type="hidden"
@@ -154,6 +172,7 @@ const UpdateEvent = () => {
               name="my_file"
               id="uploadcare-file"
               value={image}
+              required
               onChange={(info) => {
                 console.log(info.cdnUrl);
                 setImage(info.cdnUrl);
@@ -167,6 +186,7 @@ const UpdateEvent = () => {
               type="text"
               placeholder="Enter Phone"
               value={phone}
+              required
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
@@ -177,6 +197,7 @@ const UpdateEvent = () => {
               type="text"
               placeholder="Enter Email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -197,6 +218,7 @@ const UpdateEvent = () => {
               type="time"
               placeholder="Enter Time"
               value={time_of_event}
+              required
               onChange={(e) => setTime_of_event(e.target.value)}
             />
           </div>
@@ -207,6 +229,7 @@ const UpdateEvent = () => {
               type="location"
               placeholder="Enter a valid address"
               value={location}
+              required
               onChange={(e) => setLocation(e.target.value)}
             />
           </div>
@@ -215,6 +238,7 @@ const UpdateEvent = () => {
             class="form-control"
             className="AddEventElement"
             value={category}
+            required
             onChange={(e) => setCategory(e.target.value)}
           >
             <option>Sport</option>
@@ -231,6 +255,7 @@ const UpdateEvent = () => {
               type="number"
               placeholder="Enter Number of Slots"
               value={num_slots}
+              required
               onChange={(e) => setNum_slots(e.target.value)}
             />
           </div>

@@ -52,11 +52,7 @@ const EventCardSingular = (props) => {
     });
     let newlikedBy = [...likedby, account_id];
     setLikedby(newlikedBy);
-    console.log('console loggggg');
-    console.log(account_id.toString());
-    console.log('console loggggg 2');
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
+   
     setLikes(likes + 1);
   }
   // This method decrease the number of likes by 1
@@ -72,8 +68,7 @@ const EventCardSingular = (props) => {
     let newlikedBy = likedby;
     newlikedBy.pop(account_id);
     setLikedby(newlikedBy);
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
+
     setLikes(likes - 1);
   }
   async function joinEvent() {
@@ -91,8 +86,6 @@ const EventCardSingular = (props) => {
       });
       let newJoinedBy = [...joinedby, account_id];
       setJoinedby(newJoinedBy);
-      console.log(joinedby.toString());
-      console.log(newJoinedBy.toString());
       setNumJoined(numJoined + 1);
     }
   }
@@ -109,8 +102,6 @@ const EventCardSingular = (props) => {
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);
-    console.log(joinedby.toString());
-    console.log(newJoinedBy.toString());
     setNumJoined(numJoined - 1);
   }
   async function loadInitialValues() {

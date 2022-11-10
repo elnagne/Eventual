@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const UpdateEvent = () => {
   const { id } = useParams();
-  console.log(id);
   const [event, setEvent] = useState(null);
   const [event_name, setEvent_name] = useState("");
   const [author, setAuthor] = useState(null);
@@ -22,8 +21,8 @@ const UpdateEvent = () => {
   const [time_of_event, setTime_of_event] = useState("");
   const [num_slots, setNum_slots] = useState(0);
   const [woman_only, setWoman_only] = useState(false);
-  const [location, setLocation] = useState('');
-  const [category, setCategory] = useState('');
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
   const [num_likes, setNum_likes] = useState(0);
   const [num_joined, setNum_joined] = useState(0);
   const [liked_by, setLiked_by] = useState(null);
@@ -46,7 +45,7 @@ const UpdateEvent = () => {
     }
 
     const event = await response.json();
-    console.log(event);
+
     setEvent(event);
 
     setEvent_name(event.event_name);
@@ -76,7 +75,7 @@ const UpdateEvent = () => {
     toast("You Updated Your Event!");
     await console.log(localStorage.getItem("userid"));
     await setAuthor(login_author);
-    console.log(login_author);
+
     const newEvent = {
       event_name: event_name,
       author: login_author,
@@ -174,7 +173,7 @@ const UpdateEvent = () => {
               value={image}
               required
               onChange={(info) => {
-                console.log(info.cdnUrl);
+
                 setImage(info.cdnUrl);
               }}
             />

@@ -42,7 +42,7 @@ likedRoutes.route('/liked/add_like').post(function (req, response) {
     .collection('testEvents')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log('1 document liked');
+
       response.json(res);
     });
 });
@@ -67,7 +67,7 @@ likedRoutes.route('/liked/add_dislike').post(function (req, response) {
     .collection('testEvents')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log('1 document disliked');
+
       response.json(res);
     });
 });
@@ -93,7 +93,7 @@ likedRoutes.route('/attend/add_attendance').post(function (req, response) {
     .collection('testEvents')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log('1 joined event');
+
       response.json(res);
     });
 });
@@ -117,7 +117,7 @@ likedRoutes.route('/attend/add_attending').post(function (req, response) {
     .collection('mockUsers')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log('1 joined event');
+
       response.json(res);
     });
 });
@@ -144,7 +144,7 @@ likedRoutes.route('/attend/remove_attendance').post(function (req, response) {
     .collection('testEvents')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log('1 removed from event');
+
       response.json(res);
     });
 });
@@ -162,8 +162,7 @@ likedRoutes.route('/spam').post(function (req, response) {
   db_connect
     .collection('testEvents')
     .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log('reported as spam');
+
       response.json(res);
     });
 });

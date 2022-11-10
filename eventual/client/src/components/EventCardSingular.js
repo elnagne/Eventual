@@ -189,6 +189,11 @@ const EventCardSingular = (props) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  function goToAttendeesPage() {
+    let path = '/event-attendees/' + props.id;
+    navigate(path);
+  }
+
   function goToUpdatePage() {
     let path = '/update-events/' + props.id;
     navigate(path);
@@ -458,17 +463,32 @@ const EventCardSingular = (props) => {
                     {address}
                   </div>
                 )}
-                {googleMapsURL && (
-                  <Button
-                    variant="success"
-                    className="maps-btn"
-                    onClick={() => openInNewTab(googleMapsURL)}
-                  >
-                    {' '}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
-                    <strong>MAPS</strong>
-                  </Button>
-                )}
+                <Row>
+                  <Col>
+                  {googleMapsURL && (
+                    <Button
+                      variant="success"
+                      className="maps-btn"
+                      onClick={() => openInNewTab(googleMapsURL)}
+                      >
+                        {' '}
+                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                        <strong>MAPS</strong>
+                      </Button>
+                    )}
+                  </Col>
+                  <Col>
+                    {account_id == author_id && (
+                      <Button
+                        variant="success"
+                        onClick={goToAttendeesPage}
+                        className="main-btn"
+                        >
+                          Check Attendees
+                        </Button>
+                      )}
+                    </Col>
+                  </Row>
               </div>
             </Col>
             <Col lg={7}>

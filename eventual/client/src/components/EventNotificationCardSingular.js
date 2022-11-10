@@ -131,6 +131,11 @@ const EventCardSingular = (props) => {
     navigate(path);
   }
 
+  function goToAttendeesPage() {
+    let path = '/event-attendees/' + props.id;
+    navigate(path);
+  }
+
   function goToUpdatePage() {
     let path = '/update-events/' + props.id;
     navigate(path);

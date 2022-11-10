@@ -40,6 +40,7 @@ const App = () => {
         <Route path="/add-events" element={<AddEvents />} />
         <Route path="/add-notifications/:id" element={<AddNotification />} />
         <Route path="/update-events/:id" element={<UpdateEvents />} />
+        <Route path="/event-attendees" element={<AttendingEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/attending-events" element={<AttendingEvents />} />
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />

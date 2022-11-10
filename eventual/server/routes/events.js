@@ -6,7 +6,7 @@ const eventsRoutes = express.Router();
 // Used for connecting to the database
 const dbo = require('../db/conn');
 const ObjectId = require('mongodb').ObjectId;
-
+const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -199,6 +199,30 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
       response.json(res);
     });
   });
+});
+
+// Getting all attendees
+searchRoutes.route("/get-attendees/:id").get((req, res) => {
+  let db_connect = dbo.getDb("eventual");
+
+  var attendees = [];
+
+  db_connect
+    .collection("testEvents")
+    .findOne({ _id: ObjectId(req.params.id) })
+    .then((event) => {
+      for (const user of event.attending_users) {
+        dbConnect
+          .collection('mockUsers')
+          .findOne({ _id: ObjectId(user.account_id) })
+          .then((user) => {
+            var attendee = {name: user.name.first + " " + user.name.last, username: user.username };
+            attendees.push(attendee);
+          })
+        }
+    })
+
+    res.send(attendees);
 });
 
 // sends email to all users in req.body._id event with req.body.subject as subject and req.body.text as message

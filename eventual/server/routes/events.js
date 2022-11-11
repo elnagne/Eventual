@@ -202,7 +202,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
 });
 
 // Getting all attendees
-searchRoutes.route("/get-attendees/:id").get((req, res) => {
+eventsRoutes.route("/get-attendees/:id").get((req, res) => {
   let db_connect = dbo.getDb("eventual");
 
   var attendees = [];

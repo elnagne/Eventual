@@ -124,12 +124,6 @@ const SidebarPro = () => {
                 <Link to="/history" />
               </MenuItem>
             )}
-            {username && (
-              <MenuItem icon={<FontAwesomeIcon icon={faCogs} />}>
-                Settings
-                <Link to="/settings" />
-              </MenuItem>
-            )}
             {username == null && (
               <MenuItem icon={<FontAwesomeIcon icon={faSignIn} />}>
                 Log in

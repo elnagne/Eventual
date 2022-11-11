@@ -3,22 +3,22 @@ import { useParams } from "react-router-dom";
 import EventCardSingular from "./EventCardSingular";
 import EventComment from "./EventComment";
 import SidebarPro from "./SidebarPro";
-import Alert from 'react-bootstrap/Alert';
+import Alert from "react-bootstrap/Alert";
 import AddComment from "./AddComment";
-import { EventContext } from './EventContext';
+import { EventContext } from "./EventContext";
 
 const Event = () => {
   const { id } = useParams();
-  const userId = localStorage.getItem('userid');
+  const userId = localStorage.getItem("userid");
   const [event, setEvent] = useState([]);
   const [comments, setComments] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const { commentText, setCommentText } = useContext(EventContext);
 
   useLayoutEffect(() => {
-    fetch('http://localhost:5000/users/isUserAuth', {
+    fetch("http://localhost:5000/users/isUserAuth", {
       headers: {
-        'x-access-token': localStorage.getItem('token'),
+        "x-access-token": localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
@@ -29,14 +29,13 @@ const Event = () => {
   }, []);
 
   useEffect(() => {
-
     getEvents();
 
     return;
   }, [id]);
 
   async function getEvents() {
-    const response = await fetch('http://localhost:5000/search/events/' + id);
+    const response = await fetch("http://localhost:5000/search/events/" + id);
 
     if (!response.ok) {
       setEvent(null);
@@ -44,7 +43,6 @@ const Event = () => {
     }
 
     const event = await response.json();
-    console.log(event);
     setComments(event.comments);
     setEvent(event);
   }
@@ -56,7 +54,11 @@ const Event = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ eventId: id, userId: userId, comment: commentText }),
+      body: JSON.stringify({
+        eventId: id,
+        userId: userId,
+        comment: commentText,
+      }),
     });
 
     if (!response.ok) {
@@ -74,9 +76,25 @@ const Event = () => {
       <div className="eventContent">
         <div>
           <EventCardSingular event={event} id={id} />
-          {loggedIn ? <AddComment eventId={id} addComment={addComment} /> : <Alert variant='warning' className="mx-4 my-4">Log in to leave a comment.</Alert>}
-          {(comments != null && comments.length > 0) ? comments.map((userComment) => <EventComment userid={userComment.userId} comment={userComment.comment} />)
-            : <Alert variant='primary' className="mx-4 my-4">No comments found. You could be the first!</Alert>}
+          {loggedIn ? (
+            <AddComment eventId={id} addComment={addComment} />
+          ) : (
+            <Alert variant="warning" className="mx-4 my-4">
+              Log in to leave a comment.
+            </Alert>
+          )}
+          {comments != null && comments.length > 0 ? (
+            comments.map((userComment) => (
+              <EventComment
+                userid={userComment.userId}
+                comment={userComment.comment}
+              />
+            ))
+          ) : (
+            <Alert variant="primary" className="mx-4 my-4">
+              No comments found. You could be the first!
+            </Alert>
+          )}
         </div>
       </div>
     </div>

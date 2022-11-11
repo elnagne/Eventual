@@ -40,7 +40,6 @@ const EventCardSingular = (props) => {
     if (response.ok) {
       await response.json().then((user) => {
         setFemale(user.female);
-        //console.log("user.  \n" + female);
       });
     }
   };
@@ -73,11 +72,7 @@ const EventCardSingular = (props) => {
     });
     let newlikedBy = [...likedby, account_id];
     setLikedby(newlikedBy);
-    console.log('console loggggg');
-    console.log(account_id.toString());
-    console.log('console loggggg 2');
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
+
     setLikes(likes + 1);
   }
   // This method decrease the number of likes by 1
@@ -93,8 +88,7 @@ const EventCardSingular = (props) => {
     let newlikedBy = likedby;
     newlikedBy.pop(account_id);
     setLikedby(newlikedBy);
-    // console.log(likedby.toString());
-    // console.log(newlikedBy.toString());
+
     setLikes(likes - 1);
   }
   async function joinEvent() {
@@ -111,13 +105,10 @@ const EventCardSingular = (props) => {
         body: JSON.stringify(accountEvent),
       });
       let newJoinedBy = [...joinedby, account_id];
-      // console.log("event women only:  " + event.woman_only);
-      // console.log("user gender:   " + female);
+
       let outcome = event.woman_only && female;
       if (!event.woman_only || outcome) {
         setJoinedby(newJoinedBy);
-        // console.log(joinedby.toString());
-        // console.log(newJoinedBy.toString());
         setNumJoined(numJoined + 1);
       } else {
         alert("this is a women-friendly event");
@@ -158,8 +149,7 @@ const EventCardSingular = (props) => {
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);
-    // console.log(joinedby.toString());
-    // console.log(newJoinedBy.toString());
+
     setNumJoined(numJoined - 1);
   }
   async function loadInitialValues() {
@@ -173,8 +163,6 @@ const EventCardSingular = (props) => {
         setJoinedby(event.attending_users.map((user) => user.account_id));
 
         getUserGender();
-        //female = event.attending_users.map((user) => user.female);
-        //console.log(female);
       }
     }
   }

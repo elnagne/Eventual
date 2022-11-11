@@ -32,7 +32,7 @@ const AddEvent = () => {
     toast('You added an Event!');
     await console.log(localStorage.getItem('userid'));
     await setAuthor(login_author);
-    console.log(login_author);
+
     const newEvent = {
       event_name: event_name,
       author: login_author,
@@ -119,7 +119,7 @@ const AddEvent = () => {
               value={image}
               required
               onChange={(info) => {
-                console.log(info.cdnUrl);
+
                 setImage(info.cdnUrl);
               }}
             />

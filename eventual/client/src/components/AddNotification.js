@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddNotification = () => {
   const { id } = useParams();
-  console.log(id);
+
   const [event, setEvent] = useState(null);
   const [event_name, setEvent_name] = useState('');
   const [event_id, setEvent_id] = useState('');
@@ -35,7 +35,7 @@ const AddNotification = () => {
     }
 
     const event = await response.json();
-    console.log(event);
+
     setEvent(event);
 
     setEvent_name(event.event_name);
@@ -49,7 +49,7 @@ const AddNotification = () => {
     e.preventDefault();
     toast('Notification Added!');
     await console.log(localStorage.getItem('userid'));
-    console.log(login_author);
+
     var currentdate = new Date(); 
     var datetime = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 

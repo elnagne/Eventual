@@ -75,8 +75,6 @@ const EventCard = (props) => {
     });
     let newlikedBy = [...likedby, account_id];
     setLikedby(newlikedBy);
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
     setLikes(likes + 1);
   }
 
@@ -93,8 +91,6 @@ const EventCard = (props) => {
     let newlikedBy = likedby;
     newlikedBy.pop(account_id);
     setLikedby(newlikedBy);
-    console.log(likedby.toString());
-    console.log(newlikedBy.toString());
     setLikes(likes - 1);
   }
   async function joinEvent() {
@@ -114,10 +110,8 @@ const EventCard = (props) => {
       let newJoinedBy = [...joinedby, account_id];
       let outcome = event.woman_only && female;
       if (!event.woman_only || outcome) {
-        //console.log(event);
+   
         setJoinedby(newJoinedBy);
-        // console.log(joinedby.toString());
-        // console.log(newJoinedBy.toString());
         setNumJoined(numJoined + 1);
       } else {
         alert("this is a women-friendly event");
@@ -137,8 +131,7 @@ const EventCard = (props) => {
     let newJoinedBy = joinedby;
     newJoinedBy.pop(account_id);
     setJoinedby(newJoinedBy);
-    console.log(joinedby.toString());
-    console.log(newJoinedBy.toString());
+
     setNumJoined(numJoined - 1);
   }
 

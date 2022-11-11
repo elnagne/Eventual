@@ -12,13 +12,11 @@ const crypto = require('crypto');
 // sets user to have a token and sends email
 passwordResetRoutes.route('/forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
-    // TODO switch to non-mock users for release
-    console.log('Attempting to send email to ', req.body.email);
+
 
     dbConnect.collection("mockUsers").findOne({
             email: req.body.email
     }).then((user) => {
-        console.log(user);
         if (user == null) {
             response.status(403).send('Email not found');
         } else {
@@ -67,8 +65,7 @@ passwordResetRoutes.route('/reset').post(async (req, response) => {
     dbConnect.collection("mockUsers").findOne({
         PasswordResetToken: req.body.PasswordResetToken,
     }).then(user => {
-        console.log(user);
-        console.log(Date.now());
+  
         if (user == null || user.PasswordResetExpires < Date.now()) {
             response.status(401).json('Password reset has either expired or is not valid.');
         } else {
@@ -82,7 +79,6 @@ passwordResetRoutes.route('/reset').post(async (req, response) => {
 // updates password
 passwordResetRoutes.route('/update-forgot-password').post(async (req, response) => {
     const dbConnect = dbo.getDb();
-    console.log(req.body.username);
     const updatedHashedPassword = await bcrypt.hash(req.body.password, 10);
     dbConnect.collection("mockUsers").findOne({
         username: req.body.username

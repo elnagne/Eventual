@@ -11,7 +11,7 @@ const Events = () => {
   const [author, setAuthor] = useState(null);
 
   const login_author = localStorage.getItem('userid');
-  // console.log(login_author);
+
 
   useEffect(() => {
     getEvents();
@@ -33,16 +33,11 @@ const Events = () => {
 
     await setAuthor(localStorage.getItem('userid'));
 
-    console.log('logined author:', login_author);
-
     for (let i = 0; i < events.length; i++) {
-      // console.log('event:', events[i]);
-      // console.log('event author:', events[i].author);
+
       if (events[i].author == login_author) {
-        console.log('event:', events[i]);
-        console.log('event author:', events[i].author);
         events_authors.push(events[i]);
-        console.log('event in array:', events_authors[0]);
+
       }
     }
 

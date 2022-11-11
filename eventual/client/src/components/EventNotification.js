@@ -9,7 +9,7 @@ const Event = () => {
 
   useEffect(() => {
     async function getEvents() {
-      const response = await fetch('http://localhost:5000/search/events/' + id);
+      const response = await fetch("http://localhost:5000/search/events/" + id);
 
       if (!response.ok) {
         setEvent(null);
@@ -17,7 +17,7 @@ const Event = () => {
       }
 
       const event = await response.json();
-      console.log(event);
+
       setEvent(event);
     }
 

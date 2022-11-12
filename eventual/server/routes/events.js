@@ -206,11 +206,34 @@ eventsRoutes.route("/remove-attendee/:id").post((req, res) => {
     .collection("testEvents")
     .updateOne({ _id: ObjectId(req.params.id) },
       {
-        $inc: {
-          num_joined: -1,
-        },
+        $inc: { num_joined: -1, },
         $pull: {
           attending_users: {
+            account_id: ObjectId(req.body.account_id)
+          }
+        }
+      }, (err, response) => {
+        res.send(response);
+    });
+});
+
+// bans attendee from event
+eventsRoutes.route("/ban-attendee/:id").post((req, res) => {
+  // todo switch to non testEvent on release
+  let dbConnect = dbo.getDb("eventual");
+
+  dbConnect
+    .collection("testEvents")
+    .updateOne({ _id: ObjectId(req.params.id) },
+      {
+        $inc: { num_joined: -1, },
+        $pull: {
+          attending_users: {
+            account_id: ObjectId(req.body.account_id)
+          }
+        },
+        $push: {
+          banlist: {
             account_id: ObjectId(req.body.account_id)
           }
         }

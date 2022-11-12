@@ -31,9 +31,7 @@ const EventAttendees = () => {
               <Button variant="warning" type="submit" className="col-2" onClick={async () => {
                 const response = await fetch('http://localhost:5000/remove-attendee/' + id, {
                   method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
+                  headers: { "Content-Type": "application/json", },
                   body: JSON.stringify(attendee),
                 })
 
@@ -42,7 +40,15 @@ const EventAttendees = () => {
                 if (result.modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
               }}>Remove</Button>
               <Button variant="danger" type="submit" className="col-2" onClick={async () => {
+                const response = await fetch('http://localhost:5000/ban-attendee/' + id, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json", },
+                  body: JSON.stringify(attendee),
+                })
                 
+                const result = await response.json();
+
+                if (result.modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
               }}>Ban</Button>
             </ButtonGroup>
           </Row>

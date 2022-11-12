@@ -14,7 +14,7 @@ body {
     background-color: #ffe599;
 }
 
-.eventContent, .homeContent, .AddEvent, .profileContent, .historyContent, .settingsContent {
+.eventContent, .homeContent, .AddEvent, .profileContent, .historyContent {
     overflow-y: scroll;
     height: 100vh;
     width: -webkit-calc(100% - 80px);
@@ -162,7 +162,7 @@ body {
     font-size: 35px;
 }
 
-.homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .settingsWrapper, .dbWriteWrapper, .loginWrapper {
+.homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .dbWriteWrapper, .loginWrapper {
     display: flex;
 }
 

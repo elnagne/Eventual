@@ -24,7 +24,7 @@ body {
     --accent: #582768;
     --eventcard-bg: #111418;
     --eventcard-hover: #202124;
-    --textarea: #17181b;
+    --textarea: #212327;
 }
 
 .eventsWrapper {
@@ -266,7 +266,7 @@ body {
 
 .EventTitle {
     display: flex;
-    color: rgb(118, 16, 212);
+    color: var(--accent);
     justify-content: center;
     align-items: center;
     margin-top: 50%;

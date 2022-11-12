@@ -1,13 +1,15 @@
 import React from 'react';
 import SidebarPro from './SidebarPro';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 import Button from 'react-bootstrap/Button';
+import { ThemeContext } from "./ThemeContext";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddEvent = () => {
+  const {theme} = useContext(ThemeContext);
   const [event_name, setEvent_name] = useState('');
   const [author, setAuthor] = useState(null);
   const [description, setDescription] = useState('');
@@ -76,7 +78,7 @@ const AddEvent = () => {
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
-      <div className="AddEvent">
+      <div className="AddEvent" data-theme={theme}>
         <form
           name="event"
           className="AddEventForm"

@@ -61,7 +61,7 @@ body {
 }
 
 .card {
-    background-color: var(--background);
+    background-color: var(--eventcard-bg);
     color: var(--text-primary)
 }
 
@@ -303,7 +303,8 @@ body {
 .homeContent,
 .AddEvent,
 .profileContent,
-.historyContent {
+.historyContent,
+.forgotPasswordContent {
     color: var(--text-primary);
     background-color: var(--background);
     /*transition: all .5s;*/

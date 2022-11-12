@@ -68,7 +68,7 @@ async function send_event(id, update) {
                 'Time: ' +
                 event.time_of_event +
                 '\n' +
-                '<b>Email: ' +
+                'Email: ' +
                 event.email +
                 '\n' +
                 'Phone number: ' +
@@ -197,6 +197,26 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
   });
 });
 
+// remove attendee from event
+eventsRoutes.route("/remove-attendee/:id").post((req, res) => {
+  // todo switch to non testEvent on release
+  let dbConnect = dbo.getDb("eventual");
+
+  dbConnect
+    .collection("testEvents")
+    .updateOne({ _id: ObjectId(req.params.id) },
+      {
+        $pull: {
+          attending_users: {
+            account_id: ObjectId(req.body.account_id)
+          }
+        }
+      }, (err, response) => {
+        console.log(response);
+        res.status(response);
+    });
+});
+
 // Getting all attendees
 eventsRoutes.route("/get-attendees/:id").get((req, res) => {
   // todo switch to non testEvent and mockUsers on release
@@ -213,7 +233,7 @@ eventsRoutes.route("/get-attendees/:id").get((req, res) => {
           .collection('mockUsers')
           .findOne({ _id: ObjectId(user.account_id) })
           .then((user) => {
-            var attendee = {name: user.name.last + ", " + user.name.first, username: user.username };
+            var attendee = { account_id: user._id, name: user.name.last + ", " + user.name.first, username: user.username };
             attendees.push(attendee);
           })
         }

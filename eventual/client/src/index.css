@@ -260,11 +260,9 @@ body {
 }
 
 .AddNotif {
-
-    height: 50vh;
+    background-color: var(--background);
+    height: 100vh;
     width: -webkit-calc(100% - 80px);
-
-    margin-left: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -279,11 +277,20 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    background-color: var(--background);
+    color: var(--text-primary);
+    padding: 5px;
 }
 
 .AddNotifSubmit {
     margin-top: 10px;
+}
+
+.NotificationTitle {
+    display: flex;
+    color: var(--accent);
+    justify-content: center;
+    align-items: center;
 }
 
 .EventTitle {

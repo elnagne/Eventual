@@ -36,7 +36,10 @@ const EventAttendees = () => {
                   },
                   body: JSON.stringify(attendee),
                 })
-                  if (await response.json().modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
+
+                const result = await response.json();
+
+                if (result.modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
               }}>Remove</Button>
               <Button variant="danger" type="submit" className="col-2" onClick={async () => {
                 

@@ -9,13 +9,12 @@ const EventAttendees = () => {
 
   async function getAttendees() {
     const response = await fetch('http://localhost:5000/get-attendees/' + id);
-    setAttendees(await response.json());
-    console.log(attendees);
+    console.log(await (await fetch('http://localhost:5000/get-attendees/' + id)).json());
+    await response.json().then((response) => { setAttendees(response); });
   }
   
   useEffect(() => {
     getAttendees();
-    return;
   }, []);
 
   const AttendeeRow = (props) => {

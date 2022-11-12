@@ -207,20 +207,20 @@ eventsRoutes.route("/get-attendees/:id").get((req, res) => {
   dbConnect
     .collection("testEvents")
     .findOne({ _id: ObjectId(req.params.id) })
-    .then((event) => {
+    .then(async (event) => {
       for (const user of event.attending_users) {
-        dbConnect
+        await dbConnect
           .collection('mockUsers')
           .findOne({ _id: ObjectId(user.account_id) })
           .then((user) => {
             var attendee = {name: user.name.last + ", " + user.name.first, username: user.username };
-            console.log(attendee);
             attendees.push(attendee);
           })
         }
-    })
-
-    res.send(attendees);
+    }).then(() => {
+      res.send(attendees);
+    }
+  )
 });
 
 // sends email to all users in req.body._id event with req.body.subject as subject and req.body.text as message

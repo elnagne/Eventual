@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SidebarPro from "./SidebarPro";
 import NotificationsDisplay from "./NotificationsDisplay";
+import { ThemeContext } from "./ThemeContext";
 
 const MyNotifications = () => {
+  const {theme} = useContext(ThemeContext);
   const [events, setEvents] = useState([]);
   const logged_account_id = localStorage.getItem("userid");
   useEffect(() => {
@@ -27,7 +29,7 @@ const MyNotifications = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent">
+      <div className="eventContent" data-theme={theme}>
         <NotificationsDisplay events={events} />
       </div>
     </div>

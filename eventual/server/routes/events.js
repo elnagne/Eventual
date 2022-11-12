@@ -206,14 +206,16 @@ eventsRoutes.route("/remove-attendee/:id").post((req, res) => {
     .collection("testEvents")
     .updateOne({ _id: ObjectId(req.params.id) },
       {
+        $inc: {
+          num_joined: -1,
+        },
         $pull: {
           attending_users: {
             account_id: ObjectId(req.body.account_id)
           }
         }
       }, (err, response) => {
-        console.log(response);
-        res.status(response);
+        res.send(response);
     });
 });
 

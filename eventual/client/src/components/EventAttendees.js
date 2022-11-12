@@ -24,7 +24,7 @@ const EventAttendees = () => {
     return (
       <div>
         {props.attendees.map((attendee) => { return (
-          <Row key={attendee.username}>
+          <Row key={attendee.username} id={attendee.username}>
             <Col>{attendee.name}</Col>
             <Col>{attendee.username}</Col>
             <ButtonGroup as={Col}>
@@ -35,8 +35,8 @@ const EventAttendees = () => {
                     "Content-Type": "application/json",
                   },
                   body: JSON.stringify(attendee),
-                });
-                if (response.modifiedCount > 0) { this.parentNode.remove() }
+                })
+                  if (await response.json().modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
               }}>Remove</Button>
               <Button variant="danger" type="submit" className="col-2" onClick={async () => {
                 

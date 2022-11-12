@@ -81,7 +81,7 @@ const Event = () => {
           {loggedIn ? (
             <AddComment eventId={id} addComment={addComment} />
           ) : (
-            <Alert variant="warning" className="mx-4 my-4">
+            <Alert variant="primary" className="mx-4 my-4">
               Log in to leave a comment.
             </Alert>
           )}

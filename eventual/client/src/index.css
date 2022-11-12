@@ -9,6 +9,22 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: hsl(285, 45%, 28%, 50%) !important;
+    border-color: hsl(285, 45%, 28%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: hsl(285, 45%, 28%, 75%) !important;
+}
+
+.alert-primary {
+    background-color: hsl(285, 45%, 28%, 50%) !important;
+    border-color: hsl(285, 45%, 28%);
+    color: #DADCE0;
+}
+
 :root {
     --background: #fffff0;
     --text-primary: black;

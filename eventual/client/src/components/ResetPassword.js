@@ -30,7 +30,7 @@ const ResetPassword = props => {
         
             if (response.ok) {
                 await response.json().then(user => {
-                    console.log(user);
+
                     setUsername(user.username);
                     setLoading(false);
                 });
@@ -51,7 +51,7 @@ const ResetPassword = props => {
             password: password
         };
 
-        console.log(username);
+  
 
         fetch("http://localhost:5000/update-forgot-password", {
                 method: "POST",

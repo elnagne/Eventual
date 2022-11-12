@@ -46,8 +46,6 @@ async function send_event(id, update) {
                 },
               });
 
-              console.log('Creating message');
-
               text = '';
 
               if (update)
@@ -92,14 +90,12 @@ async function send_event(id, update) {
                 text: text,
               };
 
-              console.log('Sending email');
-
               transporter.sendMail(mailOptions, (err, response) => {
                 if (err) {
                   console.error('Could not send to ' + user.email + ':', err);
                   sentAll = false;
                 } else {
-                  console.log('email sent');
+                  // console.log('email sent');
                 }
               });
             }
@@ -203,11 +199,12 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
 
 // Getting all attendees
 eventsRoutes.route("/get-attendees/:id").get((req, res) => {
-  let db_connect = dbo.getDb("eventual");
+  // todo switch to non testEvent and mockUsers on release
+  let dbConnect = dbo.getDb("eventual");
 
   var attendees = [];
 
-  db_connect
+  dbConnect
     .collection("testEvents")
     .findOne({ _id: ObjectId(req.params.id) })
     .then((event) => {
@@ -216,7 +213,8 @@ eventsRoutes.route("/get-attendees/:id").get((req, res) => {
           .collection('mockUsers')
           .findOne({ _id: ObjectId(user.account_id) })
           .then((user) => {
-            var attendee = {name: user.name.first + " " + user.name.last, username: user.username };
+            var attendee = {name: user.name.last + ", " + user.name.first, username: user.username };
+            console.log(attendee);
             attendees.push(attendee);
           })
         }
@@ -237,7 +235,6 @@ eventsRoutes.route('/receive-response/:id').post(async (req, response) => {
     .findOne({ _id: ObjectId(req.params.id) })
     .then((event) => {
       for (const user of event.attending_users) {
-        console.log(user.account_id);
         dbConnect
           .collection('mockUsers')
           .findOne({ _id: ObjectId(user.account_id) })

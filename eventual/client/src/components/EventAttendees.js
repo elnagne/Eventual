@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useParams } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import SidebarPro from './SidebarPro';
 import Alert from 'react-bootstrap/Alert';
 
@@ -8,25 +9,20 @@ const EventAttendees = () => {
 
   async function getAttendees() {
     const response = await fetch('http://localhost:5000/get-attendees/' + id);
-
     setAttendees(await response.json());
-
-    for (let i = 0; i < attendees.length; i++) {
-      
-    }
+    console.log(attendees);
   }
   
   useEffect(() => {
     getAttendees();
     return;
-  });
+  }, []);
 
   const AttendeeRow = (props) => {
     return (
       <div>
-        {props.attendee.map((attendee) => { return (
-          <div/> 
-          // put username and name
+        {props.attendees.map((attendee) => { return (
+            <div>this.attendee.name</div>
           // button that calls function with username as argument
       )})}
       </div>
@@ -38,7 +34,7 @@ const EventAttendees = () => {
       <SidebarPro />
       <div className="attendeeContent">
         {attendees.length > 0 ? (
-          <AttendeeRow attendee={attendees} />
+          <AttendeeRow attendees={attendees} />
         ) : (
           <Alert variant="primary" className="mx-4 my-4">
             No attendees found.

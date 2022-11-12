@@ -15,6 +15,7 @@ body {
     --accent: #20124d;
     --eventcard-bg: #ffffff;
     --eventcard-hover: #ECECEC;
+    --textarea : #ffffff;
 }
 
 [data-theme='dark'] {
@@ -23,6 +24,7 @@ body {
     --accent: #582768;
     --eventcard-bg: #111418;
     --eventcard-hover: #202124;
+    --textarea: #17181b;
 }
 
 .eventsWrapper {
@@ -304,7 +306,19 @@ body {
 }
 
 .eventsFilter {
-    color:var(--text-primary);
+    color: var(--text-primary);
     background-color: var(--eventcard-bg);
+    border-color: var(--eventcard-hover);
+}
+
+.form-control:not(active) {
+    color: var(--text-primary);
+    background-color: var(--textarea);
+    border-color: var(--eventcard-hover);
+}
+
+.form-control:focus {
+    color: var(--text-primary);
+    background-color: var(--textarea);
     border-color: var(--eventcard-hover);
 }

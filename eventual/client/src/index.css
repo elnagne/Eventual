@@ -66,11 +66,14 @@ body {
 }
 
 .loginContent {
+    background-color: var(--background);
+    color: var(--text-primary);
     overflow-y: hidden;
     height: 100vh;
     width: -webkit-calc(100% - 80px);
     position: absolute;
     margin-left: 80px;
+    padding: 0px 50px;
 }
 
 .eventCard {

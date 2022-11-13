@@ -31,10 +31,9 @@ likedRoutes.route('/is-banned/:id').post(async (req, res) => {
     .collection('testEvents')
     .count({ _id: ObjectId(req.params.id), banlist: { account_id: ObjectId(req.body.account_id) }}, limit = 1)
     > 0) {
-      res.sendStatus(200); // user is banned
-      return;
+      res.sendStatus(403); // user is banned
     } else
-      res.sendStatus(404);
+      res.sendStatus(200);
 })
 
 likedRoutes.route('/liked/add_like').post(function (req, response) {

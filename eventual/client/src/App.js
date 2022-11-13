@@ -20,12 +20,14 @@ import ResetPassword from './components/ResetPassword';
 import UserNotifications from './components/UserNotifications';
 import { SearchContextProvider } from './components/SearchContext';
 import { EventContextProvider } from './components/EventContext';
+import { ThemeContextProvider } from './components/ThemeContext';
 
 import Profile from './components/Profile';
 // We use Route in order to define the different routes of our application
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
+    <ThemeContextProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -50,6 +52,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
+    </ThemeContextProvider>
   );
 };
 export default App;

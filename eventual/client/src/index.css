@@ -5,41 +5,105 @@
 }
 
 body {
-    background-color: #ffffff;
     color: #2b2b2b;
     font-family: 'Roboto', sans-serif;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: hsl(285, 45%, 28%, 50%) !important;
+    border-color: hsl(285, 45%, 28%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: hsl(285, 45%, 28%, 75%) !important;
+}
+
+.alert-primary {
+    background-color: hsl(285, 45%, 28%, 50%) !important;
+    border-color: hsl(285, 45%, 28%);
+    color: #DADCE0;
+}
+
+:root {
+    --background: #fffff0;
+    --text-primary: black;
+    --accent: #20124d;
+    --eventcard-bg: #ffffff;
+    --eventcard-hover: #ECECEC;
+    --textarea : #ffffff;
+}
+
+[data-theme='dark'] {
+    --background: #17181b;
+    --text-primary: #DADCE0;
+    --accent: #582768;
+    --eventcard-bg: #111418;
+    --eventcard-hover: #202124;
+    --textarea: #212327;
 }
 
 .eventsWrapper {
     background-color: #ffe599;
 }
 
-.eventContent, .homeContent, .AddEvent, .profileContent, .historyContent {
+.eventContent,
+.homeContent,
+.AddEvent,
+.profileContent,
+.historyContent {
+    color: var(--text-primary);
+    background-color: var(--background);
     overflow-y: scroll;
     height: 100vh;
     width: -webkit-calc(100% - 80px);
-    position:absolute;
+    position: absolute;
     margin-left: 80px;
+    /*transition: all .5s;*/
+}
+
+#registerPopup {
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 100;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.card {
+    background-color: var(--eventcard-bg);
+    color: var(--text-primary)
 }
 
 .loginContent {
+    background-color: var(--background);
+    color: var(--text-primary);
     overflow-y: hidden;
     height: 100vh;
     width: -webkit-calc(100% - 80px);
-    position:absolute;
+    position: absolute;
     margin-left: 80px;
+    padding: 0px 50px;
 }
 
 .eventCard {
+    background-color: var(--eventcard-bg);
     margin: 20px;
 }
 
 .eventCard.clickable:hover {
-    background-color: #ECECEC;
+    background-color: var(--eventcard-hover);
 }
 
 .eventCard img {
-    filter: drop-shadow(3px 3px 4px);
+    filter: drop-shadow(3px 3px 4px var(--eventcard-bg));
+    border-radius: 5px;
     object-fit: cover;
     margin-right: 17.5px;
     width: 135px;
@@ -55,7 +119,7 @@ body {
 }
 
 .eventCard .title {
-    color: #20124d;
+    color: var(--accent);
     font-weight: 700;
     font-size: 36px;
     margin-right: 0.7rem;
@@ -65,6 +129,7 @@ body {
     color: #E510A3;
     font-size: 16px;
 }
+
 .eventCard.singular .title {
     font-size: 62.5px;
 }
@@ -87,6 +152,7 @@ body {
 .eventCard.singular .date {
     font-size: 35px;
 }
+
 .eventCard .singular {
     color: #E510A3;
     font-size: 18px;
@@ -157,12 +223,17 @@ body {
 }
 
 .eventCard h1 {
-    color: #20124d;
+    color: var(--accent);
     font-weight: bold;
     font-size: 35px;
 }
 
-.homeWrapper, .eventsWrapper, .likedWrapper, .historyWrapper, .dbWriteWrapper, .loginWrapper {
+.homeWrapper,
+.eventsWrapper,
+.likedWrapper,
+.historyWrapper,
+.dbWriteWrapper,
+.loginWrapper {
     display: flex;
 }
 
@@ -177,7 +248,7 @@ body {
 }
 
 .navbarItem {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     color: white;
@@ -185,51 +256,62 @@ body {
     margin-bottom: 15px;
 }
 
- 
+
 
 .AddEvent {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .AddEventElement {
     margin-bottom: 15px;
 }
+
 .AddEventForm {
     width: 600px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .AddNotif {
-
-    height: 50vh;
+    background-color: var(--background);
+    height: 100vh;
     width: -webkit-calc(100% - 80px);
-
-    margin-left: 80px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .AddNotifElement {
     margin-bottom: 10px;
 }
+
 .AddNotifForm {
     width: 600px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-
+    background-color: var(--background);
+    color: var(--text-primary);
+    padding: 5px;
 }
 
 .AddNotifSubmit {
     margin-top: 10px;
 }
 
+.NotificationTitle {
+    display: flex;
+    color: var(--accent);
+    justify-content: center;
+    align-items: center;
+}
+
 .EventTitle {
-    display:flex;
-    color: rgb(118, 16, 212);
+    display: flex;
+    color: var(--accent);
     justify-content: center;
     align-items: center;
     margin-top: 50%;
@@ -241,4 +323,48 @@ body {
 
 .sidebarproWrapper {
     height: 100vh;
+}
+
+.eventContent,
+.homeContent,
+.AddEvent,
+.profileContent,
+.historyContent,
+.forgotPasswordContent {
+    color: var(--text-primary);
+    background-color: var(--background);
+    /*transition: all .5s;*/
+}
+
+.accordion-button {
+    background-color: var(--eventcard-bg) !important;
+    color: var(--text-primary);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--text-primary);
+    background-color: var(--eventcard-bg);
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+
+.eventsFilter {
+    color: var(--text-primary);
+    background-color: var(--eventcard-bg);
+    border-color: var(--eventcard-hover);
+}
+
+.form-control:not(active) {
+    color: var(--text-primary);
+    background-color: var(--textarea);
+    border-color: var(--eventcard-hover);
+}
+
+.form-control:focus {
+    color: var(--text-primary);
+    background-color: var(--textarea);
+    border-color: var(--eventcard-hover);
 }

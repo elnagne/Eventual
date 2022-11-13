@@ -63,7 +63,7 @@ const EventAttendees = () => {
       <SidebarPro />
       <Container>
         <Col className="col-xs-12 col-sm-12 col-md-10 p-5">
-          <h2>Attendees</h2>
+          <h2 className="fw-bold text-secondary pb-2">Attendees</h2>
           {attendees.length > 0 ? (
             <AttendeeRow attendees={attendees} />
           ) : (

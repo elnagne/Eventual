@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 // recordRoutes is an instance of the express router.
@@ -11,10 +12,6 @@ const dbo = require('../db/conn');
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require('mongodb').ObjectId;
 
-function checkIfBanned(dbConnect, event_id, account_id) {
-
-}
-
 // This section will help you get a list of all the records.
 likedRoutes.route('/liked').get(function (req, res) {
   let db_connect = dbo.getDb('eventual');
@@ -26,6 +23,19 @@ likedRoutes.route('/liked').get(function (req, res) {
       res.json(result);
     });
 });
+
+likedRoutes.route('/is-banned/:id').post(async (req, res) => {
+  let dbConnect = dbo.getDb('eventual');
+
+  if (await dbConnect
+    .collection('testEvents')
+    .count({ _id: ObjectId(req.params.id), banlist: { account_id: ObjectId(req.body.account_id) }}, limit = 1)
+    > 0) {
+      res.sendStatus(200); // user is banned
+      return;
+    } else
+      res.sendStatus(404);
+})
 
 likedRoutes.route('/liked/add_like').post(function (req, response) {
   let db_connect = dbo.getDb();
@@ -79,6 +89,7 @@ likedRoutes.route('/liked/add_dislike').post(function (req, response) {
 likedRoutes.route('/attend/add_attendance').post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.body.event_id) };
+
   let newvalues = {
     $inc: {
       num_joined: 1,

@@ -191,7 +191,7 @@ const EventCard = (props) => {
 
   return (
     <Card className="eventCard clickable card-title shadow">
-      <Card.Body >
+      <Card.Body>
         {imgUrl && (
           <div className="pic">
             <img src={imgUrl} alt={name} />

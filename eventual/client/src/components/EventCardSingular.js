@@ -478,9 +478,9 @@ const EventCardSingular = (props) => {
                     )}
                   </Col>
                   <Col>
-                    {account_id == author_id && (
+                    {account_id === author_id && (
                       <Button
-                        variant="success"
+                        variant="outline-primary"
                         onClick={goToAttendeesPage}
                         className="main-btn"
                         >

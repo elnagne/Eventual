@@ -37,7 +37,10 @@ searchRoutes.route("/search/filteredSearch").post((req, res) => {
   }
 
   let sortQuery ={}
-  if (orderby == "newest"){
+  if (orderby == "oldest"){
+    sortQuery = {$natural:1}
+  }
+  else if (orderby == "newest"){
     sortQuery = {$natural:-1}
   }
   else if (orderby == "likes"){

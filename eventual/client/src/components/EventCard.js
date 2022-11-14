@@ -57,10 +57,10 @@ const EventCard = (props) => {
         }
         const author = await response.json();
         setAuthor(author);
+        changedValues();
       }
       getUser();
       getUserGender();
-      loadInitialValues();
       return;
     }
   }, [props.event.author]);
@@ -136,12 +136,18 @@ const EventCard = (props) => {
     setNumJoined(numJoined - 1);
   }
   async function loadInitialValues() {
-        setLikes(event.num_likes);
-        setLikedby(event.liked_by.map((user) => user.account_id));
-        setNumJoined(event.num_joined);
-        setJoinedby(event.attending_users.map((user) => user.account_id));
-
+    if (changesMade == true) {
+      setLikes(event.num_likes);
+      setLikedby(event.liked_by.map((user) => user.account_id));
+      setNumJoined(event.num_joined);
+      setJoinedby(event.attending_users.map((user) => user.account_id));
+      setChangesMade(false);
+    }
   }
+  async function changedValues(){
+    setChangesMade(true);
+  }
+  const [changesMade, setChangesMade] = useState(true);
   const event = props.event;
   const id = event._id;
   const name = event.event_name;
@@ -191,7 +197,7 @@ const EventCard = (props) => {
 
   return (
     <Card className="eventCard clickable card-title shadow">
-      <Card.Body>
+      <Card.Body onLoad={loadInitialValues()}>
         {imgUrl && (
           <div className="pic">
             <img src={imgUrl} alt={name} />

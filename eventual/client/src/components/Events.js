@@ -54,7 +54,7 @@ const Events = () => {
     const events = await response.json();
     setEvents(events);
   }
-
+  
   return (
     <div className="eventsWrapper">
       <SidebarPro />

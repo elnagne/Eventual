@@ -96,6 +96,18 @@ const EventCardSingular = (props) => {
       setnNSM(
         'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
       );
+    } 
+    // check if banned
+    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accountEvent),
+    });
+
+    if (response.status === 403) {
+      alert("You have been banned from this event.");
     } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
         method: 'POST',
@@ -176,6 +188,11 @@ const EventCardSingular = (props) => {
   const openInNewTab = (url) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
+
+  function goToAttendeesPage() {
+    let path = '/event-attendees/' + props.id;
+    navigate(path);
+  }
 
   function goToUpdatePage() {
     let path = '/update-events/' + props.id;
@@ -446,17 +463,32 @@ const EventCardSingular = (props) => {
                     {address}
                   </div>
                 )}
-                {googleMapsURL && (
-                  <Button
-                    variant="success"
-                    className="maps-btn"
-                    onClick={() => openInNewTab(googleMapsURL)}
-                  >
-                    {' '}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
-                    <strong>MAPS</strong>
-                  </Button>
-                )}
+                <Row>
+                  <Col>
+                  {googleMapsURL && (
+                    <Button
+                      variant="success"
+                      className="maps-btn"
+                      onClick={() => openInNewTab(googleMapsURL)}
+                      >
+                        {' '}
+                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                        <strong>MAPS</strong>
+                      </Button>
+                    )}
+                  </Col>
+                  <Col>
+                    {account_id === author_id && (
+                      <Button
+                        variant="outline-primary"
+                        onClick={goToAttendeesPage}
+                        className="main-btn"
+                        >
+                          Check Attendees
+                        </Button>
+                      )}
+                    </Col>
+                  </Row>
               </div>
             </Col>
             <Col lg={7}>

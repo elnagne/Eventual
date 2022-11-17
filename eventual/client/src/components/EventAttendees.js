@@ -47,7 +47,7 @@ const EventAttendees = () => {
 
                 const result = await response.json();
 
-                if (result.modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
+                if (result.modifiedCount > 0) { setIsClicked(bool => !bool) }
               }}>Remove</Button>
               <Button variant="danger" type="submit" className="col-2" onClick={async () => {
                 const response = await fetch('http://localhost:5000/ban-attendee/' + id, {
@@ -71,10 +71,10 @@ const EventAttendees = () => {
     return (
       <div>
         {props.banlist.map((banned) => { return (
-          <Row key={banned.username} id={'banned elements: ' + banned.username}>
+          <Row key={banned.username} id={banned.username}>
             <Col className="border-end"><span>{banned.name}</span></Col>
             <Col className="border-end"><span>{banned.username}</span></Col>
-            <Button variant="danger" type="submit" className="col-2" onClick={async () => {
+            <Button variant="primary" type="submit" className="col-4 mb-3" onClick={async () => {
               const response = await fetch('http://localhost:5000/unban-user/' + id, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", },

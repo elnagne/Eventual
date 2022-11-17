@@ -189,6 +189,14 @@ body {
     float: right;
 }
 
+.eventCard .share-bar {
+    margin-left: 30px;
+}
+
+.eventCard .share-btn {
+    margin-right: 12px;
+}
+
 .eventCard .main-btn {
     margin-right: 12.5px;
     margin-bottom: 11px;

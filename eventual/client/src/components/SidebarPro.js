@@ -1,7 +1,9 @@
 import React from 'react';
+import useLocalStorage from 'use-local-storage'
 import { useState, useContext, useLayoutEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { RegisterContext } from './RegisterContext';
+import { ThemeContext } from "./ThemeContext";
 import Register from './Register';
 import UserInfo from './UserInfo';
 
@@ -34,6 +36,8 @@ import {
   faSignOut,
   faCalendarCheck,
   faMessage,
+  faSun,
+  faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 
 const SidebarPro = () => {
@@ -41,6 +45,12 @@ const SidebarPro = () => {
   const [username, setUsername] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
   const { isModalOpen, setModalOpen } = useContext(RegisterContext);
+  const {theme, setTheme} = useContext(ThemeContext);
+
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  }
 
   async function logout() {
     localStorage.removeItem('token');
@@ -124,12 +134,6 @@ const SidebarPro = () => {
                 <Link to="/history" />
               </MenuItem>
             )}
-            {username && (
-              <MenuItem icon={<FontAwesomeIcon icon={faCogs} />}>
-                Settings
-                <Link to="/settings" />
-              </MenuItem>
-            )}
             {username == null && (
               <MenuItem icon={<FontAwesomeIcon icon={faSignIn} />}>
                 Log in
@@ -166,6 +170,9 @@ const SidebarPro = () => {
                 Log out
               </MenuItem>
             )}
+            <MenuItem onClick={switchTheme} icon={theme === 'light' ? <FontAwesomeIcon icon={faMoon} />: <FontAwesomeIcon icon={faSun} />}>
+              {theme === 'light' ? 'Dark' : 'Light'} Mode
+            </MenuItem>
           </Menu>
         </SidebarContent>
         <SidebarFooter>

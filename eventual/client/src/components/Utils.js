@@ -46,3 +46,39 @@ export function getGoogleMapsURL(address_data, locationStr) {
 
   return `https://maps.google.com/?q=${latitude},${longitude}`;
 }
+
+export function createShareBlurb(name, address, dateStr, timeStr) {
+  let blurb = "";
+  if (name) {
+    blurb = blurb + "There's an upcoming event called \"" + name + '"!';
+  } else {
+    blurb = blurb + "There's an upcoming event!";
+  }
+  if (address || dateStr || timeStr) {
+    blurb = blurb + " It's taking place";
+    if (address) {
+      blurb = blurb + " at " + address;
+    }
+    if (dateStr) {
+      const dateObj = new Date(dateStr);
+      const date = dateObj.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      blurb = blurb + " on " + date;
+    }
+    if (timeStr) {
+      const timeObj = new Date("0000-01-01 " + timeStr);
+      const time = timeObj.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      blurb = blurb + " at " + time;
+    }
+    blurb = blurb + "!";
+  }
+  blurb = blurb + " :D";
+  return blurb;
+}

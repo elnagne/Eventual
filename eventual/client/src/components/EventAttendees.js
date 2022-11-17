@@ -74,17 +74,19 @@ const EventAttendees = () => {
           <Row key={banned.username} id={banned.username}>
             <Col className="border-end"><span>{banned.name}</span></Col>
             <Col className="border-end"><span>{banned.username}</span></Col>
-            <Button variant="primary" type="submit" className="col-4 mb-3" onClick={async () => {
-              const response = await fetch('http://localhost:5000/unban-user/' + id, {
-                method: "POST",
-                headers: { "Content-Type": "application/json", },
-                body: JSON.stringify(banned),
-              })
-              
-              const result = await response.json();
+            <ButtonGroup as={Col} className="mb-3">
+              <Button variant="primary" type="submit" className="col-4 mb-3" onClick={async () => {
+                const response = await fetch('http://localhost:5000/unban-user/' + id, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json", },
+                  body: JSON.stringify(banned),
+                })
+                
+                const result = await response.json();
 
-              if (result.modifiedCount > 0) { setIsClicked(bool => !bool) }
-            }}>Unban</Button>
+                if (result.modifiedCount > 0) { setIsClicked(bool => !bool) }
+              }}>Unban</Button>
+            </ButtonGroup>
           </Row>
         )})}
       </div>

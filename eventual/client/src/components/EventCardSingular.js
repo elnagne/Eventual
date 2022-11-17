@@ -16,6 +16,7 @@ import {
   faCaretLeft,
   faMessage,
   faFaceTired,
+  faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -386,26 +387,34 @@ const EventCardSingular = (props) => {
               </span>
             )}
             <span className="share-bar">
+              <OverlayTrigger
+                placement="top"
+                trigger={["click"]}
+                overlay={
+                  <Tooltip id="button-tooltip-2">Copied to clipboard!</Tooltip>
+                }
+              >
+                <Button
+                  className="share-btn"
+                  onClick={() => {
+                    navigator.clipboard.writeText(shareBlurb);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
+                </Button>
+              </OverlayTrigger>
               <TwitterShareButton
                 title={shareBlurb}
                 url={shareUrl}
                 hashtags={["eventual"]}
               >
-                <TwitterIcon
-                  className="share-btn"
-                  size={50}
-                  borderRadius={22.5}
-                ></TwitterIcon>
+                <TwitterIcon className="share-btn"></TwitterIcon>
               </TwitterShareButton>
               <EmailShareButton
                 subject={"Check out this event!"}
                 body={shareBlurb}
               >
-                <EmailIcon
-                  className="share-btn"
-                  size={50}
-                  borderRadius={22.5}
-                ></EmailIcon>
+                <EmailIcon className="share-btn"></EmailIcon>
               </EmailShareButton>
               <TumblrShareButton
                 title={"Check out this event!"}
@@ -413,18 +422,10 @@ const EventCardSingular = (props) => {
                 url={shareUrl}
                 tags={["#eventual"]}
               >
-                <TumblrIcon
-                  className="share-btn"
-                  size={50}
-                  borderRadius={22.5}
-                ></TumblrIcon>
+                <TumblrIcon className="share-btn"></TumblrIcon>
               </TumblrShareButton>
               <RedditShareButton title={shareBlurb} url={shareUrl}>
-                <RedditIcon
-                  className="share-btn"
-                  size={50}
-                  borderRadius={22.5}
-                ></RedditIcon>
+                <RedditIcon className="share-btn"></RedditIcon>
               </RedditShareButton>
             </span>
           </div>

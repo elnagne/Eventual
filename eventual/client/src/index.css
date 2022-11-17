@@ -195,6 +195,9 @@ body {
 
 .eventCard .share-btn {
     margin-right: 12px;
+    height: 45px;
+    width: 45px;
+    border-radius: 20px;
 }
 
 .eventCard .main-btn {

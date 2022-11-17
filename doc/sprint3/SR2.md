@@ -10,21 +10,21 @@
 
 ## Analysis
 
-Our group accomplished all of our allocated stories for sprint 2, though due to understimating tasks, we ended up finding bugs on the last day, forcing us to cram.
+Our group accomplished all of our allocated stories for sprint 3, and we managed to find the right balance of story points that we were able to comfortably finish by the end without crunch. Our familiarity with the technology allowed us to spend more time on our stories.
 
-Furthermore, our lack of practice for the sprint presentation ended up causing us to take much longer than expected, due to not understanding how our features worked together. Next time , we plan to do a demo presentation beforehand amongst ourselves before we present to the TA.
+However, while we practiced the demo an hour before, we had to rush due to leaving it so close. In future sprint demos, we will practice our presentation a day before, to give us time to suitably prepare.
 
 ## Good Practices
 - Frequent communication between team members.
 - Team members were very willing to help each other with their tasks.
-- Relying on well-tested APIs rather than recreating worse versions.
+- Sprint meetings were short but informative.
+- Did not have to crunch.
 
 ## Bad Practices
-- Crammed a lot towards the end of the sprint.
-- Did not practice presentation.
+- Did not practice presentation until an hour before.
 
 ## Positive Experiences
-- Lots of new learning experiences, especially for technology commonly used in the industry.
+- Managed to pass the sprint without any particular problems, allowing group members to focus on implementing their stories without having to worry about merge errors or bugs.
 
 ## Negative Experiences
 - Had many small bugs pop up on the last day after merging.

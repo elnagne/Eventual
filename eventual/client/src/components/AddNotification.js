@@ -1,16 +1,14 @@
-import { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import SidebarPro from './SidebarPro';
 import { useState } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
-import { ThemeContext } from "./ThemeContext";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddNotification = () => {
-  const {theme} = useContext(ThemeContext);
   const { id } = useParams();
 
   const [event, setEvent] = useState(null);
@@ -105,14 +103,14 @@ const AddNotification = () => {
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
-      <div className="AddNotif" data-theme={theme}>
+      <div className="AddNotif">
         <form
           name="notification"
           className="AddNotifForm"
           encType="multipart/form-data"
           onSubmit={onSubmit}
         >
-          <h2 className="NotificationTitle">Add Notification</h2>
+          <h2 className="EventTitle">Add Notification</h2>
           <div className="AddEventElement">
             <label>Event Name</label>
             <input

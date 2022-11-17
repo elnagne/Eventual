@@ -1,11 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EventCardSingular from "./EventNotificationCardSingular";
 import SidebarPro from "./SidebarPro";
-import { ThemeContext } from "./ThemeContext";
 
 const Event = () => {
-  const {theme} = useContext(ThemeContext);
   const { id } = useParams();
   const [event, setEvent] = useState([]);
 
@@ -31,7 +29,7 @@ const Event = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent" data-theme={theme}>
+      <div className="eventContent">
         <div>
           <EventCardSingular event={event} id={id} />
         </div>

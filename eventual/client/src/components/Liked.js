@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import SidebarPro from "./SidebarPro";
 import EventsDisplay from "./EventsDisplay";
-import { ThemeContext } from "./ThemeContext";
 
 const LikedEvents = () => {
-  const {theme} = useContext(ThemeContext);
   const [events, setEvents] = useState([]);
   const logged_account_id = localStorage.getItem("userid");
   useEffect(() => {
@@ -29,7 +27,7 @@ const LikedEvents = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent" data-theme={theme}>
+      <div className="eventContent">
         <EventsDisplay events={events} />
       </div>
     </div>

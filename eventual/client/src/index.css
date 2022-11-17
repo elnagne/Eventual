@@ -1,50 +1,53 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    color: #2b2b2b;
-    font-family: 'Roboto', sans-serif;
+  color: #2b2b2b;
+  font-family: "Roboto", sans-serif;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: hsl(285, 45%, 28%, 50%) !important;
-    border-color: hsl(285, 45%, 28%);
-    border: none;
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: hsl(285, 45%, 28%, 50%) !important;
+  border-color: hsl(285, 45%, 28%);
+  border: none;
 }
 
 .btn-primary:hover {
-    background-color: hsl(285, 45%, 28%, 75%) !important;
+  background-color: hsl(285, 45%, 28%, 75%) !important;
 }
 
 .alert-primary {
-    background-color: hsl(285, 45%, 28%, 50%) !important;
-    border-color: hsl(285, 45%, 28%);
-    color: #DADCE0;
+  background-color: hsl(285, 45%, 28%, 50%) !important;
+  border-color: hsl(285, 45%, 28%);
+  color: #dadce0;
 }
 
 :root {
-    --background: #fffff0;
-    --text-primary: black;
-    --accent: #20124d;
-    --eventcard-bg: #ffffff;
-    --eventcard-hover: #ECECEC;
-    --textarea : #ffffff;
+  --background: #fffff0;
+  --text-primary: black;
+  --accent: #20124d;
+  --eventcard-bg: #ffffff;
+  --eventcard-hover: #ececec;
+  --textarea: #ffffff;
 }
 
-[data-theme='dark'] {
-    --background: #17181b;
-    --text-primary: #DADCE0;
-    --accent: #582768;
-    --eventcard-bg: #111418;
-    --eventcard-hover: #202124;
-    --textarea: #212327;
+[data-theme="dark"] {
+  --background: #17181b;
+  --text-primary: #dadce0;
+  --accent: #582768;
+  --eventcard-bg: #111418;
+  --eventcard-hover: #202124;
+  --textarea: #212327;
 }
 
 .eventsWrapper {
-    background-color: #ffe599;
+  background-color: #ffe599;
 }
 
 .eventContent,
@@ -52,191 +55,191 @@ body {
 .AddEvent,
 .profileContent,
 .historyContent {
-    color: var(--text-primary);
-    background-color: var(--background);
-    overflow-y: scroll;
-    height: 100vh;
-    width: -webkit-calc(100% - 80px);
-    position: absolute;
-    margin-left: 80px;
-    /*transition: all .5s;*/
+  color: var(--text-primary);
+  background-color: var(--background);
+  overflow-y: scroll;
+  height: 100vh;
+  width: -webkit-calc(100% - 80px);
+  position: absolute;
+  margin-left: 80px;
+  /*transition: all .5s;*/
 }
 
 #registerPopup {
-    position: absolute;
-    z-index: 10;
-    background-color: rgba(0,0,0,0.2);
-    z-index: 100;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
 }
 
 .card {
-    background-color: var(--eventcard-bg);
-    color: var(--text-primary)
+  background-color: var(--eventcard-bg);
+  color: var(--text-primary);
 }
 
 .loginContent {
-    background-color: var(--background);
-    color: var(--text-primary);
-    overflow-y: hidden;
-    height: 100vh;
-    width: -webkit-calc(100% - 80px);
-    position: absolute;
-    margin-left: 80px;
-    padding: 0px 50px;
+  background-color: var(--background);
+  color: var(--text-primary);
+  overflow-y: hidden;
+  height: 100vh;
+  width: -webkit-calc(100% - 80px);
+  position: absolute;
+  margin-left: 80px;
+  padding: 0px 50px;
 }
 
 .eventCard {
-    background-color: var(--eventcard-bg);
-    margin: 20px;
+  background-color: var(--eventcard-bg);
+  margin: 20px;
 }
 
 .eventCard.clickable:hover {
-    background-color: var(--eventcard-hover);
+  background-color: var(--eventcard-hover);
 }
 
 .eventCard img {
-    filter: drop-shadow(3px 3px 4px var(--eventcard-bg));
-    border-radius: 5px;
-    object-fit: cover;
-    margin-right: 17.5px;
-    width: 135px;
-    height: 135px;
-    float: left;
+  filter: drop-shadow(3px 3px 4px var(--eventcard-bg));
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 17.5px;
+  width: 135px;
+  height: 135px;
+  float: left;
 }
 
 .eventCard.singular img {
-    width: 240px;
-    height: 240px;
-    margin-right: 20px;
-    margin-bottom: 5px;
+  width: 240px;
+  height: 240px;
+  margin-right: 20px;
+  margin-bottom: 5px;
 }
 
 .eventCard .title {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 36px;
-    margin-right: 0.7rem;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 36px;
+  margin-right: 0.7rem;
 }
 
 .eventCard .alert {
-    color: #E510A3;
-    font-size: 16px;
+  color: #e510a3;
+  font-size: 16px;
 }
 
 .eventCard.singular .title {
-    font-size: 62.5px;
+  font-size: 62.5px;
 }
 
 .eventCard .desc {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .eventCard .full-desc {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .eventCard .date {
-    font-weight: 700;
-    font-size: 22.5px;
+  font-weight: 700;
+  font-size: 22.5px;
 }
 
 .eventCard.singular .date {
-    font-size: 35px;
+  font-size: 35px;
 }
 
 .eventCard .singular {
-    color: #E510A3;
-    font-size: 18px;
+  color: #e510a3;
+  font-size: 18px;
 }
 
 .eventCard .infoStrip {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .eventCard .infoStrip .property {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .eventCard .likeCount {
-    font-weight: 1000;
+  font-weight: 1000;
 }
 
 .eventCard .likes {
-    color: #E510A3;
-    font-size: 21px;
-    font-weight: 700;
+  color: #e510a3;
+  font-size: 21px;
+  font-weight: 700;
 }
 
 .eventCard.singular .likes {
-    font-size: 27px;
-    font-style: italic;
+  font-size: 27px;
+  font-style: italic;
 }
 
 .eventCard .main-btns {
-    margin: 5px;
+  margin: 5px;
 }
 
 .eventCard .back-btn {
-    float: right;
+  float: right;
 }
 
-.eventCard .share-bar {
-    margin-left: 30px;
+.eventCard .likes {
+  margin-right: 25px;
 }
 
 .eventCard .share-btn {
-    margin-right: 12px;
-    height: 45px;
-    width: 45px;
-    border-radius: 20px;
+  margin-right: 12px;
+  height: 45px;
+  width: 45px;
+  border-radius: 20px;
 }
 
 .eventCard .main-btn {
-    margin-right: 12.5px;
-    margin-bottom: 11px;
+  margin-right: 12.5px;
+  margin-bottom: 11px;
 }
 
 .eventCard .like-btn {
-    background-color: #E510A3;
-    border-color: #d70f97;
+  background-color: #e510a3;
+  border-color: #d70f97;
 }
 
 .eventCard .maps-btn {
-    margin-top: 5px 0 5px 0;
-    width: 100%;
+  margin-top: 5px 0 5px 0;
+  width: 100%;
 }
 
 .eventCard .like-btn:hover {
-    background-color: #d70f97;
-    border-color: #d70f97;
+  background-color: #d70f97;
+  border-color: #d70f97;
 }
 
 .eventCard .like-btn:active {
-    background-color: #E510A3;
-    border-color: #d70f97;
+  background-color: #e510a3;
+  border-color: #d70f97;
 }
 
 .eventCard .event-info * {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .eventCard .event-info .property {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .eventCard h1 {
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 35px;
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 35px;
 }
 
 .homeWrapper,
@@ -245,95 +248,93 @@ body {
 .historyWrapper,
 .dbWriteWrapper,
 .loginWrapper {
-    display: flex;
+  display: flex;
 }
 
 .sidebarWrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 200px;
-    background-color: rgb(118, 16, 212);
-    color: white;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 200px;
+  background-color: rgb(118, 16, 212);
+  color: white;
+  justify-content: center;
 }
 
 .navbarItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 15px;
 }
 
-
-
 .AddEvent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .AddEventElement {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .AddEventForm {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .AddNotif {
-    background-color: var(--background);
-    height: 100vh;
-    width: -webkit-calc(100% - 80px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--background);
+  height: 100vh;
+  width: -webkit-calc(100% - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .AddNotifElement {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .AddNotifForm {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--background);
-    color: var(--text-primary);
-    padding: 5px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background);
+  color: var(--text-primary);
+  padding: 5px;
 }
 
 .AddNotifSubmit {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .NotificationTitle {
-    display: flex;
-    color: var(--accent);
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  color: var(--accent);
+  justify-content: center;
+  align-items: center;
 }
 
 .EventTitle {
-    display: flex;
-    color: var(--accent);
-    justify-content: center;
-    align-items: center;
-    margin-top: 50%;
+  display: flex;
+  color: var(--accent);
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
 }
 
 .AddEventSubmit {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .sidebarproWrapper {
-    height: 100vh;
+  height: 100vh;
 }
 
 .eventContent,
@@ -342,40 +343,40 @@ body {
 .profileContent,
 .historyContent,
 .forgotPasswordContent {
-    color: var(--text-primary);
-    background-color: var(--background);
-    /*transition: all .5s;*/
+  color: var(--text-primary);
+  background-color: var(--background);
+  /*transition: all .5s;*/
 }
 
 .accordion-button {
-    background-color: var(--eventcard-bg) !important;
-    color: var(--text-primary);
+  background-color: var(--eventcard-bg) !important;
+  color: var(--text-primary);
 }
 
 .accordion-button:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .accordion-button:not(.collapsed) {
-    color: var(--text-primary);
-    background-color: var(--eventcard-bg);
-    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+  color: var(--text-primary);
+  background-color: var(--eventcard-bg);
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
 }
 
 .eventsFilter {
-    color: var(--text-primary);
-    background-color: var(--eventcard-bg);
-    border-color: var(--eventcard-hover);
+  color: var(--text-primary);
+  background-color: var(--eventcard-bg);
+  border-color: var(--eventcard-hover);
 }
 
 .form-control:not(active) {
-    color: var(--text-primary);
-    background-color: var(--textarea);
-    border-color: var(--eventcard-hover);
+  color: var(--text-primary);
+  background-color: var(--textarea);
+  border-color: var(--eventcard-hover);
 }
 
 .form-control:focus {
-    color: var(--text-primary);
-    background-color: var(--textarea);
-    border-color: var(--eventcard-hover);
+  color: var(--text-primary);
+  background-color: var(--textarea);
+  border-color: var(--eventcard-hover);
 }

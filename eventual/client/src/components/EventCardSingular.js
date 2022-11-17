@@ -127,15 +127,6 @@ const EventCardSingular = (props) => {
       }
     }
   }
-  async function joinEvent() {
-    fetch(`http://localhost:5000/attend/add_attendance`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    });
-  }
 
   async function spamIt() {
     fetch(`http://localhost:5000/spam`, {

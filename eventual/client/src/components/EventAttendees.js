@@ -10,6 +10,8 @@ import Alert from 'react-bootstrap/Alert';
 
 const EventAttendees = () => {
   const { id } = useParams();
+
+  const [isClicked, setIsClicked] = useState(false);
   const [attendees, setAttendees] = useState([]);
   const [banlist, setBanlist] = useState([]);
 
@@ -26,7 +28,7 @@ const EventAttendees = () => {
   useEffect(() => {
     getAttendees().then();
     getBanlist().then();
-  }, []);
+  }, [isClicked]);
 
   const AttendeeRow = (props) => {
     return (
@@ -56,7 +58,7 @@ const EventAttendees = () => {
                 
                 const result = await response.json();
 
-                if (result.modifiedCount > 0) { document.getElementById(attendee.username).remove(); }
+                if (result.modifiedCount > 0) { setIsClicked(bool => !bool) }
               }}>Ban</Button>
             </ButtonGroup>
           </Row>
@@ -81,7 +83,7 @@ const EventAttendees = () => {
               
               const result = await response.json();
 
-              if (result.modifiedCount > 0) { document.getElementById('banned elements: ' + banned.username).remove(); }
+              if (result.modifiedCount > 0) { setIsClicked(bool => !bool) }
             }}>Unban</Button>
           </Row>
         )})}

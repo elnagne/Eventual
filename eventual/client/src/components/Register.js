@@ -1,15 +1,14 @@
 import React from "react";
+import "./Register.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useState, useEffect, useRef, useContext } from "react";
 import { RegisterContext } from "./RegisterContext";
-import { ThemeContext } from "./ThemeContext";
 import { Link } from "react-router-dom";
 
 const Register = (props) => {
-  const {theme} = useContext(ThemeContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,10 +61,10 @@ const Register = (props) => {
 
   return props.trigger ? (
     <section id="registerPopup" className="h-100 h-custom">
-      <div className="container py-5 h-100" >
+      <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-8 col-xl-6">
-            <div className="card rounded-3" ref={ref} data-theme={theme}>
+            <div className="card rounded-3" ref={ref}>
               <div className="card-body p-4 p-md-5">
                 <Col>
                   <Row className="mb-3">

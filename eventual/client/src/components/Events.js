@@ -3,7 +3,6 @@ import SidebarPro from "./SidebarPro";
 import EventsDisplay from "./EventsDisplay";
 import EventsSearch from "./EventsSearch";
 import { SearchContext } from './SearchContext';
-import { ThemeContext } from "./ThemeContext";
 import Alert from 'react-bootstrap/Alert';
 
 const Events = () => {
@@ -14,7 +13,6 @@ const Events = () => {
     endDate,
     city
   } = useContext(SearchContext);
-  const {theme} = useContext(ThemeContext);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -59,7 +57,7 @@ const Events = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent" data-theme={theme}>
+      <div className="eventContent">
         <EventsSearch search={getFilteredEvents} />
         {events.length > 0 ? <EventsDisplay events={events} /> : <Alert variant='primary' className="mx-4 my-4">No events found.</Alert>}
       </div>

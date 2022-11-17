@@ -1,14 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import SidebarPro from './SidebarPro'
-import { ThemeContext } from "./ThemeContext";
 
 const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 const ForgotPassword = () => {
-    const {theme} = useContext(ThemeContext);
     const [email, setEmail] = useState('');
 
     const sendResetPassword = e => {
@@ -29,7 +27,7 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="forgotPasswordContent vh-100 d-flex justify-content-center align-items-center" data-theme={theme}>
+        <div className="vh-100 d-flex justify-content-center align-items-center">
             <SidebarPro/>
             <div className="card rounded-3 mx-auto">
                 <div className="card-body p-4 p-md-5">

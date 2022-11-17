@@ -1,7 +1,6 @@
 import React from 'react'
 import { useContext } from 'react';
 import { SearchContext } from './SearchContext';
-import { ThemeContext } from "./ThemeContext";
 import Accordion from 'react-bootstrap/Accordion';
 
 const EventsSearch = ({ search }) => {
@@ -13,13 +12,12 @@ const EventsSearch = ({ search }) => {
         city, setCity,
         allFilters
     } = useContext(SearchContext);
-    const {theme} = useContext(ThemeContext);
 
     return (
-        <Accordion defaultActiveKey="1" className="eventsFilter mx-4 my-4" >
-            <Accordion.Item eventKey="0" className="eventsFilter" data-theme={theme}>
-                <Accordion.Header data-theme={theme}>Filters</Accordion.Header>
-                <Accordion.Body data-theme={theme}>
+        <Accordion defaultActiveKey="1" className="mx-4 my-4">
+            <Accordion.Item eventKey="0">
+                <Accordion.Header>Filters</Accordion.Header>
+                <Accordion.Body>
                     <div id="categoryFilters" class="d-flex flex-row mb-3">
                         {Object.keys(allFilters).map(filt =>
                             <div class="form-check form-check-inline">

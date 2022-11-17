@@ -5,11 +5,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SidebarPro from "./SidebarPro";
 import { useNavigate, Navigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "./ThemeContext";
+import { useState, useEffect } from "react";
 
 const Profile = () => {
-  const {theme} = useContext(ThemeContext);
   const [isset, setIsset] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -132,7 +130,7 @@ const Profile = () => {
   return (
     <div className="d-flex">
       <SidebarPro />
-      <div className="profileContent" data-theme={theme}>
+      <div className="profileContent">
         <div class="row">
           <Col className="col-xs-12 col-sm-12 col-md-6 justify-content-start p-5">
             <h3>Change Profile Information</h3>

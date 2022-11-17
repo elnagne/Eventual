@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import SidebarPro from "./SidebarPro";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Widget } from "@uploadcare/react-widget";
 import Button from "react-bootstrap/Button";
 import { useParams } from "react-router-dom";
-import { ThemeContext } from "./ThemeContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UpdateEvent = () => {
-  const {theme} = useContext(ThemeContext);
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [event_name, setEvent_name] = useState("");
@@ -130,7 +128,7 @@ const UpdateEvent = () => {
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
-      <div className="AddEvent" data-theme={theme}>
+      <div className="AddEvent">
         <form
           name="event"
           className="AddEventForm"

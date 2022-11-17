@@ -4,14 +4,11 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import Register from "./Register";
 import { RegisterContext } from "./RegisterContext";
-import { ThemeContext } from "./ThemeContext";
 import "./LogIn.css";
 import userInfo from "./UserInfo";
 import SidebarPro from "./SidebarPro";
-import loginbg from './login-bg.png';
 
 const LogIn = () => {
-  const {theme} = useContext(ThemeContext);
   const [errorMessage, setErrorMessage] = useState("");
   let navigate = useNavigate();
 
@@ -67,7 +64,7 @@ const LogIn = () => {
   return (
     <div className="loginWrapper">
       <SidebarPro />
-      <div className="loginContent" data-theme={theme}>
+      <div className="loginContent">
         <Form className="pageCard" id="signin-form" onSubmit={onSubmit}>
           <div class="c">
             <h1 className="text-center size">
@@ -98,7 +95,7 @@ const LogIn = () => {
           <img
             className="img"
             alt=""
-            src={loginbg}
+            src={process.env.PUBLIC_URL + "img/people.png"}
           ></img>
         </div>
       </div>

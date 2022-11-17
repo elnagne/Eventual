@@ -11,14 +11,21 @@ import Alert from 'react-bootstrap/Alert';
 const EventAttendees = () => {
   const { id } = useParams();
   const [attendees, setAttendees] = useState([]);
+  const [banlist, setBanlist] = useState([]);
 
   async function getAttendees() {
     const response = await fetch('http://localhost:5000/get-attendees/' + id);
     await response.json().then((response) => { setAttendees(response); });
   }
+
+  async function getBanlist() {
+    const response = await fetch('http://localhost:5000/get-banlist/' + id);
+    await response.json().then((response) => { setBanlist(response); });
+  }
   
   useEffect(() => {
-    getAttendees().then(console.log(attendees));
+    getAttendees().then();
+    getBanlist().then();
   }, []);
 
   const AttendeeRow = (props) => {
@@ -58,6 +65,30 @@ const EventAttendees = () => {
     );
   };
 
+  const BanRow = (props) => {
+    return (
+      <div>
+        {props.banlist.map((banned) => { return (
+          <Row key={banned.username} id={'banned elements: ' + banned.username}>
+            <Col className="border-end"><span>{banned.name}</span></Col>
+            <Col className="border-end"><span>{banned.username}</span></Col>
+            <Button variant="danger" type="submit" className="col-2" onClick={async () => {
+              const response = await fetch('http://localhost:5000/unban-user/' + id, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", },
+                body: JSON.stringify(banned),
+              })
+              
+              const result = await response.json();
+
+              if (result.modifiedCount > 0) { document.getElementById('banned elements: ' + banned.username).remove(); }
+            }}>Unban</Button>
+          </Row>
+        )})}
+      </div>
+    );
+  };
+
   return (
     <div className="d-flex">
       <SidebarPro />
@@ -69,6 +100,14 @@ const EventAttendees = () => {
           ) : (
             <Alert variant="primary" className="mx-4 my-4">
               No attendees found.
+            </Alert>
+          )}
+          <h2 className="fw-bold text-secondary pb-2">Banned Users</h2>
+          {banlist.length > 0 ? (
+            <BanRow banlist={banlist} />
+          ) : (
+            <Alert variant="primary" className="mx-4 my-4">
+              No banned users found.
             </Alert>
           )}
         </Col>

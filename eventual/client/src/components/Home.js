@@ -60,7 +60,7 @@ const Home = () => {
   return (
     <div className="homeWrapper">
       <SidebarPro />
-      <div className="homeContent text-bg-light p-3 " data-theme={theme}>
+      <div className="homeContent p-3 " data-theme={theme}>
         <div class="gap"></div>
         <div class="container mt-3 ">
           <div class="row ">
@@ -160,7 +160,7 @@ const Home = () => {
             <div class="center">
               <div>
                 <div
-                  class="bg-white p-3 text-center text-primary center"
+                  class="p-3 text-center text-primary center aboutUsCard"
                   id="1"
                   value="1"
                   onMouseOver={() => handleMouseOver(1)}
@@ -172,7 +172,7 @@ const Home = () => {
 
                   {Hov1 && (
                     <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={cat}
                           class="img-responsive rounded-circle img-fluid"
@@ -209,7 +209,7 @@ const Home = () => {
               <div class="gap"></div>
               <div>
                 <div
-                  class="bg-white p-3 text-center text-success center"
+                  class="p-3 text-center text-success center aboutUsCard"
                   onMouseOver={() => handleMouseOver(2)}
                   onMouseOut={() => handleMouseOut(2)}
                 >
@@ -219,7 +219,7 @@ const Home = () => {
 
                   {Hov2 && (
                     <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={ivy}
                           class="img-responsive rounded-circle img-fluid"
@@ -254,7 +254,7 @@ const Home = () => {
               <div class="gap"></div>
               <div>
                 <div
-                  class="bg-white p-3 text-center text-warning center"
+                  class="p-3 text-center text-warning center aboutUsCard"
                   onMouseOver={() => handleMouseOver(3)}
                   onMouseOut={() => handleMouseOut(3)}
                 >
@@ -264,7 +264,7 @@ const Home = () => {
 
                   {Hov3 && (
                     <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={Nevinn}
                           class="img-responsive rounded-circle img-fluid"
@@ -304,7 +304,7 @@ const Home = () => {
             <div class="center">
               <div>
                 <div
-                  class="bg-white p-3 text-center text-secondary center"
+                  class="p-3 text-center text-secondary center aboutUsCard"
                   onMouseOver={() => handleMouseOver(4)}
                   onMouseOut={() => handleMouseOut(4)}
                 >
@@ -314,7 +314,7 @@ const Home = () => {
 
                   {Hov4 && (
                     <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={mohamad}
                           class="img-responsive rounded-circle img-fluid"
@@ -350,7 +350,7 @@ const Home = () => {
               <div class="gap"></div>
               <div>
                 <div
-                  class="bg-white p-3 text-center text-danger center"
+                  class="p-3 text-center text-danger center aboutUsCard"
                   onMouseOver={() => handleMouseOver(5)}
                   onMouseOut={() => handleMouseOut(5)}
                 >
@@ -360,7 +360,7 @@ const Home = () => {
 
                   {Hov5 && (
                     <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={Jeremy}
                           class="img-responsive rounded-circle img-fluid"
@@ -396,7 +396,7 @@ const Home = () => {
               <div class="gap"></div>
               <div>
                 <div
-                  class="bg-white p-3 text-center text-info center"
+                  class="p-3 text-center text-info center aboutUsCard"
                   onMouseOver={() => handleMouseOver(6)}
                   onMouseOut={() => handleMouseOut(6)}
                 >
@@ -405,8 +405,8 @@ const Home = () => {
                   </strong>
 
                   {Hov6 && (
-                    <div class="col-md-4 mb-auto p-2 center">
-                      <div className="bg-white p-3 text-center rounded box ">
+                    <div class="col-md-4 mb-auto p-2 center ">
+                      <div className="p-3 text-center rounded box aboutUsText">
                         <img
                           src={Ricky}
                           class="img-responsive rounded-circle img-fluid"

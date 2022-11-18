@@ -3,12 +3,15 @@ import SidebarPro from './SidebarPro';
 import EventsDisplay from './EventsDisplay';
 import EventsSearch from './EventsSearch';
 import { SearchContext } from './SearchContext';
+import { ThemeContext } from "./ThemeContext";
 import Alert from 'react-bootstrap/Alert';
 
 var date = new Date();
 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
 const Events = () => {
+  const {theme} = useContext(ThemeContext);
+
   const [events_authors, setEvents] = useState([]);
 
   const [author, setAuthor] = useState(null);
@@ -56,7 +59,7 @@ const Events = () => {
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent">
+      <div className="eventContent" data-theme={theme}>
         {events_authors.length > 0 ? (
           <EventsDisplay events={events_authors} />
         ) : (

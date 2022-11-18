@@ -54,7 +54,7 @@ body {
 .homeContent,
 .AddEvent,
 .profileContent,
-.historyContent {
+.historyContent, .attendeesContent {
   color: var(--text-primary);
   background-color: var(--background);
   overflow-y: scroll;
@@ -64,6 +64,8 @@ body {
   margin-left: 80px;
   /*transition: all .5s;*/
 }
+
+
 
 #registerPopup {
   position: absolute;
@@ -379,4 +381,12 @@ body {
   color: var(--text-primary);
   background-color: var(--textarea);
   border-color: var(--eventcard-hover);
+}
+
+.aboutUsCard {
+  background-color: var(--eventcard-hover);
+}
+
+.aboutUsText {
+  background-color: var(--background);
 }

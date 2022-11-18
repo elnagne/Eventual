@@ -34,7 +34,7 @@ const Events = () => {
     await setAuthor(localStorage.getItem('userid'));
 
     for (let i = 0; i < events.length; i++) {
-      for (let j = 0; j < events[i].attending_users.length; i++) {
+      for (let j = 0; j < events[i].attending_users.length; j++) {
         let attendence = events[i].attending_users[j].account_id;
         if (attendence == login_author) {
           events_authors.push(events[i]);

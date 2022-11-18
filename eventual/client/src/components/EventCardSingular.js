@@ -18,21 +18,22 @@ import {
   faMessage,
   faFaceTired,
 } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [female, setFemale] = useState([]);
   const getUserGender = async () => {
     const response = await fetch(
-      "http://localhost:5000/users/get-user-info/" +
-        localStorage.getItem("userid"),
+      'http://localhost:5000/users/get-user-info/' +
+        localStorage.getItem('userid'),
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -44,6 +45,18 @@ const EventCardSingular = (props) => {
       });
     }
   };
+  useLayoutEffect(() => {
+    fetch('http://localhost:5000/users/isUserAuth', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoggedIn(data.isLoggedIn);
+      })
+      .catch((err) => alert(err));
+  }, []);
 
   useEffect(() => {
     if (props.event && props.event.author) {
@@ -97,6 +110,7 @@ const EventCardSingular = (props) => {
     // console.log(newlikedBy.toString());
     setLikes(likes - 1);
   }
+
   async function joinEvent() {
     if (num_slots - parseInt(numJoined) == 0) {
       setnNSM(
@@ -120,7 +134,7 @@ const EventCardSingular = (props) => {
         // console.log(newJoinedBy.toString());
         setNumJoined(numJoined + 1);
       } else {
-        alert("this is a women-friendly event");
+        alert('this is a women-friendly event');
       }
     }
   }
@@ -195,7 +209,7 @@ const EventCardSingular = (props) => {
   }
 
   function goToAddNotifications() {
-    let path = "/add-notifications/" + props.id;
+    let path = '/add-notifications/' + props.id;
     navigate(path);
   }
 
@@ -378,22 +392,6 @@ const EventCardSingular = (props) => {
             <Button variant="warning" size="lg" className="main-btn">
               <FontAwesomeIcon icon={faShare} /> <strong>Share</strong>
             </Button>
-            {spam == true ? (
-              <strong>This event has been reported as spam</strong>
-            ) : (
-              <Button
-                variant="danger"
-                size="lg"
-                className="main-btn"
-                onClick={() => {
-                  spamIt(eventID);
-                  return true;
-                }}
-              >
-                <FontAwesomeIcon icon={faFaceTired} />
-                <strong> Spam</strong>
-              </Button>
-            )}
 
             {account_id == author_id && (
               <Button
@@ -416,6 +414,28 @@ const EventCardSingular = (props) => {
               </Button>
             )}
           </div>
+          {loggedIn ? (
+            <div className="main-btn">
+              {spam == true ? (
+                <strong>This event has been reported as spam</strong>
+              ) : (
+                <Button
+                  variant="danger"
+                  size="lg"
+                  className="main-btn"
+                  onClick={() => {
+                    spamIt(eventID);
+                    return true;
+                  }}
+                >
+                  <FontAwesomeIcon icon={faFaceTired} />
+                  <strong> Spam</strong>
+                </Button>
+              )}
+            </div>
+          ) : (
+            <strong>Login to report as Spam</strong>
+          )}
         </div>
         <Container>
           <Row>

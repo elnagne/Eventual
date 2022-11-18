@@ -102,7 +102,7 @@ const EventCard = (props) => {
   }
   async function joinEvent() {
     // passes the id of the event
-    if (num_slots - parseInt(numJoined) == 0) {
+    if (num_slots - parseInt(numJoined) <= 0) {
       setnNSM(
         "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
       );
@@ -122,16 +122,19 @@ const EventCard = (props) => {
       let newJoinedBy = [...joinedby, account_id];
       let outcome = event.woman_only && female;
       if (!event.woman_only || outcome) {
-        await fetch(`http://localhost:5000/attend/add_attendance`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(accountEvent),
-        });
+        if (num_slots - parseInt(numJoined) > 0){
+            await fetch(`http://localhost:5000/attend/add_attendance`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(accountEvent),
+          });
 
-        setJoinedby(newJoinedBy);
-        setNumJoined(numJoined + 1);
+          setJoinedby(newJoinedBy);
+          setNumJoined(numJoined + 1);
+        } 
+        
       } else {
         alert("this is a women-friendly event");
       }

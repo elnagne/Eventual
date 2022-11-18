@@ -57,6 +57,7 @@ const EventCard = (props) => {
         }
         const author = await response.json();
         setAuthor(author);
+        changedValues();
       }
       getUser();
       getUserGender();
@@ -99,6 +100,18 @@ const EventCard = (props) => {
       setnNSM(
         'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
       );
+    }
+    // check if banned
+    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accountEvent),
+    });
+
+    if (response.status === 403) {
+      alert("You have been banned from this event.");
     } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
         method: 'POST',
@@ -134,7 +147,19 @@ const EventCard = (props) => {
 
     setNumJoined(numJoined - 1);
   }
-
+  async function loadInitialValues() {
+    if (changesMade == true) {
+      setLikes(event.num_likes);
+      setLikedby(event.liked_by.map((user) => user.account_id));
+      setNumJoined(event.num_joined);
+      setJoinedby(event.attending_users.map((user) => user.account_id));
+      setChangesMade(false);
+    }
+  }
+  async function changedValues(){
+    setChangesMade(true);
+  }
+  const [changesMade, setChangesMade] = useState(true);
   const event = props.event;
   const id = event._id;
   const name = event.event_name;
@@ -184,7 +209,7 @@ const EventCard = (props) => {
 
   return (
     <Card className="eventCard clickable card-title shadow">
-      <Card.Body>
+      <Card.Body onLoad={loadInitialValues()}>
         {imgUrl && (
           <div className="pic">
             <img src={imgUrl} alt={name} />

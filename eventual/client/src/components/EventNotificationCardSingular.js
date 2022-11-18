@@ -76,6 +76,19 @@ const EventCardSingular = (props) => {
       setnNSM(
         'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
       );
+    } 
+
+    // check if banned
+    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accountEvent),
+    });
+
+    if (response.status === 403) {
+      alert("You have been banned from this event.");
     } else {
       await fetch(`http://localhost:5000/attend/add_attendance`, {
         method: 'POST',
@@ -119,6 +132,11 @@ const EventCardSingular = (props) => {
   let navigate = useNavigate();
   function backToNotificationsPage() {
     let path = '/my-notifications';
+    navigate(path);
+  }
+
+  function goToAttendeesPage() {
+    let path = '/event-attendees/' + props.id;
     navigate(path);
   }
 

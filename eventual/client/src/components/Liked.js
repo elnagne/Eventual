@@ -15,8 +15,7 @@ const LikedEvents = () => {
       }
 
       const events = await response.json();
-      console.log(events);
-      console.log(logged_account_id);
+
       setEvents(events);
     }
 

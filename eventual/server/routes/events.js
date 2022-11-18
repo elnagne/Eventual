@@ -1,19 +1,19 @@
-const express = require('express');
+const express = require("express");
 
 // This router will act as a controller for accounts
 const eventsRoutes = express.Router();
 
 // Used for connecting to the database
-const dbo = require('../db/conn');
-const ObjectId = require('mongodb').ObjectId;
-
-const bodyParser = require('body-parser');
+const dbo = require("../db/conn");
+const ObjectId = require("mongodb").ObjectId;
+const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-const got = require('got');
-const { response } = require('express');
+const got = require("got");
+const { response } = require("express");
 const psApiKey = process.env.POSITIONSTACK_API_KEY;
 
 // sends email to all users who have joined _id = id event with event_name as subject and text as formatted event information
@@ -24,66 +24,63 @@ async function send_event(id, update) {
   var sentAll = true;
 
   dbConnect
-    .collection('testEvents')
+    .collection("testEvents")
     .findOne({ _id: ObjectId(id) })
     .then((event) => {
-      console.log(event.attending_users);
+
       for (const user of event.attending_users) {
-        console.log(user.account_id);
+
         dbConnect
-          .collection('mockUsers')
+          .collection("mockUsers")
           .findOne({ _id: ObjectId(user.account_id) })
           .then((user) => {
             if (user == null) {
-              response.status(403).send('Email not found');
+              response.status(403).send("Email not found");
             } else {
               const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                secure: 'true',
+                service: "gmail",
+                secure: "true",
                 auth: {
                   user: `${process.env.EMAIL}`,
                   pass: `${process.env.PASSWORD}`,
                 },
               });
 
-              console.log('Creating message');
 
-              text = '';
+              text = "";
 
               if (update)
                 text +=
-                  'This message is because the event you are following has updated their event information\n\n';
+                  "This message is because the event you are following has updated their event information\n\n";
 
               text +=
-                'Description: ' +
+                "Description: " +
                 event.description +
-                '\n' +
-                'Location: ' +
+                "\n" +
+                "Location: " +
                 event.location +
-                '\n' +
-                'Author: ' +
+                "\n" +
+                "Author: " +
                 event.author +
-                '\n' +
-                'Date: ' +
+                "\n" +
+                "Date: " +
                 event.date_of_event +
-                '\n' +
-                'Time: ' +
+                "\n" +
+                "Time: " +
                 event.time_of_event +
-                '\n' +
-                '<b>Email: ' +
+                "\n" +
+                "<b>Email: " +
                 event.email +
-                '\n' +
-                'Phone number: ' +
+                "\n" +
+                "Phone number: " +
                 event.phone +
-                '\n' +
-                'Number of Slots: ' +
+                "\n" +
+                "Number of Slots: " +
                 event.num_slots +
-                '\n' +
-                'Woman Only: ' +
+                "\n" +
+                "Woman Only: " +
                 event.woman_only +
-                '\n';
-
-              console.log('Creating mail options');
+                "\n";
 
               const mailOptions = {
                 from: `${process.env.EMAIL}`,
@@ -92,14 +89,14 @@ async function send_event(id, update) {
                 text: text,
               };
 
-              console.log('Sending email');
+
 
               transporter.sendMail(mailOptions, (err, response) => {
                 if (err) {
-                  console.error('Could not send to ' + user.email + ':', err);
+                  console.error("Could not send to " + user.email + ":", err);
                   sentAll = false;
                 } else {
-                  console.log('email sent');
+
                 }
               });
             }
@@ -115,28 +112,28 @@ async function send_event(id, update) {
 async function getAddressData(address) {
   var addressData = null;
   const url =
-    'http://api.positionstack.com/v1/forward?access_key=' +
+    "http://api.positionstack.com/v1/forward?access_key=" +
     encodeURIComponent(psApiKey) +
-    '&query=' +
+    "&query=" +
     encodeURIComponent(address) +
-    '&limit=1'; // Limit the number of results to 1 (for now)
+    "&limit=1"; // Limit the number of results to 1 (for now)
   await got
     .get(url)
     .then((res) => {
       addressData = JSON.parse(res.body);
     })
     .catch((err) => {
-      console.log('Positionstack error: ' + err.message);
+      console.log("Positionstack error: " + err.message);
     });
   return addressData;
 }
 
 // Updating a new account
-eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
+eventsRoutes.route("/testEvents/update/:id").post((req, res) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect
-    .collection('testEvents')
+    .collection("testEvents")
     .replaceOne(myquery, {
       event_name: req.body.event_name,
       description: req.body.description,
@@ -159,13 +156,13 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
     })
     .then(() => {
       result = send_event(req.params.id, true);
-      if (result) res.json('Sent All Emails');
+      if (result) res.json("Sent All Emails");
       else res.json("Couldn't send all Emails");
     });
 });
 
 // Creating a new account
-eventsRoutes.route('/testEvents/add').post((req, response) => {
+eventsRoutes.route("/testEvents/add").post((req, response) => {
   let dbConnect = dbo.getDb();
   let event = {
     event_name: req.body.event_name,
@@ -189,12 +186,11 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
   };
 
   getAddressData(req.body.location).then((address_data) => {
-    console.log(address_data);
     if (address_data && address_data.data && address_data.data.length) {
       event.address_data = address_data.data[0];
     }
 
-    dbConnect.collection('testEvents').insertOne(event, (err, res) => {
+    dbConnect.collection("testEvents").insertOne(event, (err, res) => {
       if (err) throw err;
       response.json(res);
     });
@@ -202,28 +198,28 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
 });
 
 // sends email to all users in req.body._id event with req.body.subject as subject and req.body.text as message
-eventsRoutes.route('/receive-response/:id').post(async (req, response) => {
+eventsRoutes.route("/receive-response/:id").post(async (req, response) => {
   const dbConnect = dbo.getDb();
   // TODO switch to non-test events for release
 
   var sentAll = true;
 
   dbConnect
-    .collection('testEvents')
+    .collection("testEvents")
     .findOne({ _id: ObjectId(req.params.id) })
     .then((event) => {
       for (const user of event.attending_users) {
-        console.log(user.account_id);
+
         dbConnect
-          .collection('mockUsers')
+          .collection("mockUsers")
           .findOne({ _id: ObjectId(user.account_id) })
           .then((user) => {
             if (user == null) {
-              response.status(403).send('Email not found');
+              response.status(403).send("Email not found");
             } else {
               const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                secure: 'true',
+                service: "gmail",
+                secure: "true",
                 auth: {
                   user: `${process.env.EMAIL}`,
                   pass: `${process.env.PASSWORD}`,
@@ -239,10 +235,10 @@ eventsRoutes.route('/receive-response/:id').post(async (req, response) => {
 
               transporter.sendMail(mailOptions, (err, response) => {
                 if (err) {
-                  console.error('Could not send to ' + user.email + ':', err);
+                  console.error("Could not send to " + user.email + ":", err);
                   sentAll = false;
                 } else {
-                  response.status(200).json('email sent');
+                  response.status(200).json("email sent");
                 }
               });
             }
@@ -250,8 +246,8 @@ eventsRoutes.route('/receive-response/:id').post(async (req, response) => {
       }
     });
 
-  if (sentAll) response.status(200).json('Sent all emails');
-  else response.status(404).json('Not all emails sent');
+  if (sentAll) response.status(200).json("Sent all emails");
+  else response.status(404).json("Not all emails sent");
 });
 
 // Export eventsRoutes Router so we can use we different CRUD operations established in this file in server.js (see server.js line 10s)

@@ -122,9 +122,9 @@ const Profile = () => {
   };
   //handle the changes on checkbox
   const handleChange = () => {
-    //console.log("the checkbox");
+
     setFemale(!female);
-    //console.log(female);
+
   };
 
   return (

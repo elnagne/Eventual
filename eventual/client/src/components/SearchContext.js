@@ -12,12 +12,13 @@ export const SearchContextProvider = ({ children }) => {
     };
     const [activeFilters, setActiveFilters] = useState(allFilters);
     const [womanOnly, setWomanOnly] = useState(false);
+    const [orderby, setOrderby] = useState("oldest");
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [city, setCity] = useState('');
   
     return (
-        <SearchContext.Provider value={{ activeFilters, setActiveFilters, womanOnly, setWomanOnly, startDate, setStartDate, endDate, setEndDate, city, setCity, allFilters }}>
+        <SearchContext.Provider value={{ activeFilters, setActiveFilters, womanOnly, setWomanOnly, startDate, setStartDate, endDate, setEndDate, city, setCity, allFilters, orderby, setOrderby }}>
             {children}
         </SearchContext.Provider>
     );

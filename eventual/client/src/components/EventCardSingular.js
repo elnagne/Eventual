@@ -9,18 +9,36 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
-  faShare,
   faEarthAfrica,
   faPerson,
   faCaretLeft,
   faMessage,
   faFaceTired,
+  faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { faHandshake } from "@fortawesome/free-solid-svg-icons";
+import {
+  TwitterShareButton,
+  TwitterIcon,
+  TumblrShareButton,
+  TumblrIcon,
+  RedditShareButton,
+  RedditIcon,
+  EmailShareButton,
+  EmailIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "react-share";
 
 const EventCardSingular = (props) => {
   const [author, setAuthor] = useState([]);
@@ -102,6 +120,18 @@ const EventCardSingular = (props) => {
       setnNSM(
         "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
       );
+    } 
+    // check if banned
+    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accountEvent),
+    });
+
+    if (response.status === 403) {
+      alert("You have been banned from this event.");
     } else {
       let newJoinedBy = [...joinedby, account_id];
       let outcome = event.woman_only && female;
@@ -174,6 +204,11 @@ const EventCardSingular = (props) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
+  function goToAttendeesPage() {
+    let path = '/event-attendees/' + props.id;
+    navigate(path);
+  }
+
   function goToUpdatePage() {
     let path = "/update-events/" + props.id;
     navigate(path);
@@ -213,6 +248,8 @@ const EventCardSingular = (props) => {
 
   const displayName = name ? name.toUpperCase() : null;
   const imgUrl = event.image_url;
+  const eventualLogoUrl = "https://imgur.com/a/E539dUc";
+  const shareUrl = imgUrl ? imgUrl : eventualLogoUrl;
 
   const num_slots = parseInt(event.num_slots);
 
@@ -252,6 +289,7 @@ const EventCardSingular = (props) => {
   };
 
   const authorName = author ? Utils.getUsersNameAsString(author) : null;
+  const shareBlurb = Utils.createShareBlurb(name, address, dateStr, timeStr);
 
   return (
     <Card className="eventCard singular card-title shadow">
@@ -276,93 +314,138 @@ const EventCardSingular = (props) => {
           </div>
           {dateStr && <div className="date">{date}</div>}
           {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
-          {likes !== undefined && account_id !== null && (
-            <div className="likes">
-              {likedby.includes(account_id) ? (
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 200, hide: 180 }}
-                  overlay={<Tooltip id="button-tooltip-2">Remove Like</Tooltip>}
-                >
-                  <Button
-                    id="a"
-                    variant="liked"
-                    onClick={() => {
-                      dislikeEvent(eventID);
-                      return true;
-                    }}
+          <div>
+            {likes !== undefined && account_id !== null && (
+              <span className="likes">
+                {likedby.includes(account_id) ? (
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 200, hide: 180 }}
+                    overlay={
+                      <Tooltip id="button-tooltip-2">Remove Like</Tooltip>
+                    }
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faHeart} />
-                  </Button>
-                </OverlayTrigger>
-              ) : (
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 200, hide: 180 }}
-                  overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
-                >
-                  <Button
-                    id="a"
-                    variant="like"
-                    onClick={() => {
-                      likeEvent(eventID);
-                      return true;
-                    }}
+                    <Button
+                      id="a"
+                      variant="liked"
+                      onClick={() => {
+                        dislikeEvent(eventID);
+                        return true;
+                      }}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faHeart} />
+                    </Button>
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 200, hide: 180 }}
+                    overlay={<Tooltip id="button-tooltip-2">Add Like</Tooltip>}
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faHeart} />
-                  </Button>
-                </OverlayTrigger>
-              )}
-              {likes}
-              {"     "}
-              {joinedby.includes(account_id) ? (
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 200, hide: 180 }}
-                  overlay={
-                    <Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>
-                  }
-                >
-                  <Button
-                    id="a"
-                    variant="liked"
-                    onClick={() => {
-                      notJoinEvent(eventID);
-                      return true;
-                    }}
+                    <Button
+                      id="a"
+                      variant="like"
+                      onClick={() => {
+                        likeEvent(eventID);
+                        return true;
+                      }}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faHeart} />
+                    </Button>
+                  </OverlayTrigger>
+                )}
+                {likes}
+                {"     "}
+                {joinedby.includes(account_id) ? (
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 200, hide: 180 }}
+                    overlay={
+                      <Tooltip id="button-tooltip-2">Remove Attendance</Tooltip>
+                    }
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faHandshake} />
-                  </Button>
-                </OverlayTrigger>
-              ) : (
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 200, hide: 180 }}
-                  overlay={<Tooltip id="button-tooltip-2">Join Event</Tooltip>}
-                >
-                  <Button
-                    id="a"
-                    variant="like"
-                    onClick={() => {
-                      joinEvent(eventID);
-                      return true;
-                    }}
+                    <Button
+                      id="a"
+                      variant="liked"
+                      onClick={() => {
+                        notJoinEvent(eventID);
+                        return true;
+                      }}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faHandshake} />
+                    </Button>
+                  </OverlayTrigger>
+                ) : (
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 200, hide: 180 }}
+                    overlay={
+                      <Tooltip id="button-tooltip-2">Join Event</Tooltip>
+                    }
                   >
-                    {" "}
-                    <FontAwesomeIcon icon={faHandshake} />
-                  </Button>
-                </OverlayTrigger>
-              )}
-              {numJoined}
-            </div>
-          )}
+                    <Button
+                      id="a"
+                      variant="like"
+                      onClick={() => {
+                        joinEvent(eventID);
+                        return true;
+                      }}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faHandshake} />
+                    </Button>
+                  </OverlayTrigger>
+                )}
+                {numJoined}
+              </span>
+            )}
+            <span className="share-bar">
+              <OverlayTrigger
+                placement="top"
+                trigger={["click"]}
+                overlay={
+                  <Tooltip id="button-tooltip-2">Copied to clipboard!</Tooltip>
+                }
+              >
+                <Button
+                  className="share-btn"
+                  onClick={() => {
+                    navigator.clipboard.writeText(shareBlurb);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCopy}></FontAwesomeIcon>
+                </Button>
+              </OverlayTrigger>
+              <TwitterShareButton
+                title={shareBlurb}
+                url={shareUrl}
+                hashtags={["eventual"]}
+              >
+                <TwitterIcon className="share-btn"></TwitterIcon>
+              </TwitterShareButton>
+              <EmailShareButton
+                subject={"Check out this event!"}
+                body={shareBlurb}
+              >
+                <EmailIcon className="share-btn"></EmailIcon>
+              </EmailShareButton>
+              <TumblrShareButton
+                title={"Check out this event!"}
+                caption={shareBlurb}
+                url={shareUrl}
+                tags={["#eventual"]}
+              >
+                <TumblrIcon className="share-btn"></TumblrIcon>
+              </TumblrShareButton>
+              <RedditShareButton title={shareBlurb} url={shareUrl}>
+                <RedditIcon className="share-btn"></RedditIcon>
+              </RedditShareButton>
+            </span>
+          </div>
           <div className="main-btns">
-            <Button variant="warning" size="lg" className="main-btn">
-              <FontAwesomeIcon icon={faShare} /> <strong>Share</strong>
-            </Button>
             {spam == true ? (
               <strong>This event has been reported as spam</strong>
             ) : (
@@ -443,17 +526,32 @@ const EventCardSingular = (props) => {
                     {address}
                   </div>
                 )}
-                {googleMapsURL && (
-                  <Button
-                    variant="success"
-                    className="maps-btn"
-                    onClick={() => openInNewTab(googleMapsURL)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
-                    <strong>MAPS</strong>
-                  </Button>
-                )}
+                <Row>
+                  <Col>
+                  {googleMapsURL && (
+                    <Button
+                      variant="success"
+                      className="maps-btn"
+                      onClick={() => openInNewTab(googleMapsURL)}
+                      >
+                        {' '}
+                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                        <strong>MAPS</strong>
+                      </Button>
+                    )}
+                  </Col>
+                  <Col>
+                    {account_id === author_id && (
+                      <Button
+                        variant="outline-primary"
+                        onClick={goToAttendeesPage}
+                        className="main-btn"
+                        >
+                          Check Attendees
+                        </Button>
+                      )}
+                    </Col>
+                  </Row>
               </div>
             </Col>
             <Col lg={7}>

@@ -16,6 +16,7 @@ import AttendingEvents from './components/AttendingEvents';
 import LogIn from './components/LogIn';
 import UserInfo from './components/UserInfo';
 import ForgotPassword from './components/ForgotPassword';
+import EventAttendees from './components/EventAttendees';
 import ResetPassword from './components/ResetPassword';
 import UserNotifications from './components/UserNotifications';
 import { SearchContextProvider } from './components/SearchContext';
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/add-events" element={<AddEvents />} />
         <Route path="/add-notifications/:id" element={<AddNotification />} />
         <Route path="/update-events/:id" element={<UpdateEvents />} />
+        <Route path="/event-attendees/:id" element={<EventAttendees />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/attending-events" element={<AttendingEvents />} />
         <Route path="/dbwritetemp" element={<DbWriteTemp />} />

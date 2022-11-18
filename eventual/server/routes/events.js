@@ -27,7 +27,6 @@ async function send_event(id, update) {
     .collection('testEvents')
     .findOne({ _id: ObjectId(id) })
     .then((event) => {
-      console.log(event.attending_users);
       for (const user of event.attending_users) {
         console.log(user.account_id);
         dbConnect

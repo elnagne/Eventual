@@ -95,11 +95,7 @@ const LogIn = () => {
         </Form>
 
         <div className="embed-responsive embed-responsive-4by3">
-          <img
-            className="img"
-            alt=""
-            src={loginbg}
-          ></img>
+          <img className="img" alt="" src={loginbg}></img>
         </div>
       </div>
     </div>

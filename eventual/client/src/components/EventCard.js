@@ -1,23 +1,23 @@
-import * as Utils from './Utils.js';
-import React, { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-import './Likebtn.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandshake } from '@fortawesome/free-solid-svg-icons';
+import * as Utils from "./Utils.js";
+import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import "./Likebtn.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandshake } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart,
   faCircleDot,
   faPerson,
   faCaretRight,
-} from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+} from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const arrowDivStyle = {
-  float: 'right',
-  margin: '50px auto',
+  float: "right",
+  margin: "50px auto",
 };
 
 const arrowStyle = {
@@ -65,27 +65,33 @@ const EventCard = (props) => {
     }
   }, [props.event.author]);
 
-  async function likeEvent(id) {
+  async function likeEvent() {
+    let outcome = event.woman_only && female;
     // passes the id of the event
-    await fetch(`http://localhost:5000/liked/add_like`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(accountEvent),
-    });
     let newlikedBy = [...likedby, account_id];
-    setLikedby(newlikedBy);
-    setLikes(likes + 1);
+    if (!event.woman_only || outcome) {
+      await fetch(`http://localhost:5000/liked/add_like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(accountEvent),
+      });
+      setLikedby(newlikedBy);
+
+      setLikes(likes + 1);
+    } else {
+      alert("this is a women-friendly event");
+    }
   }
 
   // This method decrease the number of likes by 1
   async function dislikeEvent(id) {
     // passes the id of the event
     await fetch(`http://localhost:5000/liked/add_dislike`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(accountEvent),
     });
@@ -98,7 +104,7 @@ const EventCard = (props) => {
     // passes the id of the event
     if (num_slots - parseInt(numJoined) == 0) {
       setnNSM(
-        'No spots left, please return another time when spots are available again or leave a like to keep track of the event'
+        "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
       );
     }
     // check if banned
@@ -113,17 +119,17 @@ const EventCard = (props) => {
     if (response.status === 403) {
       alert("You have been banned from this event.");
     } else {
-      await fetch(`http://localhost:5000/attend/add_attendance`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(accountEvent),
-      });
       let newJoinedBy = [...joinedby, account_id];
       let outcome = event.woman_only && female;
       if (!event.woman_only || outcome) {
-   
+        await fetch(`http://localhost:5000/attend/add_attendance`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(accountEvent),
+        });
+
         setJoinedby(newJoinedBy);
         setNumJoined(numJoined + 1);
       } else {
@@ -135,9 +141,9 @@ const EventCard = (props) => {
   async function notJoinEvent() {
     // passes the id of the event
     await fetch(`http://localhost:5000/attend/remove_attendance`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(accountEvent),
     });
@@ -177,33 +183,33 @@ const EventCard = (props) => {
     event.attending_users.map((user) => user.account_id)
   );
   const num_slots = parseInt(event.num_slots);
-  const account_id = localStorage.getItem('userid');
+  const account_id = localStorage.getItem("userid");
   const accountEvent = {
     account_id: account_id,
     event_id: eventID,
   };
-  const [NoSpotsMsg, setnNSM] = useState('');
+  const [NoSpotsMsg, setnNSM] = useState("");
 
   const dateStr = event.date_of_event;
   const dateObj = new Date(dateStr);
-  const date = dateObj.toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const date = dateObj.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
   const timeStr = event.time_of_event;
-  const timeObj = new Date('0000-01-01 ' + timeStr);
+  const timeObj = new Date("0000-01-01 " + timeStr);
   const time = timeObj.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   const authorName = Utils.getUsersNameAsString(author);
 
   let navigate = useNavigate();
   function redirectToEvent() {
-    let path = '/events/' + id;
+    let path = "/events/" + id;
     navigate(path);
   }
 
@@ -237,41 +243,41 @@ const EventCard = (props) => {
           )}
           {city && (
             <span>
-              {' '}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
+              {" "}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
               <span className="property">City: </span>
               {city}
             </span>
           )}
           {authorName && (
             <span>
-              {' '}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
+              {" "}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
               <span className="property">Hosted By: </span>
               {authorName}
             </span>
           )}
           {address && (
             <span>
-              {' '}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
+              {" "}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
               <span className="property">Address: </span>
               {address}
             </span>
           )}
           {num_slots !== undefined && (
             <span>
-              {' '}
-              <FontAwesomeIcon icon={faCircleDot} size="xs" />{' '}
+              {" "}
+              <FontAwesomeIcon icon={faCircleDot} size="xs" />{" "}
               <span className="property">Available Spots: </span>
-              {num_slots - parseInt(numJoined)}{' '}
+              {num_slots - parseInt(numJoined)}{" "}
               <FontAwesomeIcon icon={faPerson} size="xs" />
             </span>
           )}
         </div>
 
         {desc && <div className="desc">{desc}</div>}
-        {NoSpotsMsg !== '' && <span className="alert">{NoSpotsMsg}</span>}
+        {NoSpotsMsg !== "" && <span className="alert">{NoSpotsMsg}</span>}
         {likes !== undefined && account_id !== null && (
           <div className="likes">
             {likedby.includes(account_id) ? (
@@ -288,7 +294,7 @@ const EventCard = (props) => {
                     return true;
                   }}
                 >
-                  {' '}
+                  {" "}
                   <FontAwesomeIcon icon={faHeart} />
                 </Button>
               </OverlayTrigger>
@@ -306,13 +312,13 @@ const EventCard = (props) => {
                     return true;
                   }}
                 >
-                  {' '}
+                  {" "}
                   <FontAwesomeIcon icon={faHeart} />
                 </Button>
               </OverlayTrigger>
             )}
             {likes}
-            {'     '}
+            {"     "}
             {joinedby.includes(account_id) ? (
               <OverlayTrigger
                 placement="top"
@@ -329,7 +335,7 @@ const EventCard = (props) => {
                     return true;
                   }}
                 >
-                  {' '}
+                  {" "}
                   <FontAwesomeIcon icon={faHandshake} />
                 </Button>
               </OverlayTrigger>
@@ -347,7 +353,7 @@ const EventCard = (props) => {
                     return true;
                   }}
                 >
-                  {' '}
+                  {" "}
                   <FontAwesomeIcon icon={faHandshake} />
                 </Button>
               </OverlayTrigger>

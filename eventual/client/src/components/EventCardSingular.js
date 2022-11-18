@@ -78,18 +78,23 @@ const EventCardSingular = (props) => {
     }
   }, [props.event]);
   async function likeEvent() {
+    let outcome = event.woman_only && female;
     // passes the id of the event
-    await fetch(`http://localhost:5000/liked/add_like`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(accountEvent),
-    });
     let newlikedBy = [...likedby, account_id];
-    setLikedby(newlikedBy);
+    if (!event.woman_only || outcome) {
+      await fetch(`http://localhost:5000/liked/add_like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(accountEvent),
+      });
+      setLikedby(newlikedBy);
 
-    setLikes(likes + 1);
+      setLikes(likes + 1);
+    } else {
+      alert("this is a women-friendly event");
+    }
   }
   // This method decrease the number of likes by 1
   async function dislikeEvent() {
@@ -112,45 +117,38 @@ const EventCardSingular = (props) => {
       setnNSM(
         "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
       );
-    } 
+    }
     // check if banned
-    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(accountEvent),
-    });
-
-    if (response.status === 403) {
-      alert("You have been banned from this event.");
-    } else {
-      await fetch(`http://localhost:5000/attend/add_attendance`, {
+    const response = await fetch(
+      "http://localhost:5000/is-banned/" + accountEvent.event_id,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(accountEvent),
-      });
-      let newJoinedBy = [...joinedby, account_id];
+      }
+    );
 
+    if (response.status === 403) {
+      alert("You have been banned from this event.");
+    } else {
+      let newJoinedBy = [...joinedby, account_id];
       let outcome = event.woman_only && female;
       if (!event.woman_only || outcome) {
+        await fetch(`http://localhost:5000/attend/add_attendance`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(accountEvent),
+        });
         setJoinedby(newJoinedBy);
         setNumJoined(numJoined + 1);
       } else {
         alert("this is a women-friendly event");
       }
     }
-  }
-  async function joinEvent() {
-    fetch(`http://localhost:5000/attend/add_attendance`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
   }
 
   async function spamIt() {
@@ -206,7 +204,7 @@ const EventCardSingular = (props) => {
   };
 
   function goToAttendeesPage() {
-    let path = '/event-attendees/' + props.id;
+    let path = "/event-attendees/" + props.id;
     navigate(path);
   }
 
@@ -529,14 +527,14 @@ const EventCardSingular = (props) => {
                 )}
                 <Row>
                   <Col>
-                  {googleMapsURL && (
-                    <Button
-                      variant="success"
-                      className="maps-btn"
-                      onClick={() => openInNewTab(googleMapsURL)}
+                    {googleMapsURL && (
+                      <Button
+                        variant="success"
+                        className="maps-btn"
+                        onClick={() => openInNewTab(googleMapsURL)}
                       >
-                        {' '}
-                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                        {" "}
+                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
                         <strong>MAPS</strong>
                       </Button>
                     )}
@@ -547,12 +545,12 @@ const EventCardSingular = (props) => {
                         variant="outline-primary"
                         onClick={goToAttendeesPage}
                         className="main-btn"
-                        >
-                          Check Attendees
-                        </Button>
-                      )}
-                    </Col>
-                  </Row>
+                      >
+                        Check Attendees
+                      </Button>
+                    )}
+                  </Col>
+                </Row>
               </div>
             </Col>
             <Col lg={7}>

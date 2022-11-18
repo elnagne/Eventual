@@ -92,11 +92,7 @@ const LogIn = () => {
         </Form>
 
         <div className="embed-responsive embed-responsive-4by3">
-          <img
-            className="img"
-            alt=""
-            src={process.env.PUBLIC_URL + "img/people.png"}
-          ></img>
+          <img className="img" alt="" src={loginbg}></img>
         </div>
       </div>
     </div>

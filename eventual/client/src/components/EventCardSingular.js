@@ -9,8 +9,6 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-} from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
   faEarthAfrica,
@@ -80,7 +78,6 @@ const EventCardSingular = (props) => {
     }
   }, [props.event]);
   async function likeEvent() {
-
     let outcome = event.woman_only && female;
     // passes the id of the event
     let newlikedBy = [...likedby, account_id];
@@ -120,15 +117,18 @@ const EventCardSingular = (props) => {
       setnNSM(
         "No spots left, please return another time when spots are available again or leave a like to keep track of the event"
       );
-    } 
+    }
     // check if banned
-    const response = await fetch('http://localhost:5000/is-banned/' + accountEvent.event_id, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(accountEvent),
-    });
+    const response = await fetch(
+      "http://localhost:5000/is-banned/" + accountEvent.event_id,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(accountEvent),
+      }
+    );
 
     if (response.status === 403) {
       alert("You have been banned from this event.");
@@ -146,11 +146,10 @@ const EventCardSingular = (props) => {
         setJoinedby(newJoinedBy);
         setNumJoined(numJoined + 1);
       } else {
-         alert("this is a women-friendly event");
+        alert("this is a women-friendly event");
       }
     }
   }
-  
 
   async function spamIt() {
     fetch(`http://localhost:5000/spam`, {
@@ -205,7 +204,7 @@ const EventCardSingular = (props) => {
   };
 
   function goToAttendeesPage() {
-    let path = '/event-attendees/' + props.id;
+    let path = "/event-attendees/" + props.id;
     navigate(path);
   }
 
@@ -528,14 +527,14 @@ const EventCardSingular = (props) => {
                 )}
                 <Row>
                   <Col>
-                  {googleMapsURL && (
-                    <Button
-                      variant="success"
-                      className="maps-btn"
-                      onClick={() => openInNewTab(googleMapsURL)}
+                    {googleMapsURL && (
+                      <Button
+                        variant="success"
+                        className="maps-btn"
+                        onClick={() => openInNewTab(googleMapsURL)}
                       >
-                        {' '}
-                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{' '}
+                        {" "}
+                        <FontAwesomeIcon icon={faEarthAfrica} /> Open in{" "}
                         <strong>MAPS</strong>
                       </Button>
                     )}
@@ -546,12 +545,12 @@ const EventCardSingular = (props) => {
                         variant="outline-primary"
                         onClick={goToAttendeesPage}
                         className="main-btn"
-                        >
-                          Check Attendees
-                        </Button>
-                      )}
-                    </Col>
-                  </Row>
+                      >
+                        Check Attendees
+                      </Button>
+                    )}
+                  </Col>
+                </Row>
               </div>
             </Col>
             <Col lg={7}>

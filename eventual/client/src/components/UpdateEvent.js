@@ -30,6 +30,7 @@ const UpdateEvent = () => {
   const [liked_by, setLiked_by] = useState(null);
   const [attending_users, setAttending_users] = useState(null);
   const [comments, setComments] = useState(null);
+  const [banlist, setBanlist] = useState(null);
 
   const login_author = localStorage.getItem("userid");
 
@@ -66,6 +67,7 @@ const UpdateEvent = () => {
     setLiked_by(event.liked_by);
     setAttending_users(event.attending_users);
     setComments(event.comments);
+    setBanlist(event.banlist);
   }
 
   const handleCheck = () => {
@@ -96,6 +98,7 @@ const UpdateEvent = () => {
       liked_by: liked_by,
       attending_users: attending_users,
       comments: comments,
+      banlist: banlist,
     };
 
     await fetch("http://localhost:5000/testEvents/update/" + id, {
@@ -120,6 +123,7 @@ const UpdateEvent = () => {
     setWoman_only("");
     setLocation("");
     setCategory("");
+    setBanlist(event.banlist);
     window.location.reload();
   };
 

@@ -1,0 +1,75 @@
+body {
+  background:white;
+}
+
+.name {
+  color: blue;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.work {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.about span {
+  font-size: 13px;
+}
+
+.v-profile {
+  color: blue;
+  cursor: pointer;
+}
+
+.box {
+  -webkit-box-shadow: 13px 12px 5px -10px rgba(196,194,196,0.72);
+  -moz-box-shadow: 13px 12px 5px -10px rgba(196,194,196,0.72);
+  box-shadow: 13px 12px 5px -10px rgba(196,194,196,0.72);
+}
+
+.col-md-3 {
+  margin-top: 10px;
+}
+.left{
+    margin-left: 10px;
+}
+.right{
+    margin-left:1opx;
+}
+
+.gap {
+  margin-top: 30px;
+}
+
+ /* .h1{
+   font-size: 200%;
+   background: linear-gradient(45deg, blue,mediumpurple);
+   -webkit-background-clip: text;
+    color:	mediumpurple;
+   -webkit-text-fill-color: transparent;
+
+ } */
+ .h1{
+    font-size: 220%;
+    color:rgb(163, 118, 252)
+ }
+ .size1 {
+   font-size: 140%;
+ }
+.size2 {
+
+   font-size: 230%;
+
+ }
+
+.header{
+   font-size: 350%;
+   background: linear-gradient(45deg, mediumpurple, pink);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+
+ }
+ 

@@ -3,6 +3,7 @@ import SidebarPro from "./SidebarPro";
 import EventsDisplay from "./EventsDisplay";
 import EventsSearch from "./EventsSearch";
 import { SearchContext } from './SearchContext';
+import { ThemeContext } from "./ThemeContext";
 import Alert from 'react-bootstrap/Alert';
 
 const Events = () => {
@@ -11,8 +12,10 @@ const Events = () => {
     womanOnly,
     startDate,
     endDate,
+    orderby,
     city
   } = useContext(SearchContext);
+  const {theme} = useContext(ThemeContext);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ const Events = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ filters: filtersArray, womanOnly: womanOnly, startDate: startDate, endDate: endDate, city: city }),
+      body: JSON.stringify({ filters: filtersArray, womanOnly: womanOnly, startDate: startDate, endDate: endDate, city: city, orderby:orderby }),
     });
 
     if (!response.ok) {
@@ -53,11 +56,11 @@ const Events = () => {
     const events = await response.json();
     setEvents(events);
   }
-
+  
   return (
     <div className="eventsWrapper">
       <SidebarPro />
-      <div className="eventContent">
+      <div className="eventContent" data-theme={theme}>
         <EventsSearch search={getFilteredEvents} />
         {events.length > 0 ? <EventsDisplay events={events} /> : <Alert variant='primary' className="mx-4 my-4">No events found.</Alert>}
       </div>

@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 // recordRoutes is an instance of the express router.
@@ -22,6 +23,18 @@ likedRoutes.route('/liked').get(function (req, res) {
       res.json(result);
     });
 });
+
+likedRoutes.route('/is-banned/:id').post(async (req, res) => {
+  let dbConnect = dbo.getDb('eventual');
+
+  if (await dbConnect
+    .collection('testEvents')
+    .count({ _id: ObjectId(req.params.id), banlist: { account_id: ObjectId(req.body.account_id) }}, limit = 1)
+    > 0) {
+      res.sendStatus(403); //user is banned
+    } else
+      res.sendStatus(200);
+})
 
 likedRoutes.route('/liked/add_like').post(function (req, response) {
   let db_connect = dbo.getDb();
@@ -75,6 +88,7 @@ likedRoutes.route('/liked/add_dislike').post(function (req, response) {
 likedRoutes.route('/attend/add_attendance').post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.body.event_id) };
+
   let newvalues = {
     $inc: {
       num_joined: 1,
@@ -91,30 +105,6 @@ likedRoutes.route('/attend/add_attendance').post(function (req, response) {
 
   db_connect
     .collection('testEvents')
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-
-      response.json(res);
-    });
-});
-
-likedRoutes.route('/attend/add_attending').post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.body.account_id) };
-  let newvalues = {
-    $inc: {
-      num_joined: 1,
-    },
-  };
-  db_connect
-    .collection('mockUsers')
-    .update(
-      { _id: ObjectId(req.body.account_id) },
-      { $push: { attending_events: { event_id: ObjectId(req.body.event_id) } } }
-    );
-
-  db_connect
-    .collection('mockUsers')
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
 

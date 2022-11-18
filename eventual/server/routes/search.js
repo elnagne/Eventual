@@ -25,24 +25,53 @@ searchRoutes.route("/search").get((req, res) => {
 searchRoutes.route("/search/filteredSearch").post((req, res) => {
   let db_connect = dbo.getDb("eventual");
 
+  let orderby = req.body.orderby;
   let activeFilters = req.body.filters;
   let startDate = req.body.startDate.length != 0 ? req.body.startDate : "0000-00-00"
   let endDate = req.body.endDate.length != 0 ? req.body.endDate : "9999-99-99";
   let city = req.body.city;
-  
   let query = req.body.womanOnly ? { category: { $in: activeFilters }, woman_only: true, date_of_event: { $gte: startDate, $lte: endDate }}
                                  : { category: { $in: activeFilters }, date_of_event: { $gte: startDate, $lte: endDate }}
   if (city) {
     query['address_data.locality'] = city ;
   }
 
-  db_connect
+  let sortQuery ={}
+  if (orderby == "oldest"){
+    sortQuery = {$natural:1}
+  }
+  else if (orderby == "newest"){
+    sortQuery = {$natural:-1}
+  }
+  else if (orderby == "likes"){
+    sortQuery = {num_likes:-1}
+  }
+  else if (orderby == "joined"){
+    sortQuery = {num_joined:-1}
+  }
+  if (orderby == "popularity"){
+    db_connect
     .collection("testEvents")
-    .find(query)
+    .aggregate([{$match: query},
+      {"$addFields":{ "sort_order":{"$add":["$num_joined", "$num_likes"]}}}, 
+      {"$sort":{"sort_order":-1}},
+      {"$project":{"sort_order":0}}
+     ])
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
     });
+  }
+  else{
+    db_connect
+    .collection("testEvents")
+    .find(query)
+    .sort(sortQuery)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+  }
 });
 
 // Find a singular event given their id

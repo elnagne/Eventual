@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import SidebarPro from "./SidebarPro";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Widget } from "@uploadcare/react-widget";
 import Button from "react-bootstrap/Button";
 import { useParams } from "react-router-dom";
+import { ThemeContext } from "./ThemeContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UpdateEvent = () => {
+  const {theme} = useContext(ThemeContext);
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [event_name, setEvent_name] = useState("");
@@ -28,6 +30,7 @@ const UpdateEvent = () => {
   const [liked_by, setLiked_by] = useState(null);
   const [attending_users, setAttending_users] = useState(null);
   const [comments, setComments] = useState(null);
+  const [banlist, setBanlist] = useState(null);
 
   const login_author = localStorage.getItem("userid");
 
@@ -64,6 +67,7 @@ const UpdateEvent = () => {
     setLiked_by(event.liked_by);
     setAttending_users(event.attending_users);
     setComments(event.comments);
+    setBanlist(event.banlist);
   }
 
   const handleCheck = () => {
@@ -94,6 +98,7 @@ const UpdateEvent = () => {
       liked_by: liked_by,
       attending_users: attending_users,
       comments: comments,
+      banlist: banlist,
     };
 
     await fetch("http://localhost:5000/testEvents/update/" + id, {
@@ -118,6 +123,7 @@ const UpdateEvent = () => {
     setWoman_only("");
     setLocation("");
     setCategory("");
+    setBanlist(event.banlist);
     window.location.reload();
   };
 
@@ -128,7 +134,7 @@ const UpdateEvent = () => {
   return (
     <div className="dbWriteWrapper">
       <SidebarPro />
-      <div className="AddEvent">
+      <div className="AddEvent" data-theme={theme}>
         <form
           name="event"
           className="AddEventForm"

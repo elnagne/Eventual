@@ -151,6 +151,7 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
       num_joined: req.body.num_joined,
       liked_by: req.body.liked_by,
       attending_users: req.body.attending_users,
+      banlist: req.body.banlist,
       comments: req.body.comments,
     })
     .then(() => {
@@ -181,6 +182,7 @@ eventsRoutes.route('/testEvents/add').post((req, response) => {
     num_joined: 0,
     liked_by: [],
     attending_users: [],
+    banlist: [],
     comments: [],
   };
 
@@ -242,6 +244,25 @@ eventsRoutes.route("/ban-attendee/:id").post((req, res) => {
     });
 });
 
+// unbans user from event
+eventsRoutes.route("/unban-user/:id").post((req, res) => {
+  // todo switch to non testEvent on release
+  let dbConnect = dbo.getDb("eventual");
+
+  dbConnect
+    .collection("testEvents")
+    .updateOne({ _id: ObjectId(req.params.id) },
+      {
+        $pull: {
+          banlist: {
+            account_id: ObjectId(req.body.account_id)
+          }
+        }
+      }, (err, response) => {
+        res.send(response);
+    });
+});
+
 // Getting all attendees
 eventsRoutes.route("/get-attendees/:id").get((req, res) => {
   // todo switch to non testEvent and mockUsers on release
@@ -254,6 +275,32 @@ eventsRoutes.route("/get-attendees/:id").get((req, res) => {
     .findOne({ _id: ObjectId(req.params.id) })
     .then(async (event) => {
       for (const user of event.attending_users) {
+        await dbConnect
+          .collection('mockUsers')
+          .findOne({ _id: ObjectId(user.account_id) })
+          .then((user) => {
+            var attendee = { account_id: user._id, name: user.name.last + ", " + user.name.first, username: user.username };
+            attendees.push(attendee);
+          })
+        }
+    }).then(() => {
+      res.send(attendees);
+    }
+  )
+});
+
+// Getting all banned users at event id
+eventsRoutes.route("/get-banlist/:id").get((req, res) => {
+  // todo switch to non testEvent and mockUsers on release
+  let dbConnect = dbo.getDb("eventual");
+
+  var attendees = [];
+
+  dbConnect
+    .collection("testEvents")
+    .findOne({ _id: ObjectId(req.params.id) })
+    .then(async (event) => {
+      for (const user of event.banlist) {
         await dbConnect
           .collection('mockUsers')
           .findOne({ _id: ObjectId(user.account_id) })

@@ -132,26 +132,19 @@ eventsRoutes.route('/testEvents/update/:id').post((req, res) => {
   let myquery = { _id: ObjectId(req.params.id) };
   db_connect
     .collection('testEvents')
-    .replaceOne(myquery, {
-      event_name: req.body.event_name,
-      description: req.body.description,
-      author: req.body.author,
-      image_url: req.body.image_url,
-      email: req.body.email,
-      phone: req.body.phone,
-      date_of_event: req.body.date_of_event,
-      time_of_event: req.body.time_of_event,
-      num_slots: req.body.num_slots,
-      woman_only: req.body.woman_only,
-      spam: false,
-      location: req.body.location,
-      category: req.body.category,
-      num_likes: req.body.num_likes,
-      num_joined: req.body.num_joined,
-      liked_by: req.body.liked_by,
-      attending_users: req.body.attending_users,
-      banlist: req.body.banlist,
-      comments: req.body.comments,
+    .updateOne(myquery, {
+      $set: {
+        event_name: req.body.event_name,
+        description: req.body.description,
+        author: req.body.author,
+        image_url: req.body.image_url,
+        email: req.body.email,
+        phone: req.body.phone,
+        date_of_event: req.body.date_of_event,
+        time_of_event: req.body.time_of_event,
+        num_slots: req.body.num_slots,
+        woman_only: req.body.woman_only,
+      }
     })
     .then(() => {
       result = send_event(req.params.id, true);
